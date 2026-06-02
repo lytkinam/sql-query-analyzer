@@ -175,7 +175,7 @@ def _extract_select_block(node_text: str) -> Optional[str]:
     stop_pattern = re.compile(
         r'(?:^|\s)(?:ИЗ|FROM|ГДЕ|WHERE|СГРУППИРОВАТЬ|GROUP\s+BY'
         r'|УПОРЯДОЧИТЬ|ORDER\s+BY|ИТОГИ|TOTALS|ИМЕЮЩИЕ|HAVING'
-        r'|ДЛЯ ИЗМЕНЕНИЯ|FOR UPDATE)(?:\s|$)',
+        r'|ДЛЯ ИЗМЕНЕНИЯ|FOR UPDATE|ПОМЕСТИТЬ|INTO)(?:\s|$)',
         re.IGNORECASE,
     )
 
@@ -199,7 +199,7 @@ def _extract_select_block(node_text: str) -> Optional[str]:
                         r'|СГРУППИРОВАТЬ|GROUP\s+BY'
                         r'|УПОРЯДОЧИТЬ|ORDER\s+BY'
                         r'|ИТОГИ|TOTALS|ИМЕЮЩИЕ|HAVING'
-                        r'|ДЛЯ ИЗМЕНЕНИЯ|FOR UPDATE)(?=\s|$)',
+                        r'|ДЛЯ ИЗМЕНЕНИЯ|FOR UPDATE|ПОМЕСТИТЬ|INTO)(?=\s|$)',
                         rest[i:], re.IGNORECASE,
                     )
                     if sm:
@@ -309,7 +309,7 @@ def _classify_expr(expr: str) -> str:
         return "case_when"
 
     # Параметр &Х или строковый литерал или ЗНАЧЕНИЕ(...) или число
-    if re.match(r'^(?:&|__STR\d+__|\d)', e):
+    if re.match(r'^(?:&|__STR\d+__|\d|"|\')', e):
         return "literal"
     if re.match(r'^(?:NULL|ИСТИНА|ЛОЖЬ|TRUE|FALSE)$', e, re.IGNORECASE):
         return "literal"
