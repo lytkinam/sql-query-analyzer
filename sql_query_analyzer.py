@@ -73,99 +73,104 @@ class Edge:
     in_node: Node
 
 
-def _remove_innermost_round_brackets(text: str) -> str:
-    while True:
-        new = re.sub(r'\(([^()]*)\)', lambda m: '[' + m.group(1) + ']', text)
-        if new == text:
-            break
-        text = new
-    return text
-
-
-def _remove_innermost_square_brackets(text: str) -> str:
-    while True:
-        new = re.sub(r'\[([^\[\]]*)\]', ' ', text)
-        if new == text:
-            break
-        text = new
-    return text
-
-
-def _remove_innermost_curly_brackets(text: str) -> str:
-    pattern = re.compile(
-        r'\{(?!\s*\S+\s+(?:СОЕДИНЕНИЕ|JOIN)\s)([^{}]*)\}',
-        re.IGNORECASE)
-    while True:
-        new = pattern.sub(' ', text)
-        if new == text:
-            break
-        text = new
-    return text
+def _table_name_replacer(match: re.Match) -> str:
+    """Извлекает имя таблицы из матча (аналог tableNameReplacer в JS)."""
+    return match.group(1)
 
 
 def get_own_in_tables(text: str) -> list:
     """
     Извлекает список имён таблиц из секций FROM/ИЗ/JOIN/СОЕДИНЕНИЕ.
 
-    Алгоритм:
-    1. Удалить содержимое внутренних скобок (все виды).
-    2. Удалить всё от ВЫБРАТЬ/SELECT до ИЗ/FROM (чтобы поля селекта не попали в результат).
-    3. Удалить финальные клаузы (ГДЕ/WHERE, СГРУППИРОВАТЬ, УПОРЯДОЧИТЬ, ...).
-    4. Из оставшегося текста вычитать имя таблицы, сразу отрезая псевдоним (КАК/AS).
-    """
-    # Шаг 1: удалить внутренние скобки
-    text = _remove_innermost_round_brackets(text)
-    text = _remove_innermost_square_brackets(text)
-    text = _remove_innermost_curly_brackets(text)
+    Алгоритм точно повторяет JS-функцию getOwnInTables():
 
-    # Шаг 2: заменить UNION-разделитель на маркер, чтобы не сливать части
+    1.  Удалить () рекурсивно → заменить на " ~ "
+        (нейтрализует ИЗ/FROM внутри подзапросов в ГДЕ/WHERE)
+    2.  Удалить [] рекурсивно → пробел
+    3.  Удалить {} рекурсивно (кроме {СОЕДИНЕНИЕ/JOIN ...}) → пробел
+    4.  Заменить ОБЪЕДИНИТЬ/UNION на маркер " ! "
+    5.  ВЫБРАТЬ/SELECT ... ИЗ/FROM → "ИЗ " (убирает список полей)
+    6.  Удалить СГРУППИРОВАТЬ/ДЛЯ ИЗМЕНЕНИЯ до маркера !
+    7.  Удалить финальные клаузы (СГРУППИРОВАТЬ, ДЛЯ ИЗМЕНЕНИЯ,
+        ИНДЕКСИРОВАТЬ, УПОРЯДОЧИТЬ, ИТОГИ) до конца строки
+    8.  Собрать имена таблиц: после ИЗ/FROM/СОЕДИНЕНИЕ/JOIN или через запятую
+    9.  ГДЕ/WHERE намеренно НЕ удаляется — ИЗ внутри него
+        нейтрализуется на шаге 1 (скобки убраны)
+    """
+    # Шаг 1: удалить () рекурсивно, заменить на " ~ " (как в JS)
+    while True:
+        new = re.sub(r'\(([^()]*)\)', ' ~ ', text)
+        if new == text:
+            break
+        text = new
+
+    # Шаг 2: удалить [] рекурсивно
+    while True:
+        new = re.sub(r'\[([^\[\]]*)\]', ' ', text)
+        if new == text:
+            break
+        text = new
+
+    # Шаг 3: удалить {} (кроме {СОЕДИНЕНИЕ/JOIN ...}) рекурсивно
+    pattern_curly = re.compile(
+        r'\{(?!\s*\S+\s+(?:СОЕДИНЕНИЕ|JOIN)\s)([^{}]*)\}',
+        re.IGNORECASE)
+    while True:
+        new = pattern_curly.sub(' ', text)
+        if new == text:
+            break
+        text = new
+
+    # Шаг 4: UNION-маркер
     text = re.sub(
         r'(?:^|\s)(?:ОБЪЕДИНИТЬ|UNION)(?:\s+(?:ВСЕ|ALL))?(?:$|\s)',
         ' ! ', text, flags=re.IGNORECASE)
 
-    # Шаг 3: удалить SELECT-часть (от ВЫБРАТЬ/SELECT до ИЗ/FROM включительно) для каждой части UNION
-    parts = re.split(r'!', text)
-    cleaned_parts = []
-    for part in parts:
-        # удаляем всё от ВЫБРАТЬ/SELECT до ИЗ/FROM (не включая само слово FROM)
-        part = re.sub(
-            r'(?:^|[\s\S]*?)(?:ВЫБРАТЬ|SELECT)\b[\s\S]*?(?=\b(?:ИЗ|FROM)\b)',
-            '', part, flags=re.IGNORECASE)
-        cleaned_parts.append(part)
-    text = ''.join(cleaned_parts)
-
-    # Шаг 4: удалить клаузу ПОМЕСТИТЬ/INTO (если есть)
+    # Шаг 5: ВЫБРАТЬ/SELECT ... ИЗ/FROM → схлопнуть до "ИЗ "
+    # JS: /(^|\s)(ВЫБРАТЬ|SELECT)\s([^!])*(^|\s)(ИЗ|FROM)\s/gi → "ИЗ "
     text = re.sub(
-        r'(?:ПОМЕСТИТЬ|INTO)\s+\S+', '', text, flags=re.IGNORECASE)
+        r'(?:^|\s)(?:ВЫБРАТЬ|SELECT)\s[^!]*?(?:\s|^)(?=(?:ИЗ|FROM)\s)',
+        ' ', text, flags=re.IGNORECASE)
 
-    # Шаг 5: удалить финальные клаузы от ГДЕ/WHERE и дальше
+    # Шаг 6: СГРУППИРОВАТЬ/ДЛЯ ИЗМЕНЕНИЯ до маркера ! (два JS-паттерна)
     text = re.sub(
-        r'\b(?:ГДЕ|WHERE)\b[\s\S]*$', '', text, flags=re.IGNORECASE)
-    for kw in [
-        r'(?:СГРУППИРОВАТЬ|GROUP)\s+(?:ПО|BY)',
-        r'(?:ДЛЯ\s+ИЗМЕНЕНИЯ|FOR\s+UPDATE)',
-        r'(?:ИНДЕКСИРОВАТЬ|INDEX)',
-        r'(?:УПОРЯДОЧИТЬ|ORDER)',
-        r'(?:ИТОГИ|TOTALS)',
-        r'(?:ИМЕЮЩИЕ|HAVING)',
-    ]:
-        text = re.sub(
-            r'\b' + kw + r'\b[\s\S]*$', '', text, flags=re.IGNORECASE)
+        r'(?:^|\s)(?:СГРУППИРОВАТЬ|GROUP)\s[^!]*!',
+        ' ', text, flags=re.IGNORECASE)
+    text = re.sub(
+        r'(?:^|\s)(?:ДЛЯ ИЗМЕНЕНИЯ|FOR UPDATE)\s[^!]*!',
+        ' ', text, flags=re.IGNORECASE)
 
-    # Шаг 6: извлечь имена таблиц после FROM/JOIN/ИЗ/СОЕДИНЕНИЕ
-    # Формат: KEYWORD имя_таблицы [КАК/AS псевдоним]
-    # Читаем только первый токен после ключевого слова, псевдоним КАК/AS игнорируем
-    matches = re.findall(
-        r'\b(?:ИЗ|FROM|(?:\S+\s+)?(?:СОЕДИНЕНИЕ|JOIN))\s+(\S+)(?:\s+(?:КАК|AS)\s+\S+)?',
+    # Шаг 7: финальные клаузы (до конца строки)
+    text = re.sub(
+        r'(?:^|\s)(?:СГРУППИРОВАТЬ|GROUP)\s[\s\S]*$',
+        ' ', text, flags=re.IGNORECASE)
+    text = re.sub(
+        r'(?:^|\s)(?:ДЛЯ ИЗМЕНЕНИЯ|FOR UPDATE)\s[\s\S]*$',
+        ' ', text, flags=re.IGNORECASE)
+    text = re.sub(
+        r'(?:^|\s)(?:ИНДЕКСИРОВАТЬ|INDEX)\s[\s\S]*$',
+        ' ', text, flags=re.IGNORECASE)
+    text = re.sub(
+        r'(?:^|\s)(?:УПОРЯДОЧИТЬ|ORDER)\s[\s\S]*$',
+        ' ', text, flags=re.IGNORECASE)
+    text = re.sub(
+        r'(?:^|\s)(?:ИТОГИ|TOTALS)\s[\s\S]*$',
+        ' ', text, flags=re.IGNORECASE)
+
+    # Шаг 8: извлечь имена таблиц
+    # JS-паттерн: (ИЗ|FROM|СОЕДИНЕНИЕ|JOIN)\s+\S+  ИЛИ  ,\s*\S+
+    raw_matches = re.findall(
+        r'(?:(?:(?:\s|^)(?:ИЗ|FROM|СОЕДИНЕНИЕ|JOIN)\s+)|(?:,\s*))\S+(?:\s|$)',
         text, flags=re.IGNORECASE | re.MULTILINE)
 
     result = []
-    for m in matches:
-        # отрезать псевдоним КАК/AS если он прилеп вплотную без пробела
-        m = re.sub(r'(?:КАК|AS)\S+$', '', m, flags=re.IGNORECASE).strip()
-        upper = m.upper()
-        if upper and upper not in result:
-            result.append(upper)
+    extractor = re.compile(
+        r'(?:(?:(?:\s|^)(?:ИЗ|FROM|СОЕДИНЕНИЕ|JOIN)\s+)|(?:,\s*))(\S+)(?:\s|$)',
+        re.IGNORECASE)
+    for raw in raw_matches:
+        name = extractor.sub(_table_name_replacer, raw).upper().strip()
+        if name and name not in result:
+            result.append(name)
     return result
 
 
