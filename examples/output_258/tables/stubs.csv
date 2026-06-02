@@ -1,0 +1,8 @@
+node_id,node_name,type,is_stub,reason
+0,ВТ_ИСПОЛЬЗОВАТЬДЛЯНПО,temp_query,true,no_consumers
+71,ВТ_СторнированныеСуммыТранзитныеВиды,temp_query,true,no_consumers
+126,ВТ_СчетаДоговоров_СчетаУчастников,temp_query,true,no_consumers
+231,ВТ_ВозвратыПенсий,temp_query,true,no_consumers
+251,ВТ_Переводы_Устарело,temp_query,true,no_consumers
+252,ВТ_СторнированныеСуммы,temp_query,true,no_consumers
+297,ВТ_258НПО,temp_query,true,no_consumers

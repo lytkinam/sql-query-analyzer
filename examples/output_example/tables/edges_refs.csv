@@ -1,0 +1,3 @@
+from_id,to_id,fromname,toname,relation
+0,1,ВТ_Сотрудники,ВТ_Начисления,ref
+1,2,ВТ_Начисления,Результат_1,ref
