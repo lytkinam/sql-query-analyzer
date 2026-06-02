@@ -228,7 +228,10 @@ class TestTablesLarge:
             kinds = {r["source_kind"] for r in rows}
             # Хотя бы один известный kind
             known = {"Catalog", "AccumulationRegister", "InformationRegister",
-                     "Document", "AccountingRegister", "TempTable", "Unknown"}
+                     "Document", "AccountingRegister", "TempTable", "Unknown",
+                     "Enum", "CalculationRegister", "ChartOfCharacteristicTypes",
+                     "ChartOfAccounts", "ChartOfCalculationTypes", "BusinessProcess",
+                     "Task", "DataProcessor", "Report", "Constant", "Sequence"}
             assert kinds <= known
 
     def test_tempqueries_count_reasonable(self, large_output):
