@@ -1,0 +1,2386 @@
+[
+  {
+    "node_id": 0,
+    "name": "ВТ_ИСПОЛЬЗОВАТЬДЛЯНПО",
+    "path": "query_texts/node_0.sql",
+    "text_len": 156,
+    "text_hash": "sha256:79ad7b6ac1d81d2c39d93f102b3c13077e8243ae5ee5af8841802b123f44a7ad",
+    "line_count": 7
+  },
+  {
+    "node_id": 1,
+    "name": "ВТ_ТипыРезервов",
+    "path": "query_texts/node_1.sql",
+    "text_len": 1256,
+    "text_hash": "sha256:07f598f21ffdba2e70c13e44816b61a69d677ced2fcf9a65740685092311576a",
+    "line_count": 68
+  },
+  {
+    "node_id": 2,
+    "name": "Часть_1",
+    "path": "query_texts/node_2.sql",
+    "text_len": 91,
+    "text_hash": "sha256:57055ea19ec20779128dae6ca4059f71ec5078ae30f90da2dfd9195622f032f3",
+    "line_count": 3
+  },
+  {
+    "node_id": 3,
+    "name": "Часть_2",
+    "path": "query_texts/node_3.sql",
+    "text_len": 50,
+    "text_hash": "sha256:f1722be1a45fccd55c2a305cd5b38fbfc6a5d822b2aa9d71fb0aefd95450cef2",
+    "line_count": 2
+  },
+  {
+    "node_id": 4,
+    "name": "Часть_3",
+    "path": "query_texts/node_4.sql",
+    "text_len": 72,
+    "text_hash": "sha256:30dc40a912e3eccb458347a53b0a2876fb4875136d6f7a93482a9dea02135e8f",
+    "line_count": 2
+  },
+  {
+    "node_id": 5,
+    "name": "Часть_4",
+    "path": "query_texts/node_5.sql",
+    "text_len": 72,
+    "text_hash": "sha256:d663166d013d5ee954948428df178ec43665527c599e90f2a45dfa39507d9e0e",
+    "line_count": 2
+  },
+  {
+    "node_id": 6,
+    "name": "Часть_5",
+    "path": "query_texts/node_6.sql",
+    "text_len": 78,
+    "text_hash": "sha256:8ce5a64e77084881c88de7eb4af338d2dd01918d1a6c297543f3e5420ba8bba5",
+    "line_count": 2
+  },
+  {
+    "node_id": 7,
+    "name": "Часть_6",
+    "path": "query_texts/node_7.sql",
+    "text_len": 78,
+    "text_hash": "sha256:c79895620dd5551080bb3078e99e7df45cf73addeb336a1a1b01920f91275811",
+    "line_count": 2
+  },
+  {
+    "node_id": 8,
+    "name": "Часть_7",
+    "path": "query_texts/node_8.sql",
+    "text_len": 64,
+    "text_hash": "sha256:8773652b9b9871312a96876a04cf9f4eb0ea8f8a7e4305fc1ff3614d6b4395a5",
+    "line_count": 2
+  },
+  {
+    "node_id": 9,
+    "name": "Часть_8",
+    "path": "query_texts/node_9.sql",
+    "text_len": 51,
+    "text_hash": "sha256:161d5fe3259d29ccc79cc8fe237e89c1ea0d94eb70f506e48b7f17723713e151",
+    "line_count": 2
+  },
+  {
+    "node_id": 10,
+    "name": "Часть_9",
+    "path": "query_texts/node_10.sql",
+    "text_len": 86,
+    "text_hash": "sha256:e62acbc663b53ceb372b9903fe677e7be3cf150f2161ade9bf18479e4cfbaf12",
+    "line_count": 2
+  },
+  {
+    "node_id": 11,
+    "name": "Часть_10",
+    "path": "query_texts/node_11.sql",
+    "text_len": 92,
+    "text_hash": "sha256:d67d8155f626b1061add9ce2c0befe3739653890c4efbf2475effc0fd29fe200",
+    "line_count": 2
+  },
+  {
+    "node_id": 12,
+    "name": "Часть_11",
+    "path": "query_texts/node_12.sql",
+    "text_len": 77,
+    "text_hash": "sha256:a7d2b1503f7d2ca1d27fe499f0668e48c9d4710530dc92bce390429a135de76f",
+    "line_count": 2
+  },
+  {
+    "node_id": 13,
+    "name": "Часть_12",
+    "path": "query_texts/node_13.sql",
+    "text_len": 77,
+    "text_hash": "sha256:cdfc19de2f3c015d927a09df5e75eb412397e6c1c44a11da8d2bd11548c96ec6",
+    "line_count": 2
+  },
+  {
+    "node_id": 14,
+    "name": "Часть_13",
+    "path": "query_texts/node_14.sql",
+    "text_len": 67,
+    "text_hash": "sha256:fc43078a86584f27b453ff89d1bc49395146e523ac97ea28fcf7728c86ad071b",
+    "line_count": 2
+  },
+  {
+    "node_id": 15,
+    "name": "Часть_14",
+    "path": "query_texts/node_15.sql",
+    "text_len": 67,
+    "text_hash": "sha256:da481cbcfc52466d99eb62fb85258d472babc9943e758b5e421e8febb7981558",
+    "line_count": 2
+  },
+  {
+    "node_id": 16,
+    "name": "ВТ_ВидыПаспортов",
+    "path": "query_texts/node_16.sql",
+    "text_len": 227,
+    "text_hash": "sha256:54248483b6a99f2aed9c228f2363399b133023900d61286602f7d4297cc5a669",
+    "line_count": 7
+  },
+  {
+    "node_id": 17,
+    "name": "ВТ_ДокументыСторно",
+    "path": "query_texts/node_17.sql",
+    "text_len": 993,
+    "text_hash": "sha256:fb87941be4973c870c0120753d1f2470f82e1cd6e6968611ef76a804a3813e85",
+    "line_count": 39
+  },
+  {
+    "node_id": 18,
+    "name": "Часть_1",
+    "path": "query_texts/node_18.sql",
+    "text_len": 279,
+    "text_hash": "sha256:2b8d61bad041fa880633bd7dc5c52fb91854fec31d76d112e272f4bb58f40762",
+    "line_count": 9
+  },
+  {
+    "node_id": 19,
+    "name": "Часть_2",
+    "path": "query_texts/node_19.sql",
+    "text_len": 195,
+    "text_hash": "sha256:da1d791756385b59dea869cb5254c98aefee8695cbb4c13fe4007146afeef9fd",
+    "line_count": 7
+  },
+  {
+    "node_id": 20,
+    "name": "Часть_3",
+    "path": "query_texts/node_20.sql",
+    "text_len": 260,
+    "text_hash": "sha256:5d1a81ffe1d0bb9959cf6182596eeeb046b9a1806c8d8cfc27bab8dad31bd0b3",
+    "line_count": 7
+  },
+  {
+    "node_id": 21,
+    "name": "Часть_4",
+    "path": "query_texts/node_21.sql",
+    "text_len": 205,
+    "text_hash": "sha256:af9bed14636576c89cea81ef005b7dc6aeccb38ee070eb145761b5ebf005d90c",
+    "line_count": 7
+  },
+  {
+    "node_id": 22,
+    "name": "ВТ_ПереводыИзРегистров_ВидыДвижений",
+    "path": "query_texts/node_22.sql",
+    "text_len": 611,
+    "text_hash": "sha256:f7b4b68a0ca0f73be14e4852f863d8518d833f15c04c24bcff5dd94b739f4db7",
+    "line_count": 12
+  },
+  {
+    "node_id": 23,
+    "name": "ВТ_ПереводыИзРегистров_ВидыДвижений_ВРезервы",
+    "path": "query_texts/node_23.sql",
+    "text_len": 840,
+    "text_hash": "sha256:dc0649e7ff7d9a21b5dee84956db434b199cf954707d0bd17bc9e9e549dc0784",
+    "line_count": 17
+  },
+  {
+    "node_id": 24,
+    "name": "ВТ_ПенсионныеСчета_ПР",
+    "path": "query_texts/node_24.sql",
+    "text_len": 3995,
+    "text_hash": "sha256:901242093d3ffb45c9a93ee813947db7a1346042610c05856ec7fbcf9947d87d",
+    "line_count": 143
+  },
+  {
+    "node_id": 25,
+    "name": "Подзапрос_1",
+    "path": "query_texts/node_25.sql",
+    "text_len": 93,
+    "text_hash": "sha256:c73c4e025bb0be7e5513e48bd5dc5064cc73a8f38566f78aa542365fc116b9a9",
+    "line_count": 4
+  },
+  {
+    "node_id": 26,
+    "name": "Подзапрос_2",
+    "path": "query_texts/node_26.sql",
+    "text_len": 93,
+    "text_hash": "sha256:c73c4e025bb0be7e5513e48bd5dc5064cc73a8f38566f78aa542365fc116b9a9",
+    "line_count": 4
+  },
+  {
+    "node_id": 27,
+    "name": "Подзапрос_3",
+    "path": "query_texts/node_27.sql",
+    "text_len": 93,
+    "text_hash": "sha256:c73c4e025bb0be7e5513e48bd5dc5064cc73a8f38566f78aa542365fc116b9a9",
+    "line_count": 4
+  },
+  {
+    "node_id": 28,
+    "name": "Подзапрос_4",
+    "path": "query_texts/node_28.sql",
+    "text_len": 93,
+    "text_hash": "sha256:c73c4e025bb0be7e5513e48bd5dc5064cc73a8f38566f78aa542365fc116b9a9",
+    "line_count": 4
+  },
+  {
+    "node_id": 29,
+    "name": "Подзапрос_5",
+    "path": "query_texts/node_29.sql",
+    "text_len": 93,
+    "text_hash": "sha256:c73c4e025bb0be7e5513e48bd5dc5064cc73a8f38566f78aa542365fc116b9a9",
+    "line_count": 4
+  },
+  {
+    "node_id": 30,
+    "name": "Подзапрос_6",
+    "path": "query_texts/node_30.sql",
+    "text_len": 93,
+    "text_hash": "sha256:c73c4e025bb0be7e5513e48bd5dc5064cc73a8f38566f78aa542365fc116b9a9",
+    "line_count": 4
+  },
+  {
+    "node_id": 31,
+    "name": "Подзапрос",
+    "path": "query_texts/node_31.sql",
+    "text_len": 3727,
+    "text_hash": "sha256:ea01d18c4e149369368596f0d62dc9ede97bab1d4c8c9ac5c8c3d70af09f778b",
+    "line_count": 132
+  },
+  {
+    "node_id": 32,
+    "name": "Часть_1",
+    "path": "query_texts/node_32.sql",
+    "text_len": 298,
+    "text_hash": "sha256:85282455efc80ad15f3b424fc0a8e61e4802f523f9d4d6d4454582c8631e31dc",
+    "line_count": 11
+  },
+  {
+    "node_id": 33,
+    "name": "Часть_2",
+    "path": "query_texts/node_33.sql",
+    "text_len": 303,
+    "text_hash": "sha256:daeb5a13844f3d6ffccebfbe7cfb086ba702213c2ffba69fd1b12a409de405f2",
+    "line_count": 13
+  },
+  {
+    "node_id": 34,
+    "name": "Часть_3",
+    "path": "query_texts/node_34.sql",
+    "text_len": 357,
+    "text_hash": "sha256:358eef8181f08a74e8ac1e158f90e77ea816a5d569bd144376689ffa9a092835",
+    "line_count": 11
+  },
+  {
+    "node_id": 35,
+    "name": "Часть_4",
+    "path": "query_texts/node_35.sql",
+    "text_len": 363,
+    "text_hash": "sha256:75d326dd0258d4b23a829b3e9598641e6d4662a53c421943a9662aad88504a29",
+    "line_count": 13
+  },
+  {
+    "node_id": 36,
+    "name": "Часть_5",
+    "path": "query_texts/node_36.sql",
+    "text_len": 327,
+    "text_hash": "sha256:9aa87df689049dec12d399e19cf54848528a7958af55eaa781eb9f85e3594836",
+    "line_count": 11
+  },
+  {
+    "node_id": 37,
+    "name": "Часть_6",
+    "path": "query_texts/node_37.sql",
+    "text_len": 333,
+    "text_hash": "sha256:f514fa9b17eeecd97d038b1aed3f645b8346f62771f021137766f369f6ead562",
+    "line_count": 13
+  },
+  {
+    "node_id": 38,
+    "name": "Часть_7",
+    "path": "query_texts/node_38.sql",
+    "text_len": 213,
+    "text_hash": "sha256:25f50d2dbd3605392d37f3f50f49c21641515c7a088301aae2d2fabb6dd4e5da",
+    "line_count": 4
+  },
+  {
+    "node_id": 39,
+    "name": "Часть_8",
+    "path": "query_texts/node_39.sql",
+    "text_len": 203,
+    "text_hash": "sha256:15668cfd6472433d4dafc0c9676b71dd7d3bba69a0f9b5a42902416fab397ae7",
+    "line_count": 4
+  },
+  {
+    "node_id": 40,
+    "name": "Часть_9",
+    "path": "query_texts/node_40.sql",
+    "text_len": 343,
+    "text_hash": "sha256:c0a1e9aa080e4342de9eb5cb23193dfda775296e5d9b365edb23d23d0ff7142d",
+    "line_count": 6
+  },
+  {
+    "node_id": 41,
+    "name": "Часть_10",
+    "path": "query_texts/node_41.sql",
+    "text_len": 494,
+    "text_hash": "sha256:55f3034dc2c3db66870fc2c70403d5c73f0c76bf5791b92aea88326b7346e44f",
+    "line_count": 6
+  },
+  {
+    "node_id": 42,
+    "name": "Часть_11",
+    "path": "query_texts/node_42.sql",
+    "text_len": 325,
+    "text_hash": "sha256:16d94551bd31264672a37ab147059cf72dc661a77d2c4733d4d02bd92dad0373",
+    "line_count": 8
+  },
+  {
+    "node_id": 43,
+    "name": "ВТ_ПенсионныеСчета",
+    "path": "query_texts/node_43.sql",
+    "text_len": 505,
+    "text_hash": "sha256:d0c2c3f08e2de517c71aba683fd0b2ad0775217e64376f1d4bece9604eaad3da",
+    "line_count": 17
+  },
+  {
+    "node_id": 44,
+    "name": "Часть_1",
+    "path": "query_texts/node_44.sql",
+    "text_len": 216,
+    "text_hash": "sha256:9f46e8f15e095a7b234afebd06c5f89d377fe7d9f53999e235413b4bb5c17820",
+    "line_count": 7
+  },
+  {
+    "node_id": 45,
+    "name": "Часть_2",
+    "path": "query_texts/node_45.sql",
+    "text_len": 275,
+    "text_hash": "sha256:746045a799bd161fc88f9aa4bdc06eebe8b8c72602bfd17fb1764f8f1c812374",
+    "line_count": 7
+  },
+  {
+    "node_id": 46,
+    "name": "ВТ_ПричиныЗакрытия",
+    "path": "query_texts/node_46.sql",
+    "text_len": 716,
+    "text_hash": "sha256:0f1213fc8ce67d064a4cecde1ff195bc6da70ef5209aeb39f13c666b89df92aa",
+    "line_count": 22
+  },
+  {
+    "node_id": 47,
+    "name": "Подзапрос_7",
+    "path": "query_texts/node_47.sql",
+    "text_len": 77,
+    "text_hash": "sha256:766f116b16b0204fe3cb0111d9f4fd141cff2d8e751e2405e055a0f03fd3d7f2",
+    "line_count": 4
+  },
+  {
+    "node_id": 48,
+    "name": "ВТ_ВидыПенсионныхСчетов",
+    "path": "query_texts/node_48.sql",
+    "text_len": 441,
+    "text_hash": "sha256:c3af6a3aec9d0ad78a22e83eb3be528de85bb9ca270bb758cc4069e1012d40af",
+    "line_count": 15
+  },
+  {
+    "node_id": 49,
+    "name": "Подзапрос_8",
+    "path": "query_texts/node_49.sql",
+    "text_len": 77,
+    "text_hash": "sha256:766f116b16b0204fe3cb0111d9f4fd141cff2d8e751e2405e055a0f03fd3d7f2",
+    "line_count": 4
+  },
+  {
+    "node_id": 50,
+    "name": "ВТ_ПенсионныеСчетаРПВ",
+    "path": "query_texts/node_50.sql",
+    "text_len": 379,
+    "text_hash": "sha256:1504cbc54c94eb9384f3f9278ae4b0e3e52917299ba5336b6011d4fe6f48a079",
+    "line_count": 16
+  },
+  {
+    "node_id": 51,
+    "name": "Подзапрос_9",
+    "path": "query_texts/node_51.sql",
+    "text_len": 80,
+    "text_hash": "sha256:7ad23cf59bacc5b374456216f65e0a61f797a279e23c00933d5040bc59b13631",
+    "line_count": 4
+  },
+  {
+    "node_id": 52,
+    "name": "ВТ_ТипыПенсийНачалоПериода",
+    "path": "query_texts/node_52.sql",
+    "text_len": 521,
+    "text_hash": "sha256:7d9f8c71fd664beb98c1aa47c532a44dad13158fbd36d65dadac79a58a79e931",
+    "line_count": 13
+  },
+  {
+    "node_id": 53,
+    "name": "Подзапрос_10",
+    "path": "query_texts/node_53.sql",
+    "text_len": 94,
+    "text_hash": "sha256:1f0223ee303d0ae544de8a6887e169b04f6a02843c2115f99a65c8d5ede12ee6",
+    "line_count": 4
+  },
+  {
+    "node_id": 54,
+    "name": "ВТ_ВыплатныеНачалоПериода",
+    "path": "query_texts/node_54.sql",
+    "text_len": 1341,
+    "text_hash": "sha256:c2b7697a27a199695494233e7987219263397ad51a991ef3b9587b13343c3829",
+    "line_count": 26
+  },
+  {
+    "node_id": 55,
+    "name": "Подзапрос_11",
+    "path": "query_texts/node_55.sql",
+    "text_len": 94,
+    "text_hash": "sha256:1f0223ee303d0ae544de8a6887e169b04f6a02843c2115f99a65c8d5ede12ee6",
+    "line_count": 4
+  },
+  {
+    "node_id": 56,
+    "name": "ВТ_СостояниеНачалоПериода",
+    "path": "query_texts/node_56.sql",
+    "text_len": 2548,
+    "text_hash": "sha256:5f572f72d4bd1213b7ee6f9255f7c89cdc2fba9e62b2ad0615a48e9835103604",
+    "line_count": 44
+  },
+  {
+    "node_id": 57,
+    "name": "Подзапрос_12",
+    "path": "query_texts/node_57.sql",
+    "text_len": 94,
+    "text_hash": "sha256:1f0223ee303d0ae544de8a6887e169b04f6a02843c2115f99a65c8d5ede12ee6",
+    "line_count": 4
+  },
+  {
+    "node_id": 58,
+    "name": "ВТ_ВидОбязательствНачало",
+    "path": "query_texts/node_58.sql",
+    "text_len": 1340,
+    "text_hash": "sha256:9b7e98c825efc586eb64bf73dc5f1b3bca3be699a28bbac8f33cdaf2485a514f",
+    "line_count": 25
+  },
+  {
+    "node_id": 59,
+    "name": "ВТ_ИзмененияВидаОбязательств_Предв",
+    "path": "query_texts/node_59.sql",
+    "text_len": 3565,
+    "text_hash": "sha256:da748e330d40b26f29afb2dd172d530fe32cbbbf7a73e565debfe5652aa5daf3",
+    "line_count": 74
+  },
+  {
+    "node_id": 60,
+    "name": "уп_СостоянияПС",
+    "path": "query_texts/node_60.sql",
+    "text_len": 465,
+    "text_hash": "sha256:5f3fa9572286af7f934b75eb1a130660df3b4b685a9f31525bda319bc73c07f5",
+    "line_count": 12
+  },
+  {
+    "node_id": 61,
+    "name": "уп_СхемаСчета",
+    "path": "query_texts/node_61.sql",
+    "text_len": 425,
+    "text_hash": "sha256:d93ee6d1e74e5d2bac383bedfa1c07ad09e62ecb8d6533dbf2d1cb326e3cee12",
+    "line_count": 11
+  },
+  {
+    "node_id": 62,
+    "name": "ВТ_ИзмененияВидаОбязательств",
+    "path": "query_texts/node_62.sql",
+    "text_len": 517,
+    "text_hash": "sha256:0896eae3443a9aa20f5c334d8d7bd540f085b4223da823475e3740b72ef50454",
+    "line_count": 13
+  },
+  {
+    "node_id": 63,
+    "name": "ВТ_ВидыОбязательств",
+    "path": "query_texts/node_63.sql",
+    "text_len": 530,
+    "text_hash": "sha256:0f4bab6550211318ea616baa903830079e1340b02427fd6b281badcd82e8e9d4",
+    "line_count": 16
+  },
+  {
+    "node_id": 64,
+    "name": "Часть_1",
+    "path": "query_texts/node_64.sql",
+    "text_len": 309,
+    "text_hash": "sha256:bee97f6f1f30927e5e74e990fbdd75980299da33f8b8f7ac75f9b1aeffc7cbbf",
+    "line_count": 7
+  },
+  {
+    "node_id": 65,
+    "name": "Часть_2",
+    "path": "query_texts/node_65.sql",
+    "text_len": 203,
+    "text_hash": "sha256:fa627228beb8acfb0b40160147478ec880a7a9cb55c5518c2d299e37941b80de",
+    "line_count": 6
+  },
+  {
+    "node_id": 66,
+    "name": "ВТ_ВидыОбязательствДвижение",
+    "path": "query_texts/node_66.sql",
+    "text_len": 814,
+    "text_hash": "sha256:48894b231f777c44d4447ca1573f83af026d0cd3bd201b72754c77e28c9c42df",
+    "line_count": 17
+  },
+  {
+    "node_id": 67,
+    "name": "ВТ_СчетаТранзитныеВидыОбязательств",
+    "path": "query_texts/node_67.sql",
+    "text_len": 261,
+    "text_hash": "sha256:a416bd6dbe786eeb21fab5a1832ffbf5b08ab39e7b9dc24141f07ede39be594b",
+    "line_count": 7
+  },
+  {
+    "node_id": 68,
+    "name": "ВТ_СчетаНеТранзитныеВидыОбязательств",
+    "path": "query_texts/node_68.sql",
+    "text_len": 447,
+    "text_hash": "sha256:65da0669495c5f9d0ef3df4c59a6aad2b96d63c470eb8126c5d3d4b6305c1b50",
+    "line_count": 9
+  },
+  {
+    "node_id": 69,
+    "name": "ВТ_НеТранзитныеВидыНачалоКонец",
+    "path": "query_texts/node_69.sql",
+    "text_len": 622,
+    "text_hash": "sha256:abf0f4d61401dc0983b57a81cc4cc567baa0938f5c0dc8d88408e70e69e2cea9",
+    "line_count": 10
+  },
+  {
+    "node_id": 70,
+    "name": "ВТ_ТранзитныеВидыНачалоКонец",
+    "path": "query_texts/node_70.sql",
+    "text_len": 614,
+    "text_hash": "sha256:b391128da139da075203535ec8954cbad842981406393f13c00985258488cbb1",
+    "line_count": 10
+  },
+  {
+    "node_id": 71,
+    "name": "ВТ_СторнированныеСуммыТранзитныеВиды",
+    "path": "query_texts/node_71.sql",
+    "text_len": 3543,
+    "text_hash": "sha256:c84d978e11755141682a177678a1789fd5c1f1ed4cf500284313aadfe44e2f7f",
+    "line_count": 78
+  },
+  {
+    "node_id": 72,
+    "name": "Часть_1",
+    "path": "query_texts/node_72.sql",
+    "text_len": 1669,
+    "text_hash": "sha256:66824bfad0eb27d36d1ff07fcb912909b74385f9ef043948b193be06a4ad332a",
+    "line_count": 34
+  },
+  {
+    "node_id": 73,
+    "name": "Часть_2",
+    "path": "query_texts/node_73.sql",
+    "text_len": 1856,
+    "text_hash": "sha256:e3129f2d0d96b0957de2cae5e1ca74316a165109378614e6f9d103373ee19c0e",
+    "line_count": 41
+  },
+  {
+    "node_id": 74,
+    "name": "ВТ_ОстаткиТранзитныеВиды",
+    "path": "query_texts/node_74.sql",
+    "text_len": 8615,
+    "text_hash": "sha256:21c8586475030df3d3dd327e17de0327a26c57dc1f01503f0ff86999a4cb470f",
+    "line_count": 211
+  },
+  {
+    "node_id": 75,
+    "name": "ПодЗапрос",
+    "path": "query_texts/node_75.sql",
+    "text_len": 1663,
+    "text_hash": "sha256:27d98f0fafd7f7838619bdb3bec82669519b7637b0d0431e7fe503f48ec4a42c",
+    "line_count": 40
+  },
+  {
+    "node_id": 76,
+    "name": "Часть_1",
+    "path": "query_texts/node_76.sql",
+    "text_len": 1224,
+    "text_hash": "sha256:8878fe0a409f0bedad04d4f04eafd8bff27273c79a6edbcbe5a3066c072c265f",
+    "line_count": 30
+  },
+  {
+    "node_id": 77,
+    "name": "Часть_2",
+    "path": "query_texts/node_77.sql",
+    "text_len": 1224,
+    "text_hash": "sha256:21c5934ef225b32e169ecdf5b94d35af1eaa66959933ce778c8dde0201eb1c21",
+    "line_count": 31
+  },
+  {
+    "node_id": 78,
+    "name": "Часть_1",
+    "path": "query_texts/node_78.sql",
+    "text_len": 3149,
+    "text_hash": "sha256:dc8fba66f246717038109998d2234dc038693a31bc9ded4b2381e25f46cf95e4",
+    "line_count": 86
+  },
+  {
+    "node_id": 79,
+    "name": "Часть_2",
+    "path": "query_texts/node_79.sql",
+    "text_len": 1390,
+    "text_hash": "sha256:3dea468031527c84065e650ab7cd2e81418b089fd579ef00963773fd0c4eb71d",
+    "line_count": 28
+  },
+  {
+    "node_id": 80,
+    "name": "Часть_3",
+    "path": "query_texts/node_80.sql",
+    "text_len": 1367,
+    "text_hash": "sha256:071b05302fb759572a1fe65f26c20dbb0d43dfdcdd5c51bef25fd921400a8863",
+    "line_count": 28
+  },
+  {
+    "node_id": 81,
+    "name": "Часть_4",
+    "path": "query_texts/node_81.sql",
+    "text_len": 1310,
+    "text_hash": "sha256:78f71420427e0f210b55dc8a7991ed94d988ad317c8a564bf11dc82aabdd4924",
+    "line_count": 28
+  },
+  {
+    "node_id": 82,
+    "name": "Часть_5",
+    "path": "query_texts/node_82.sql",
+    "text_len": 1287,
+    "text_hash": "sha256:4d3f05750e87fb50aae1a6c0ae71c0fa242a78057cd6986004716e4206d22050",
+    "line_count": 28
+  },
+  {
+    "node_id": 83,
+    "name": "ВТ_Суммы_ПР_ТранзитныеВиды",
+    "path": "query_texts/node_83.sql",
+    "text_len": 5597,
+    "text_hash": "sha256:d2889710932e9c7a2e33c8a5328a0abf00fbe23152dee5616d9c9e3ad2492b25",
+    "line_count": 146
+  },
+  {
+    "node_id": 84,
+    "name": "ПодЗапрос",
+    "path": "query_texts/node_84.sql",
+    "text_len": 3884,
+    "text_hash": "sha256:ddf13add39c6ef183d57fd3e61f23d0252a8f6b3c0ad7e363f1c98edcec8734c",
+    "line_count": 106
+  },
+  {
+    "node_id": 85,
+    "name": "Часть_1",
+    "path": "query_texts/node_85.sql",
+    "text_len": 590,
+    "text_hash": "sha256:47ac64d34cb573e29b01621112b9aaa329a54409afa58481afceaa09a04dd4d7",
+    "line_count": 15
+  },
+  {
+    "node_id": 86,
+    "name": "Часть_2",
+    "path": "query_texts/node_86.sql",
+    "text_len": 1302,
+    "text_hash": "sha256:6d7ceb605fbe265c4d4c9653db7f971769881a4fd8aa65f38fc48fa334d0d3ae",
+    "line_count": 32
+  },
+  {
+    "node_id": 87,
+    "name": "Часть_3",
+    "path": "query_texts/node_87.sql",
+    "text_len": 1318,
+    "text_hash": "sha256:a4edb0d81f40eb453f83c1ec2a15f725381be4b20a9ea21521cd75a59c5730fb",
+    "line_count": 34
+  },
+  {
+    "node_id": 88,
+    "name": "Часть_4",
+    "path": "query_texts/node_88.sql",
+    "text_len": 1500,
+    "text_hash": "sha256:5eb4c42464b0233837e853cdb523de2af922af0b17a9a9375cac998884090fdf",
+    "line_count": 36
+  },
+  {
+    "node_id": 89,
+    "name": "ВТ_ВыплатыПРТранзитныеВиды",
+    "path": "query_texts/node_89.sql",
+    "text_len": 9360,
+    "text_hash": "sha256:485a9babfcc479ad5b0d522b3efd7a8bdeb5288bb699c8b9ca1f3c5d745007f9",
+    "line_count": 246
+  },
+  {
+    "node_id": 90,
+    "name": "Часть_1",
+    "path": "query_texts/node_90.sql",
+    "text_len": 1610,
+    "text_hash": "sha256:582b580298a02b116b14f949f006ac47a8eae48f50cd4ab2ba4906d5175b6fef",
+    "line_count": 40
+  },
+  {
+    "node_id": 91,
+    "name": "Часть_2",
+    "path": "query_texts/node_91.sql",
+    "text_len": 1892,
+    "text_hash": "sha256:270835b2bce780c52adafa7bf6f6fe87110c1d0b8b1d3a8dda92cdb4200ea438",
+    "line_count": 47
+  },
+  {
+    "node_id": 92,
+    "name": "Часть_3",
+    "path": "query_texts/node_92.sql",
+    "text_len": 1195,
+    "text_hash": "sha256:ba8473f6602de876274a74aca216658179e61bcd3aa3d66f0818dbe23902c8ec",
+    "line_count": 28
+  },
+  {
+    "node_id": 93,
+    "name": "Часть_4",
+    "path": "query_texts/node_93.sql",
+    "text_len": 1754,
+    "text_hash": "sha256:7cec7ee0b025fb2955ba0ad66084e21df8a941f846b283a38c239d2ae99c4657",
+    "line_count": 41
+  },
+  {
+    "node_id": 94,
+    "name": "Часть_5",
+    "path": "query_texts/node_94.sql",
+    "text_len": 2836,
+    "text_hash": "sha256:4814b71bc859e48b5de9488ac53c40f348335d97bf016ed1faf18afd95e3a636",
+    "line_count": 78
+  },
+  {
+    "node_id": 95,
+    "name": "ВТ_ВыплатыТранзитныеВиды",
+    "path": "query_texts/node_95.sql",
+    "text_len": 967,
+    "text_hash": "sha256:19365386263d5b2591d5cbdaef155b314e3ca6bab19f40fc8d0cd557fe33e730",
+    "line_count": 21
+  },
+  {
+    "node_id": 96,
+    "name": "ВТ_ПеремещенияВСтраховойРезервТранзитныеВиды",
+    "path": "query_texts/node_96.sql",
+    "text_len": 1648,
+    "text_hash": "sha256:3a954695f8f16aa81da00629905d2c696fe683bdc56a8e9bb5e5a777741dbde6",
+    "line_count": 42
+  },
+  {
+    "node_id": 97,
+    "name": "Подзапрос_13",
+    "path": "query_texts/node_97.sql",
+    "text_len": 84,
+    "text_hash": "sha256:fcce1dcf1f6af33d517da1ad83f6c4d91fb33a757ed91f9c57e95c410e4fbabc",
+    "line_count": 4
+  },
+  {
+    "node_id": 98,
+    "name": "ВТ_ПереводыИзРегистров_РезервыТранзитныеВиды",
+    "path": "query_texts/node_98.sql",
+    "text_len": 5051,
+    "text_hash": "sha256:e76befe829406732d3b0d137528bc98f1e9606fe9577b7599325b2dd41dd6f2c",
+    "line_count": 105
+  },
+  {
+    "node_id": 99,
+    "name": "Часть_1",
+    "path": "query_texts/node_99.sql",
+    "text_len": 1901,
+    "text_hash": "sha256:4f4df91d0845cd5fcbec891a0fa83c7cfaf3a40b7de3b4c3c7ddb438c5b46c6e",
+    "line_count": 43
+  },
+  {
+    "node_id": 100,
+    "name": "Часть_2",
+    "path": "query_texts/node_100.sql",
+    "text_len": 3130,
+    "text_hash": "sha256:384fb6d1d274c3313c6ea9ce87443fa3cf06a54646212734c9d1a843208fb1ad",
+    "line_count": 59
+  },
+  {
+    "node_id": 101,
+    "name": "ВТ_ПереводыИзРегистров_РегистрыТранзитныеВиды",
+    "path": "query_texts/node_101.sql",
+    "text_len": 1217,
+    "text_hash": "sha256:067133f5c61c884ba5c201af7f2108c4f11ff51ab594802e21d917d2deb6341e",
+    "line_count": 37
+  },
+  {
+    "node_id": 102,
+    "name": "Часть_1",
+    "path": "query_texts/node_102.sql",
+    "text_len": 590,
+    "text_hash": "sha256:22156be039b43df9e2893ab5bf427661d5dd6d13d0c87c4e2b92d4e5268a04cf",
+    "line_count": 12
+  },
+  {
+    "node_id": 103,
+    "name": "Часть_2",
+    "path": "query_texts/node_103.sql",
+    "text_len": 598,
+    "text_hash": "sha256:f7901d877a7349b3259e9da3b6d0a070c60366bf8568bbf36fceb4774d3dfc76",
+    "line_count": 11
+  },
+  {
+    "node_id": 104,
+    "name": "ВТ_ПереводыТранзитныеВиды",
+    "path": "query_texts/node_104.sql",
+    "text_len": 977,
+    "text_hash": "sha256:e597ec25dc67adf89afc03d1bdc6b75fab84bcdaf9f48ffebaccf89875491768",
+    "line_count": 16
+  },
+  {
+    "node_id": 105,
+    "name": "ВТ_ОстаткиТранзитныеВиды_Предв",
+    "path": "query_texts/node_105.sql",
+    "text_len": 3207,
+    "text_hash": "sha256:fb85ba8538e2b45a80dd68880bd86c7e4ff1276cfdc3999f50362764368e94d6",
+    "line_count": 49
+  },
+  {
+    "node_id": 106,
+    "name": "ВТ_ТранзитныеВидыНачалоКонец_Суммы",
+    "path": "query_texts/node_106.sql",
+    "text_len": 1557,
+    "text_hash": "sha256:d1a42ea588bad8ba663d00defdb3e3d6d3503de5db9575ca43c54376659b9d48",
+    "line_count": 26
+  },
+  {
+    "node_id": 107,
+    "name": "ВТ_ТранзитныеВиды_ГруппыСчетов",
+    "path": "query_texts/node_107.sql",
+    "text_len": 2311,
+    "text_hash": "sha256:e090f2bbf94251f0bb467cd3dc1d26509c54211fc73f26ffe94215acc02a30c4",
+    "line_count": 39
+  },
+  {
+    "node_id": 108,
+    "name": "Подзапрос",
+    "path": "query_texts/node_108.sql",
+    "text_len": 300,
+    "text_hash": "sha256:ad39ea304be98efe7e521982b9ac1876a2ead2b860182cd559bf27e88e46e3da",
+    "line_count": 5
+  },
+  {
+    "node_id": 109,
+    "name": "ВТ_ТранзитныеВиды_ТипыДоговоровЕПС",
+    "path": "query_texts/node_109.sql",
+    "text_len": 1637,
+    "text_hash": "sha256:a2d484ea048fcadb6cd21a57179c3b884887c88545f386e2fd930b7a34a91721",
+    "line_count": 31
+  },
+  {
+    "node_id": 110,
+    "name": "Подзапрос",
+    "path": "query_texts/node_110.sql",
+    "text_len": 307,
+    "text_hash": "sha256:7b4dbc693e506961b0097f304cb8744f19b65676c3e2ac1ccc5197882dbb7a11",
+    "line_count": 5
+  },
+  {
+    "node_id": 111,
+    "name": "ВТ_ТранзитныеВиды_ДатыФиксации",
+    "path": "query_texts/node_111.sql",
+    "text_len": 1987,
+    "text_hash": "sha256:79d105f10be85d87babd6a1fade9caa02ebeb4379d8e107159e25a0081c0972b",
+    "line_count": 39
+  },
+  {
+    "node_id": 112,
+    "name": "Подзапрос",
+    "path": "query_texts/node_112.sql",
+    "text_len": 308,
+    "text_hash": "sha256:753a582abc7846eb8166a132a0411263d8dfea5102fb9269ab26c4d236ad5508",
+    "line_count": 5
+  },
+  {
+    "node_id": 113,
+    "name": "ВТ_ТранзитныеВиды_ПериодыГарантВосполнения",
+    "path": "query_texts/node_113.sql",
+    "text_len": 1745,
+    "text_hash": "sha256:323140a8cc2fbc4bf43f483d33495a3a2f4d9526a931767cc8a870a58e66e0f6",
+    "line_count": 31
+  },
+  {
+    "node_id": 114,
+    "name": "Подзапрос",
+    "path": "query_texts/node_114.sql",
+    "text_len": 314,
+    "text_hash": "sha256:3797673c99898a43991b123b1725a055366069890d8c27a48e3e070154fa1f0a",
+    "line_count": 5
+  },
+  {
+    "node_id": 115,
+    "name": "ВТ_ПенсионныеСчета_Свойства_ТранзитныеОбязательства",
+    "path": "query_texts/node_115.sql",
+    "text_len": 5959,
+    "text_hash": "sha256:e0ac9069615e1528cc10a2e74c7d26fde76e4798f4262274f866190ff523aad3",
+    "line_count": 112
+  },
+  {
+    "node_id": 116,
+    "name": "ВТ_ПенсионныеСчетаСПТ",
+    "path": "query_texts/node_116.sql",
+    "text_len": 1329,
+    "text_hash": "sha256:8d858e091476379ed72cb427d1a6f2b8995b857e1faafb1b355a76eed1607af9",
+    "line_count": 30
+  },
+  {
+    "node_id": 117,
+    "name": "ВТ_ПенсионныеСчета_Свойства",
+    "path": "query_texts/node_117.sql",
+    "text_len": 6801,
+    "text_hash": "sha256:6af5451347d3e03e1e04019bc17765f31833dd9e147de4ec09e21f6f7d8d6833",
+    "line_count": 138
+  },
+  {
+    "node_id": 118,
+    "name": "Подзапрос_14",
+    "path": "query_texts/node_118.sql",
+    "text_len": 77,
+    "text_hash": "sha256:766f116b16b0204fe3cb0111d9f4fd141cff2d8e751e2405e055a0f03fd3d7f2",
+    "line_count": 4
+  },
+  {
+    "node_id": 119,
+    "name": "Подзапрос_15",
+    "path": "query_texts/node_119.sql",
+    "text_len": 77,
+    "text_hash": "sha256:766f116b16b0204fe3cb0111d9f4fd141cff2d8e751e2405e055a0f03fd3d7f2",
+    "line_count": 4
+  },
+  {
+    "node_id": 120,
+    "name": "Подзапрос_16",
+    "path": "query_texts/node_120.sql",
+    "text_len": 77,
+    "text_hash": "sha256:766f116b16b0204fe3cb0111d9f4fd141cff2d8e751e2405e055a0f03fd3d7f2",
+    "line_count": 4
+  },
+  {
+    "node_id": 121,
+    "name": "Подзапрос_17",
+    "path": "query_texts/node_121.sql",
+    "text_len": 77,
+    "text_hash": "sha256:766f116b16b0204fe3cb0111d9f4fd141cff2d8e751e2405e055a0f03fd3d7f2",
+    "line_count": 4
+  },
+  {
+    "node_id": 122,
+    "name": "Подзапрос_18",
+    "path": "query_texts/node_122.sql",
+    "text_len": 77,
+    "text_hash": "sha256:766f116b16b0204fe3cb0111d9f4fd141cff2d8e751e2405e055a0f03fd3d7f2",
+    "line_count": 4
+  },
+  {
+    "node_id": 123,
+    "name": "ВТ_СостоянияПенсионныхСчетов",
+    "path": "query_texts/node_123.sql",
+    "text_len": 1732,
+    "text_hash": "sha256:189b79d0929e4d6a074f302b2d9e662a99afd4f46c76d1b5a4cc4a1cc5206e02",
+    "line_count": 31
+  },
+  {
+    "node_id": 124,
+    "name": "Подзапрос_19",
+    "path": "query_texts/node_124.sql",
+    "text_len": 100,
+    "text_hash": "sha256:10524bcca1c957daceeb12d3b7bdbb90385503ccdcc53b79c38d1b37dcc1ece2",
+    "line_count": 4
+  },
+  {
+    "node_id": 125,
+    "name": "ВТ_ПенсионныеСчета_НеИПС",
+    "path": "query_texts/node_125.sql",
+    "text_len": 357,
+    "text_hash": "sha256:db7bdb2c9bcd6057c51fa5afe2b89d06f5ecb9698b07cf17927d63df984a3389",
+    "line_count": 12
+  },
+  {
+    "node_id": 126,
+    "name": "ВТ_СчетаДоговоров_СчетаУчастников",
+    "path": "query_texts/node_126.sql",
+    "text_len": 317,
+    "text_hash": "sha256:76ef5b4cd9b2471a9f311d6bc130c62a9098e27b6e74129c4fe6c1894c453f1c",
+    "line_count": 10
+  },
+  {
+    "node_id": 127,
+    "name": "ВТ_ПенсионныеСчета_Орг_ПС_ТР",
+    "path": "query_texts/node_127.sql",
+    "text_len": 374,
+    "text_hash": "sha256:75a409ab8599303ffcf12d54afa74ab853b227c6f85afe635309cff9b7cecc2b",
+    "line_count": 13
+  },
+  {
+    "node_id": 128,
+    "name": "ВТ_ПенсионныеСчета_Орг_Уч_ПС",
+    "path": "query_texts/node_128.sql",
+    "text_len": 342,
+    "text_hash": "sha256:ed92d08315c596b01bf19163e6fab9612b1b2fecb53313c1308ba70fc2df5b50",
+    "line_count": 12
+  },
+  {
+    "node_id": 129,
+    "name": "ВТ_ПенсионныеДоговоры",
+    "path": "query_texts/node_129.sql",
+    "text_len": 182,
+    "text_hash": "sha256:3a41d9af3ee2158b1391678d4dd0e43fd03d3ea7f7d4568354a8a4250916e4ab",
+    "line_count": 5
+  },
+  {
+    "node_id": 130,
+    "name": "ВТ_ПараметрыПенсионныхДоговоров",
+    "path": "query_texts/node_130.sql",
+    "text_len": 567,
+    "text_hash": "sha256:bd357f3e06efd54e89201bcbd0bdc474d3dbfc7f18a311d4fbbb53526cfa5091",
+    "line_count": 16
+  },
+  {
+    "node_id": 131,
+    "name": "Подзапрос_20",
+    "path": "query_texts/node_131.sql",
+    "text_len": 86,
+    "text_hash": "sha256:e49b7d620119b2857614bf1202fe7677e31749a5e721e4420518e9a46f3c16de",
+    "line_count": 4
+  },
+  {
+    "node_id": 132,
+    "name": "ВТ_ПенсионныеДоговоры_Свойства",
+    "path": "query_texts/node_132.sql",
+    "text_len": 8187,
+    "text_hash": "sha256:c63fc6bee81d7880d5e5186d9dac93d96fc94b6ef3d3b14b1a6baee1b70ac4d0",
+    "line_count": 137
+  },
+  {
+    "node_id": 133,
+    "name": "Подзапрос_21",
+    "path": "query_texts/node_133.sql",
+    "text_len": 86,
+    "text_hash": "sha256:e49b7d620119b2857614bf1202fe7677e31749a5e721e4420518e9a46f3c16de",
+    "line_count": 4
+  },
+  {
+    "node_id": 134,
+    "name": "ВТ_СхемыПенсионныхСчетов",
+    "path": "query_texts/node_134.sql",
+    "text_len": 1546,
+    "text_hash": "sha256:52a843740bf598e98c5d916d33340eb3a8ae8feb016e996181cc47a71214068d",
+    "line_count": 34
+  },
+  {
+    "node_id": 135,
+    "name": "Подзапрос_22",
+    "path": "query_texts/node_135.sql",
+    "text_len": 100,
+    "text_hash": "sha256:10524bcca1c957daceeb12d3b7bdbb90385503ccdcc53b79c38d1b37dcc1ece2",
+    "line_count": 4
+  },
+  {
+    "node_id": 136,
+    "name": "ВТ_ПенсионныеСхемы",
+    "path": "query_texts/node_136.sql",
+    "text_len": 196,
+    "text_hash": "sha256:3ac5b346be5b6803818e9543f5a02265885356485004e850fc0cf22aebe2602a",
+    "line_count": 8
+  },
+  {
+    "node_id": 137,
+    "name": "ВТ_Схемы_Свойства",
+    "path": "query_texts/node_137.sql",
+    "text_len": 4028,
+    "text_hash": "sha256:77d3a0429436571dfe60e6ad85cac312005aa00913d197722c2736e04470834a",
+    "line_count": 91
+  },
+  {
+    "node_id": 138,
+    "name": "ВТ_СхемыПенсионныхСчетов_ТранзитныеОбязательства",
+    "path": "query_texts/node_138.sql",
+    "text_len": 4123,
+    "text_hash": "sha256:5ccf274633086d9f65c9753e594806b78726dd4b543697b90017c428336704fa",
+    "line_count": 93
+  },
+  {
+    "node_id": 139,
+    "name": "Подзапрос",
+    "path": "query_texts/node_139.sql",
+    "text_len": 291,
+    "text_hash": "sha256:ee72066833c129fd655c24736aaf318575e06ca1e68c0e638b84f22ad46f5ccd",
+    "line_count": 5
+  },
+  {
+    "node_id": 140,
+    "name": "ВТ_Вкладчики",
+    "path": "query_texts/node_140.sql",
+    "text_len": 270,
+    "text_hash": "sha256:cad3941455f3f565c82e52ba9a29f3ac169ac13dd8ab2c0a8a501db5769f0ecf",
+    "line_count": 10
+  },
+  {
+    "node_id": 141,
+    "name": "ВТ_ФизическиеЛица",
+    "path": "query_texts/node_141.sql",
+    "text_len": 551,
+    "text_hash": "sha256:3389a44c401490ec7a2e54d7731bef2705369e9455c71a15c037e695e6fb53e6",
+    "line_count": 21
+  },
+  {
+    "node_id": 142,
+    "name": "Часть_1",
+    "path": "query_texts/node_142.sql",
+    "text_len": 288,
+    "text_hash": "sha256:471a1f920ad1ebafa025e34b75892295b302c466757b4df1df89d06488693c07",
+    "line_count": 8
+  },
+  {
+    "node_id": 143,
+    "name": "Часть_2",
+    "path": "query_texts/node_143.sql",
+    "text_len": 249,
+    "text_hash": "sha256:a111d8f2375eaf23126a164518196ca5ceefebfb825b699753fb400ea8a59ada",
+    "line_count": 10
+  },
+  {
+    "node_id": 144,
+    "name": "ВТ_ВкладчикиУчастники",
+    "path": "query_texts/node_144.sql",
+    "text_len": 234,
+    "text_hash": "sha256:7ba717312dad0bd88a604df4dcb9c5620770041fc25011b30d632a08bc73d8b0",
+    "line_count": 12
+  },
+  {
+    "node_id": 145,
+    "name": "Часть_1",
+    "path": "query_texts/node_145.sql",
+    "text_len": 111,
+    "text_hash": "sha256:c52bf5ff30d7b250055ca773136e9929f8a8a3358755843a6ff0789c0a5a56da",
+    "line_count": 5
+  },
+  {
+    "node_id": 146,
+    "name": "Часть_2",
+    "path": "query_texts/node_146.sql",
+    "text_len": 109,
+    "text_hash": "sha256:42542c706f8558ce245bbd2695971eaa347695ce6fed991cec5ddc5fe6376d4d",
+    "line_count": 4
+  },
+  {
+    "node_id": 147,
+    "name": "ВТ_ДанныеКонтрагентов",
+    "path": "query_texts/node_147.sql",
+    "text_len": 3596,
+    "text_hash": "sha256:d38d5046742d925bb91e8d30cbecbb1bf0514d68cc3c9e862520d4314a4cb4c8",
+    "line_count": 119
+  },
+  {
+    "node_id": 148,
+    "name": "Часть_1",
+    "path": "query_texts/node_148.sql",
+    "text_len": 3316,
+    "text_hash": "sha256:c9aebdc9bc6fbc30799f48ae3f31e4e3a55ccbff5f21e4f548fe9048f761d033",
+    "line_count": 99
+  },
+  {
+    "node_id": 149,
+    "name": "Часть_2",
+    "path": "query_texts/node_149.sql",
+    "text_len": 266,
+    "text_hash": "sha256:91990018016eadb6f49840432bb5ca0a55daaf68ebf8af97b0dbeef9c7c6e4e7",
+    "line_count": 17
+  },
+  {
+    "node_id": 150,
+    "name": "ВТ_ФИО_ФЛ",
+    "path": "query_texts/node_150.sql",
+    "text_len": 401,
+    "text_hash": "sha256:51980fe2554e687f54105c91a20c75e02f26d92c396b5fb1735638fc2033901d",
+    "line_count": 14
+  },
+  {
+    "node_id": 151,
+    "name": "Подзапрос_23",
+    "path": "query_texts/node_151.sql",
+    "text_len": 128,
+    "text_hash": "sha256:8459716b5b09cdf2d50ff8ff1b89caa396f9fce5193522ada8866a106131d439",
+    "line_count": 4
+  },
+  {
+    "node_id": 152,
+    "name": "ВТ_ФИО_ИП",
+    "path": "query_texts/node_152.sql",
+    "text_len": 786,
+    "text_hash": "sha256:5991b173fb16260dd3b8c260876a214701cec7eb41aa22ba0be6e2d74f40f005",
+    "line_count": 23
+  },
+  {
+    "node_id": 153,
+    "name": "ВТ_ПаспортныеДанные_ПоследняяЗапись",
+    "path": "query_texts/node_153.sql",
+    "text_len": 552,
+    "text_hash": "sha256:4f60473e22ed0768848b15b6434384cd6e8092ac52bcd226187b24ec8d3eff80",
+    "line_count": 17
+  },
+  {
+    "node_id": 154,
+    "name": "Подзапрос_24",
+    "path": "query_texts/node_154.sql",
+    "text_len": 68,
+    "text_hash": "sha256:361f6cba79e756afd518e66e7b45706d21e6c03420d76e4437d417570ca0e6f4",
+    "line_count": 4
+  },
+  {
+    "node_id": 155,
+    "name": "ВТ_ПаспортныеДанные_1",
+    "path": "query_texts/node_155.sql",
+    "text_len": 684,
+    "text_hash": "sha256:e64d1b9519febd6d8c588903adf828fccdf9ae9c7edd4dbe7651fed45aea5448",
+    "line_count": 19
+  },
+  {
+    "node_id": 156,
+    "name": "Подзапрос_25",
+    "path": "query_texts/node_156.sql",
+    "text_len": 68,
+    "text_hash": "sha256:361f6cba79e756afd518e66e7b45706d21e6c03420d76e4437d417570ca0e6f4",
+    "line_count": 4
+  },
+  {
+    "node_id": 157,
+    "name": "ВТ_ПаспортныеДанные_Cleared",
+    "path": "query_texts/node_157.sql",
+    "text_len": 4520,
+    "text_hash": "sha256:d9bf2ec743981549a79e368c8e49823c7060b512a3032a9bd37058526d3eb5ea",
+    "line_count": 127
+  },
+  {
+    "node_id": 158,
+    "name": "ВТ_ПаспортныеДанные",
+    "path": "query_texts/node_158.sql",
+    "text_len": 396,
+    "text_hash": "sha256:0451fb442c301ecb0698ed4f7c539eb5a7081f2a656ac053adc8bfa2297e3277",
+    "line_count": 14
+  },
+  {
+    "node_id": 159,
+    "name": "ВТ_Данные_к",
+    "path": "query_texts/node_159.sql",
+    "text_len": 2040,
+    "text_hash": "sha256:2b5f03c4d507ad7d3a3a7be0deadc5d7db34ac52238c37d6f313510d20fb0ac1",
+    "line_count": 72
+  },
+  {
+    "node_id": 160,
+    "name": "ВТ_Идентификаторы264",
+    "path": "query_texts/node_160.sql",
+    "text_len": 5728,
+    "text_hash": "sha256:c18eedd05fa27df3a91deeb20272551ae61c8454240315a037e2a9296850c2b4",
+    "line_count": 237
+  },
+  {
+    "node_id": 161,
+    "name": "Часть_1",
+    "path": "query_texts/node_161.sql",
+    "text_len": 5452,
+    "text_hash": "sha256:48fa65c1e52a16a31aedf9a149da9dd74b554c1fc375440bf5a673171baf0ca2",
+    "line_count": 217
+  },
+  {
+    "node_id": 162,
+    "name": "Часть_2",
+    "path": "query_texts/node_162.sql",
+    "text_len": 258,
+    "text_hash": "sha256:b74bdbc62dee6f87f808e834a323c09ddb6202caae5d5dfbbeb6af0cf7b0260c",
+    "line_count": 17
+  },
+  {
+    "node_id": 163,
+    "name": "ВТ_ИдентификаторыКонтрагентов",
+    "path": "query_texts/node_163.sql",
+    "text_len": 812,
+    "text_hash": "sha256:7987a955eade40305d3ab660d6b5fca4fa0abce32177b8f2a2031c660df31be2",
+    "line_count": 33
+  },
+  {
+    "node_id": 164,
+    "name": "ВТ_ФизическиеЛица_Свойства",
+    "path": "query_texts/node_164.sql",
+    "text_len": 994,
+    "text_hash": "sha256:e68d7f939dd87b680dabcd0372d6a16aafcba817f63024295b46dade5e95315e",
+    "line_count": 28
+  },
+  {
+    "node_id": 165,
+    "name": "ВТ_ФизическиеЛица_ДляПаспортов",
+    "path": "query_texts/node_165.sql",
+    "text_len": 351,
+    "text_hash": "sha256:d094110f5f8dec76adedd6be4d7c8172fa0fcfad7d50e5c5d26f7e2e069a0a17",
+    "line_count": 11
+  },
+  {
+    "node_id": 166,
+    "name": "ВТ_ГражданствоФизическихЛиц",
+    "path": "query_texts/node_166.sql",
+    "text_len": 573,
+    "text_hash": "sha256:aaa39ac112e5891c341ffc7c5b5982f55403a7d8b04ea31a2c8dbbddac59760e",
+    "line_count": 18
+  },
+  {
+    "node_id": 167,
+    "name": "Подзапрос_26",
+    "path": "query_texts/node_167.sql",
+    "text_len": 136,
+    "text_hash": "sha256:2a5d8f1f5428a65b69939f3da3e5823f41f719ccfb7a02befc251f007b40ee3c",
+    "line_count": 4
+  },
+  {
+    "node_id": 168,
+    "name": "ВТ_ИдентификаторыКонтрагентов_Старые",
+    "path": "query_texts/node_168.sql",
+    "text_len": 2381,
+    "text_hash": "sha256:f3f4c67ad3a57a276585414b05303fd4d3154810e9e220cfe7a7baf3cd7be426",
+    "line_count": 66
+  },
+  {
+    "node_id": 169,
+    "name": "Часть_1",
+    "path": "query_texts/node_169.sql",
+    "text_len": 380,
+    "text_hash": "sha256:da7efda11d291beea31bac485780929c5701923d3c653e945b74fb142f7e6382",
+    "line_count": 12
+  },
+  {
+    "node_id": 170,
+    "name": "Часть_2",
+    "path": "query_texts/node_170.sql",
+    "text_len": 1983,
+    "text_hash": "sha256:3474013969abb25c4fc3e52d4ae1dc6f6232a7bfc3a3e754e30408c46949c09d",
+    "line_count": 51
+  },
+  {
+    "node_id": 171,
+    "name": "ВТ_Корректировки",
+    "path": "query_texts/node_171.sql",
+    "text_len": 2455,
+    "text_hash": "sha256:4120a9a9ebb00ce3f452882434f71329d8c5bd05fe25facc15a22039c289a627",
+    "line_count": 62
+  },
+  {
+    "node_id": 172,
+    "name": "Подзапрос_27",
+    "path": "query_texts/node_172.sql",
+    "text_len": 64,
+    "text_hash": "sha256:20016bba95411806655c068f1adadafc1ad21777f17fc1302ff679205f1ec4e5",
+    "line_count": 4
+  },
+  {
+    "node_id": 173,
+    "name": "ВТ_Суммы_ПР",
+    "path": "query_texts/node_173.sql",
+    "text_len": 6984,
+    "text_hash": "sha256:f8dc08aa5ff32ead16e2d34720bcd3d671d0cf2f8993ad0bf51d36abaec39e16",
+    "line_count": 263
+  },
+  {
+    "node_id": 174,
+    "name": "Подзапрос_28",
+    "path": "query_texts/node_174.sql",
+    "text_len": 223,
+    "text_hash": "sha256:c1b8a5da830227eec9942393422a549c993984fc0c3fd837d71839f978a912b0",
+    "line_count": 6
+  },
+  {
+    "node_id": 175,
+    "name": "Подзапрос_29",
+    "path": "query_texts/node_175.sql",
+    "text_len": 223,
+    "text_hash": "sha256:c1b8a5da830227eec9942393422a549c993984fc0c3fd837d71839f978a912b0",
+    "line_count": 6
+  },
+  {
+    "node_id": 176,
+    "name": "Подзапрос_30",
+    "path": "query_texts/node_176.sql",
+    "text_len": 223,
+    "text_hash": "sha256:c1b8a5da830227eec9942393422a549c993984fc0c3fd837d71839f978a912b0",
+    "line_count": 6
+  },
+  {
+    "node_id": 177,
+    "name": "Подзапрос_31",
+    "path": "query_texts/node_177.sql",
+    "text_len": 223,
+    "text_hash": "sha256:c1b8a5da830227eec9942393422a549c993984fc0c3fd837d71839f978a912b0",
+    "line_count": 6
+  },
+  {
+    "node_id": 178,
+    "name": "Подзапрос_32",
+    "path": "query_texts/node_178.sql",
+    "text_len": 140,
+    "text_hash": "sha256:74aebb23f907d221e51b12619bf9c5de8176a5a1e1675f5819f5acefc37a8377",
+    "line_count": 4
+  },
+  {
+    "node_id": 179,
+    "name": "Подзапрос_33",
+    "path": "query_texts/node_179.sql",
+    "text_len": 223,
+    "text_hash": "sha256:c1b8a5da830227eec9942393422a549c993984fc0c3fd837d71839f978a912b0",
+    "line_count": 6
+  },
+  {
+    "node_id": 180,
+    "name": "Подзапрос_34",
+    "path": "query_texts/node_180.sql",
+    "text_len": 223,
+    "text_hash": "sha256:c1b8a5da830227eec9942393422a549c993984fc0c3fd837d71839f978a912b0",
+    "line_count": 6
+  },
+  {
+    "node_id": 181,
+    "name": "Подзапрос_35",
+    "path": "query_texts/node_181.sql",
+    "text_len": 223,
+    "text_hash": "sha256:c1b8a5da830227eec9942393422a549c993984fc0c3fd837d71839f978a912b0",
+    "line_count": 6
+  },
+  {
+    "node_id": 182,
+    "name": "Подзапрос_36",
+    "path": "query_texts/node_182.sql",
+    "text_len": 223,
+    "text_hash": "sha256:c1b8a5da830227eec9942393422a549c993984fc0c3fd837d71839f978a912b0",
+    "line_count": 6
+  },
+  {
+    "node_id": 183,
+    "name": "Подзапрос_37",
+    "path": "query_texts/node_183.sql",
+    "text_len": 223,
+    "text_hash": "sha256:c1b8a5da830227eec9942393422a549c993984fc0c3fd837d71839f978a912b0",
+    "line_count": 6
+  },
+  {
+    "node_id": 184,
+    "name": "Часть_1",
+    "path": "query_texts/node_184.sql",
+    "text_len": 716,
+    "text_hash": "sha256:e6e7a5cd4c37f481a09ab03c47043182926f3aacc36f578edbd64410c16f6bf5",
+    "line_count": 22
+  },
+  {
+    "node_id": 185,
+    "name": "Часть_2",
+    "path": "query_texts/node_185.sql",
+    "text_len": 540,
+    "text_hash": "sha256:1fe1e067342e916ac7f9790ca4c43db4ec6e834e7d6c6b26cb2dbae403ee45ac",
+    "line_count": 21
+  },
+  {
+    "node_id": 186,
+    "name": "Часть_3",
+    "path": "query_texts/node_186.sql",
+    "text_len": 558,
+    "text_hash": "sha256:0abdf0a6ac31f48f991e37d0d0784584888a00cac7d9385a70f9633e95ff0d05",
+    "line_count": 23
+  },
+  {
+    "node_id": 187,
+    "name": "Часть_4",
+    "path": "query_texts/node_187.sql",
+    "text_len": 558,
+    "text_hash": "sha256:99a319a1d6d67264761091290088b9d3635d3eb9fb878498e0bc086339fa1d49",
+    "line_count": 23
+  },
+  {
+    "node_id": 188,
+    "name": "Часть_5",
+    "path": "query_texts/node_188.sql",
+    "text_len": 279,
+    "text_hash": "sha256:628450b41f51adc41e9f83b1efcd5704f7922a544aae064b06c3ca885cb0e33c",
+    "line_count": 13
+  },
+  {
+    "node_id": 189,
+    "name": "Часть_6",
+    "path": "query_texts/node_189.sql",
+    "text_len": 508,
+    "text_hash": "sha256:cd3dd47d6b0c242a0896275d9f913727c57f34cef3ca3cedae6ef21b8c158016",
+    "line_count": 19
+  },
+  {
+    "node_id": 190,
+    "name": "Часть_7",
+    "path": "query_texts/node_190.sql",
+    "text_len": 661,
+    "text_hash": "sha256:ee0c5b0f224ff355a161283ba7193f7b01cc6135c6e5ef610b3f3c257b32fecf",
+    "line_count": 21
+  },
+  {
+    "node_id": 191,
+    "name": "Часть_8",
+    "path": "query_texts/node_191.sql",
+    "text_len": 717,
+    "text_hash": "sha256:3479ab30539c24ee62536b44c07713342f17a7685432d104da3bb6c122dec24c",
+    "line_count": 21
+  },
+  {
+    "node_id": 192,
+    "name": "Часть_9",
+    "path": "query_texts/node_192.sql",
+    "text_len": 743,
+    "text_hash": "sha256:2543ef38b88b8de3a4a9c71ff12b7208de86825019af16e4dbc0d684f7b40129",
+    "line_count": 21
+  },
+  {
+    "node_id": 193,
+    "name": "Часть_10",
+    "path": "query_texts/node_193.sql",
+    "text_len": 705,
+    "text_hash": "sha256:d6fb4b654e7f09e41340a070b4017b42c64204d57cca7a2581dee46a3482f0f1",
+    "line_count": 21
+  },
+  {
+    "node_id": 194,
+    "name": "Часть_11",
+    "path": "query_texts/node_194.sql",
+    "text_len": 774,
+    "text_hash": "sha256:b3abc3060d91ee4f868d2cb58d37eed093e0eff22880817cb98fa5eb4d8a9cd2",
+    "line_count": 26
+  },
+  {
+    "node_id": 195,
+    "name": "ВТ_Суммы_ПР_дляВС",
+    "path": "query_texts/node_195.sql",
+    "text_len": 2758,
+    "text_hash": "sha256:c28a0b1e4756c4fd3782f376d3fd74d044281236284bb821725c2ff21eafe643",
+    "line_count": 55
+  },
+  {
+    "node_id": 196,
+    "name": "ВТ_СуммыКоэффициентыВС_предв",
+    "path": "query_texts/node_196.sql",
+    "text_len": 12727,
+    "text_hash": "sha256:c89d35fd0626c13b7857cc62095bdb0bd8ea9f475413a2839adc4fd956835a37",
+    "line_count": 191
+  },
+  {
+    "node_id": 197,
+    "name": "ДоговорКоэфДляРасчетаВыкупныхСумм",
+    "path": "query_texts/node_197.sql",
+    "text_len": 1230,
+    "text_hash": "sha256:fb145746ba1448b7b134446b7e223f80942770ac2171d16f5cfb0d013c06303f",
+    "line_count": 18
+  },
+  {
+    "node_id": 198,
+    "name": "ШаблонКоэфДляРасчетаВыкупныхСумм",
+    "path": "query_texts/node_198.sql",
+    "text_len": 1226,
+    "text_hash": "sha256:0c9872b001d1ac5fd09af7b2545c08c5e3b6edb0a61523bac0839722544f2465",
+    "line_count": 18
+  },
+  {
+    "node_id": 199,
+    "name": "СхемаКоэфДляРасчетаВыкупныхСумм",
+    "path": "query_texts/node_199.sql",
+    "text_len": 1225,
+    "text_hash": "sha256:a142597c41c9b2def8f12dfcda6c0cb546b0c4498703004bc3b56fb38d8b4b2b",
+    "line_count": 18
+  },
+  {
+    "node_id": 200,
+    "name": "БудущееДоговорКоэфДляРасчетаВыкупныхСумм",
+    "path": "query_texts/node_200.sql",
+    "text_len": 886,
+    "text_hash": "sha256:2f41b8c3c70fad20deaad95319c591bf9c408f13191c1826528fd2097ee1267f",
+    "line_count": 14
+  },
+  {
+    "node_id": 201,
+    "name": "БудущееШаблонКоэфДляРасчетаВыкупныхСумм",
+    "path": "query_texts/node_201.sql",
+    "text_len": 884,
+    "text_hash": "sha256:3b056391775190a121f5aa52c484aea90b1cf5d27a5d325a6fd5b341bcdda84a",
+    "line_count": 14
+  },
+  {
+    "node_id": 202,
+    "name": "БудущееСхемаКоэфДляРасчетаВыкупныхСумм",
+    "path": "query_texts/node_202.sql",
+    "text_len": 883,
+    "text_hash": "sha256:99fd07ff676bc3a04b0b9805cb6eb80ef57c612f5e4e6e7200e0a3edba1ce07b",
+    "line_count": 14
+  },
+  {
+    "node_id": 203,
+    "name": "ВТ_СуммыКоэффициентыВС",
+    "path": "query_texts/node_203.sql",
+    "text_len": 1594,
+    "text_hash": "sha256:0cc48de2fad95a18a7dfffdc27cd71727dd1fc027e1eab60ff114875677bf8c7",
+    "line_count": 35
+  },
+  {
+    "node_id": 204,
+    "name": "ВТ_РасчетнаяДатаВС",
+    "path": "query_texts/node_204.sql",
+    "text_len": 2172,
+    "text_hash": "sha256:14a22081999beb8f7e1b6752f15cade74bc8eea04934ded2acf4c822b0a29112",
+    "line_count": 46
+  },
+  {
+    "node_id": 205,
+    "name": "ВТ_Сумма_ПР_дляПП",
+    "path": "query_texts/node_205.sql",
+    "text_len": 6735,
+    "text_hash": "sha256:0b338b27fa94f62d773a8aec1cb202c443ab85e9ac78688d316dd08349fc10a8",
+    "line_count": 97
+  },
+  {
+    "node_id": 206,
+    "name": "ДоговорКоэфДляРасчетаВыкупныхСумм",
+    "path": "query_texts/node_206.sql",
+    "text_len": 1229,
+    "text_hash": "sha256:8da012c9fde0fb535bc8388f17a7702deeb8a10ec027906bcbf6e7c4d2a5338c",
+    "line_count": 18
+  },
+  {
+    "node_id": 207,
+    "name": "ШаблонКоэфДляРасчетаВыкупныхСумм",
+    "path": "query_texts/node_207.sql",
+    "text_len": 1225,
+    "text_hash": "sha256:1ac29baa328e5a850bd3b4931c404d92e6a5b039007312b2ea9d2025c0fe1444",
+    "line_count": 18
+  },
+  {
+    "node_id": 208,
+    "name": "СхемаКоэфДляРасчетаВыкупныхСумм",
+    "path": "query_texts/node_208.sql",
+    "text_len": 1224,
+    "text_hash": "sha256:84b1547b7f42ef1d22fc6b315cfdd57a2ce651ff1232ee6411074f58065d049c",
+    "line_count": 18
+  },
+  {
+    "node_id": 209,
+    "name": "ВТ_РасчетныеСуммыПП_пред",
+    "path": "query_texts/node_209.sql",
+    "text_len": 328,
+    "text_hash": "sha256:43bccf433efd39acc7c63304bee1cb104109c22c1444957d3c3a70babb75ef1f",
+    "line_count": 9
+  },
+  {
+    "node_id": 210,
+    "name": "ВТ_ОстаткиНаследников",
+    "path": "query_texts/node_210.sql",
+    "text_len": 1598,
+    "text_hash": "sha256:830791bcebd2fb06933094bea29ec3365c0a083c10096e6826bdd1ba5ae70217",
+    "line_count": 30
+  },
+  {
+    "node_id": 211,
+    "name": "ВТ_РасчетныеСуммыПП",
+    "path": "query_texts/node_211.sql",
+    "text_len": 994,
+    "text_hash": "sha256:fa8ab2e68ce4197f9021de17742c9911479404854f4c92df8d5f055eb3249374",
+    "line_count": 23
+  },
+  {
+    "node_id": 212,
+    "name": "ВТ_Суммы_ПР_С_Обязательствами",
+    "path": "query_texts/node_212.sql",
+    "text_len": 3447,
+    "text_hash": "sha256:07de33d90e46f89b1b40496c62a5f490bb0acdd131cfcf70b1834b5e6e10950e",
+    "line_count": 96
+  },
+  {
+    "node_id": 213,
+    "name": "Часть_1",
+    "path": "query_texts/node_213.sql",
+    "text_len": 481,
+    "text_hash": "sha256:6cd191a2264dda061355e2df4cfe64ab463e31838d95c44527f9c45dee745e81",
+    "line_count": 13
+  },
+  {
+    "node_id": 214,
+    "name": "Часть_2",
+    "path": "query_texts/node_214.sql",
+    "text_len": 2558,
+    "text_hash": "sha256:b311d45558004865ea94fa673de86c6351d19abffddd16e99b8a5284a9ffaab3",
+    "line_count": 63
+  },
+  {
+    "node_id": 215,
+    "name": "Часть_3",
+    "path": "query_texts/node_215.sql",
+    "text_len": 372,
+    "text_hash": "sha256:448949e4edc1f04d7ee969105daefebe5a7c2c74a24e2b2d2d95bbb1d15a07b0",
+    "line_count": 14
+  },
+  {
+    "node_id": 216,
+    "name": "ВТ_Суммы",
+    "path": "query_texts/node_216.sql",
+    "text_len": 652,
+    "text_hash": "sha256:49a0321c8762f08628abc8b2bc19b6b98693390fb1794b53a415eddf885a9da8",
+    "line_count": 15
+  },
+  {
+    "node_id": 217,
+    "name": "ВТ_НачисленияПенсийПоСчетам",
+    "path": "query_texts/node_217.sql",
+    "text_len": 1865,
+    "text_hash": "sha256:3f702627b560140c9b50eaf295386f6ff4cc2036ab846694678754089236681e",
+    "line_count": 56
+  },
+  {
+    "node_id": 218,
+    "name": "Подзапрос_38",
+    "path": "query_texts/node_218.sql",
+    "text_len": 87,
+    "text_hash": "sha256:ac3bc03c3f33192f652f02938a95a0913e0f020cb8f087d5acb340c93a0804df",
+    "line_count": 4
+  },
+  {
+    "node_id": 219,
+    "name": "Регистры",
+    "path": "query_texts/node_219.sql",
+    "text_len": 1395,
+    "text_hash": "sha256:10f7ad04254b0a08bbf1bbdc197e052338d63ac8f5b623a63d1fb8ea885439ba",
+    "line_count": 33
+  },
+  {
+    "node_id": 220,
+    "name": "Часть_1",
+    "path": "query_texts/node_220.sql",
+    "text_len": 699,
+    "text_hash": "sha256:a6b50d0070d7a3a8adf7616bd29c1068f5196d26e22773867c7b67bfbad6af91",
+    "line_count": 14
+  },
+  {
+    "node_id": 221,
+    "name": "Часть_2",
+    "path": "query_texts/node_221.sql",
+    "text_len": 810,
+    "text_hash": "sha256:c3e3a002ef2f7cce11d2b1e669132c815e6a6361e13602c2155e4f332f528cfd",
+    "line_count": 21
+  },
+  {
+    "node_id": 222,
+    "name": "ВТ_РегистраторыНачисленийСолидарныхСчетов",
+    "path": "query_texts/node_222.sql",
+    "text_len": 556,
+    "text_hash": "sha256:a85aab1180d3c7dcedab4bfb94b2145c44b2ecb1511f91b2449bdcb3f2b538a1",
+    "line_count": 14
+  },
+  {
+    "node_id": 223,
+    "name": "ВТ_НачисленияСолидарныхСчетовКРаспределению",
+    "path": "query_texts/node_223.sql",
+    "text_len": 995,
+    "text_hash": "sha256:a1c76855c2be6128589a5f58192f66c9be5e3cb4c6814b40ef6c8e97a28b223c",
+    "line_count": 29
+  },
+  {
+    "node_id": 224,
+    "name": "Подзапрос_39",
+    "path": "query_texts/node_224.sql",
+    "text_len": 84,
+    "text_hash": "sha256:fcce1dcf1f6af33d517da1ad83f6c4d91fb33a757ed91f9c57e95c410e4fbabc",
+    "line_count": 4
+  },
+  {
+    "node_id": 225,
+    "name": "Подзапрос_40",
+    "path": "query_texts/node_225.sql",
+    "text_len": 241,
+    "text_hash": "sha256:86fad0c9a3f35f1c210b5d57af2458cd60c054e53d7952277b3d8a98732df7c4",
+    "line_count": 6
+  },
+  {
+    "node_id": 226,
+    "name": "ВТ_ДвиженияПоРегистраторам",
+    "path": "query_texts/node_226.sql",
+    "text_len": 3381,
+    "text_hash": "sha256:3fb10d84a97bd322be930e30f089befe1af5c28733b9aef0124cecb6d2b7e283",
+    "line_count": 73
+  },
+  {
+    "node_id": 227,
+    "name": "Подзапрос_41",
+    "path": "query_texts/node_227.sql",
+    "text_len": 218,
+    "text_hash": "sha256:1c4a7e615b574814e88e32ea74fb7cd1d78372f74da1605df0c03fc9faf6d22a",
+    "line_count": 6
+  },
+  {
+    "node_id": 228,
+    "name": "ВТ_ДвиженияПоДокументам",
+    "path": "query_texts/node_228.sql",
+    "text_len": 726,
+    "text_hash": "sha256:9ebb75b9491f3e6d1f67e3505fc598d0a8a9634a7d56f6f0c9e23e188f79057e",
+    "line_count": 20
+  },
+  {
+    "node_id": 229,
+    "name": "ВТ_ПеремещенияВСтраховойРезерв",
+    "path": "query_texts/node_229.sql",
+    "text_len": 895,
+    "text_hash": "sha256:63ba17a18ec148634bb3e7176d2dfe1b4739814da09c5795f2b8012c07052a72",
+    "line_count": 27
+  },
+  {
+    "node_id": 230,
+    "name": "Подзапрос_42",
+    "path": "query_texts/node_230.sql",
+    "text_len": 84,
+    "text_hash": "sha256:fcce1dcf1f6af33d517da1ad83f6c4d91fb33a757ed91f9c57e95c410e4fbabc",
+    "line_count": 4
+  },
+  {
+    "node_id": 231,
+    "name": "ВТ_ВозвратыПенсий",
+    "path": "query_texts/node_231.sql",
+    "text_len": 746,
+    "text_hash": "sha256:090ac7b844f976ed0a6ed4c88159cfa8093bd2983fd54ac2d31d1f63690f6c4f",
+    "line_count": 22
+  },
+  {
+    "node_id": 232,
+    "name": "Подзапрос_43",
+    "path": "query_texts/node_232.sql",
+    "text_len": 84,
+    "text_hash": "sha256:fcce1dcf1f6af33d517da1ad83f6c4d91fb33a757ed91f9c57e95c410e4fbabc",
+    "line_count": 4
+  },
+  {
+    "node_id": 233,
+    "name": "ВТ_ПереводыИзРегистров_Резервы",
+    "path": "query_texts/node_233.sql",
+    "text_len": 2056,
+    "text_hash": "sha256:ed15f84976809afa7de55a8fd461c16f22672cf0336358f70c520f39957ac0e9",
+    "line_count": 56
+  },
+  {
+    "node_id": 234,
+    "name": "Часть_1",
+    "path": "query_texts/node_234.sql",
+    "text_len": 1025,
+    "text_hash": "sha256:a719ffeffcab3353c1e76e7941a53ae487c9031c6dd28c2e27b168a5de6a95c0",
+    "line_count": 27
+  },
+  {
+    "node_id": 235,
+    "name": "Часть_2",
+    "path": "query_texts/node_235.sql",
+    "text_len": 1011,
+    "text_hash": "sha256:ec444ba8c9ec1c091c56e56fc07ff0d4d98500de7bf872ee918c94df9d159710",
+    "line_count": 26
+  },
+  {
+    "node_id": 236,
+    "name": "ВТ_ПереводыИзРегистров_Регистры",
+    "path": "query_texts/node_236.sql",
+    "text_len": 905,
+    "text_hash": "sha256:fe6d721340661e66946976fcca535de8a6681343f6b3316a4d363c16988fb8c2",
+    "line_count": 31
+  },
+  {
+    "node_id": 237,
+    "name": "Часть_1",
+    "path": "query_texts/node_237.sql",
+    "text_len": 375,
+    "text_hash": "sha256:f9a7b3b8377f3edbf7066914e4c55216830766cf7c487f9f38fe55577e872312",
+    "line_count": 9
+  },
+  {
+    "node_id": 238,
+    "name": "Часть_2",
+    "path": "query_texts/node_238.sql",
+    "text_len": 278,
+    "text_hash": "sha256:0f428533897da67dbb8029f82685030ed802e66da2ea459824b5796ff8eeaee8",
+    "line_count": 8
+  },
+  {
+    "node_id": 239,
+    "name": "Часть_3",
+    "path": "query_texts/node_239.sql",
+    "text_len": 216,
+    "text_hash": "sha256:777a289b97a9b1a5c5cdf3366b1dac14b1310c23052db5a5f1714021d04c6455",
+    "line_count": 8
+  },
+  {
+    "node_id": 240,
+    "name": "ВТ_Переводы",
+    "path": "query_texts/node_240.sql",
+    "text_len": 369,
+    "text_hash": "sha256:8d9a36a4601414e0a61e867f34f1da2c26e6cd7aecbce0e7664d4ad50e6e25d7",
+    "line_count": 10
+  },
+  {
+    "node_id": 241,
+    "name": "ВТ_ПереводыПР",
+    "path": "query_texts/node_241.sql",
+    "text_len": 3676,
+    "text_hash": "sha256:5b847da03be5bc6219043cb96b7d21ff6ea53d9aa62e614e27bf6dfe9271837c",
+    "line_count": 102
+  },
+  {
+    "node_id": 242,
+    "name": "Подзапрос",
+    "path": "query_texts/node_242.sql",
+    "text_len": 836,
+    "text_hash": "sha256:4fd53fb1c484e15268e20de33d3208c59ba3ad9c600a85f7eb9bc8f23b39ae16",
+    "line_count": 19
+  },
+  {
+    "node_id": 243,
+    "name": "Часть_1",
+    "path": "query_texts/node_243.sql",
+    "text_len": 631,
+    "text_hash": "sha256:524a7ee4a25f251f290ce9171e13ae0bf9929d9fee5d750b946f1feec8eff689",
+    "line_count": 12
+  },
+  {
+    "node_id": 244,
+    "name": "Часть_2",
+    "path": "query_texts/node_244.sql",
+    "text_len": 623,
+    "text_hash": "sha256:6692ab8609e40e92cc6a51846b000965b7944be13c3e9c69ae50f40b6993a016",
+    "line_count": 12
+  },
+  {
+    "node_id": 245,
+    "name": "Часть_1",
+    "path": "query_texts/node_245.sql",
+    "text_len": 915,
+    "text_hash": "sha256:ccb8c176c22910bf6321c724309d93dac8d70a0ce263955994dab1f6e1f49b38",
+    "line_count": 17
+  },
+  {
+    "node_id": 246,
+    "name": "Часть_2",
+    "path": "query_texts/node_246.sql",
+    "text_len": 606,
+    "text_hash": "sha256:1698df2fd48db48eebed51e10eef9ad32d75a8eb6120706cfb7ac3e24ea025ed",
+    "line_count": 13
+  },
+  {
+    "node_id": 247,
+    "name": "Часть_3",
+    "path": "query_texts/node_247.sql",
+    "text_len": 1340,
+    "text_hash": "sha256:1764a9e6c673f32e25869cd7397f36aef3fb32fb22daa0f5f87dfe04cc11c1e6",
+    "line_count": 33
+  },
+  {
+    "node_id": 248,
+    "name": "Часть_4",
+    "path": "query_texts/node_248.sql",
+    "text_len": 193,
+    "text_hash": "sha256:53295889f631b42b7e9076a3aa045676958a108e834faa09718f216b98d79996",
+    "line_count": 7
+  },
+  {
+    "node_id": 249,
+    "name": "Часть_5",
+    "path": "query_texts/node_249.sql",
+    "text_len": 274,
+    "text_hash": "sha256:1dad05b2ffbfac91d5fa50abdbef0ef04239f96dbc166e88a91777ecc2301be0",
+    "line_count": 7
+  },
+  {
+    "node_id": 250,
+    "name": "Часть_6",
+    "path": "query_texts/node_250.sql",
+    "text_len": 242,
+    "text_hash": "sha256:bea0636b79723a67cbc66c605b14ab0a76069e207ece7b982dd81670bf29f33d",
+    "line_count": 10
+  },
+  {
+    "node_id": 251,
+    "name": "ВТ_Переводы_Устарело",
+    "path": "query_texts/node_251.sql",
+    "text_len": 246,
+    "text_hash": "sha256:936c0fae1ee33a70f87931bd714a8e019b416c47aac6bb7a35ba6087d23c425a",
+    "line_count": 12
+  },
+  {
+    "node_id": 252,
+    "name": "ВТ_СторнированныеСуммы",
+    "path": "query_texts/node_252.sql",
+    "text_len": 1555,
+    "text_hash": "sha256:2bc198b7a4c40252145c7c5981d1755e2bc75e24edbc1a74667bffb21a95c206",
+    "line_count": 48
+  },
+  {
+    "node_id": 253,
+    "name": "Подзапрос_44",
+    "path": "query_texts/node_253.sql",
+    "text_len": 74,
+    "text_hash": "sha256:489235a8fd0383df33a306563e7b4aa7761e76525c1ce8b218c69db0bd56b9f6",
+    "line_count": 4
+  },
+  {
+    "node_id": 254,
+    "name": "Подзапрос_45",
+    "path": "query_texts/node_254.sql",
+    "text_len": 74,
+    "text_hash": "sha256:489235a8fd0383df33a306563e7b4aa7761e76525c1ce8b218c69db0bd56b9f6",
+    "line_count": 4
+  },
+  {
+    "node_id": 255,
+    "name": "ВТ_ВыплатыПР",
+    "path": "query_texts/node_255.sql",
+    "text_len": 3708,
+    "text_hash": "sha256:9db3aacd13b3d38db633ebffca75ae8ee949976eb032b24ec1700514a075cd86",
+    "line_count": 132
+  },
+  {
+    "node_id": 256,
+    "name": "Подзапрос_46",
+    "path": "query_texts/node_256.sql",
+    "text_len": 100,
+    "text_hash": "sha256:10524bcca1c957daceeb12d3b7bdbb90385503ccdcc53b79c38d1b37dcc1ece2",
+    "line_count": 4
+  },
+  {
+    "node_id": 257,
+    "name": "Подзапрос_47",
+    "path": "query_texts/node_257.sql",
+    "text_len": 177,
+    "text_hash": "sha256:9332282871488421785d2967ec09abe68732cb6b4bb113fe1d4c72b21234aa50",
+    "line_count": 5
+  },
+  {
+    "node_id": 258,
+    "name": "Подзапрос_48",
+    "path": "query_texts/node_258.sql",
+    "text_len": 221,
+    "text_hash": "sha256:47edfa6ec96ef3ab067c70326a875a0a58351007b98d72aebcfe1c490a2388e7",
+    "line_count": 6
+  },
+  {
+    "node_id": 259,
+    "name": "Подзапрос_49",
+    "path": "query_texts/node_259.sql",
+    "text_len": 223,
+    "text_hash": "sha256:c1b8a5da830227eec9942393422a549c993984fc0c3fd837d71839f978a912b0",
+    "line_count": 6
+  },
+  {
+    "node_id": 260,
+    "name": "Подзапрос_50",
+    "path": "query_texts/node_260.sql",
+    "text_len": 223,
+    "text_hash": "sha256:c1b8a5da830227eec9942393422a549c993984fc0c3fd837d71839f978a912b0",
+    "line_count": 6
+  },
+  {
+    "node_id": 261,
+    "name": "Часть_1",
+    "path": "query_texts/node_261.sql",
+    "text_len": 451,
+    "text_hash": "sha256:61ebd026f7fa0806903f1aba668253925bea10777396abb96cd8cfbf394b9539",
+    "line_count": 17
+  },
+  {
+    "node_id": 262,
+    "name": "Часть_2",
+    "path": "query_texts/node_262.sql",
+    "text_len": 902,
+    "text_hash": "sha256:e7cd84dcfbb80d8ac80fb0f2d375b5c9a6a603fdd06d66f8d0e81f8f73eab991",
+    "line_count": 27
+  },
+  {
+    "node_id": 263,
+    "name": "Часть_3",
+    "path": "query_texts/node_263.sql",
+    "text_len": 495,
+    "text_hash": "sha256:4cfcfba8120d533033f07f8846b75f5069fe348fa7695a906ef3d9dd6d061952",
+    "line_count": 16
+  },
+  {
+    "node_id": 264,
+    "name": "Часть_4",
+    "path": "query_texts/node_264.sql",
+    "text_len": 591,
+    "text_hash": "sha256:5ef74de4672b49ba80af8b72b42ff11df5cb1df4f1a300ecfe940c5b3aac6634",
+    "line_count": 18
+  },
+  {
+    "node_id": 265,
+    "name": "Часть_5",
+    "path": "query_texts/node_265.sql",
+    "text_len": 1187,
+    "text_hash": "sha256:80db0d6b6b9bfeebab4911504d7dfba2ea2e05bc9161e4c45be38131537a6906",
+    "line_count": 42
+  },
+  {
+    "node_id": 266,
+    "name": "ВТ_Выплаты",
+    "path": "query_texts/node_266.sql",
+    "text_len": 445,
+    "text_hash": "sha256:6922eb97bf608f18aa93c3566c601b8a7663483756af8e404bc386ac0db8f0c6",
+    "line_count": 15
+  },
+  {
+    "node_id": 267,
+    "name": "ВТ_МГД_ПР",
+    "path": "query_texts/node_267.sql",
+    "text_len": 621,
+    "text_hash": "sha256:c7e52cac7d1288017e9be9446ff0dac5263188fed5e6f0559cfaf25cace80262",
+    "line_count": 16
+  },
+  {
+    "node_id": 268,
+    "name": "Подзапрос_51",
+    "path": "query_texts/node_268.sql",
+    "text_len": 112,
+    "text_hash": "sha256:fa3634f9b220454cd4b79005177d07dd3cbca64a3dd3ae8790bca271e3b6777b",
+    "line_count": 4
+  },
+  {
+    "node_id": 269,
+    "name": "ВТ_МГД",
+    "path": "query_texts/node_269.sql",
+    "text_len": 1351,
+    "text_hash": "sha256:0780a06d1af1c06a3a575e1329b6ef47cfd5e0f851f7d4b403f4c945a433a1d3",
+    "line_count": 29
+  },
+  {
+    "node_id": 270,
+    "name": "ВТ_Умершие",
+    "path": "query_texts/node_270.sql",
+    "text_len": 799,
+    "text_hash": "sha256:e5c697dc99caf54244e7643597470a02a85466ec2d56e025ba1ea873f5b69b13",
+    "line_count": 15
+  },
+  {
+    "node_id": 271,
+    "name": "ВТ_ПенсионныеСчета_НачалоВыплат",
+    "path": "query_texts/node_271.sql",
+    "text_len": 871,
+    "text_hash": "sha256:aa4de496a8a411f920c1fa0b7b633cd74275e657bc0472e4e80d61c182218220",
+    "line_count": 23
+  },
+  {
+    "node_id": 272,
+    "name": "Подзапрос_52",
+    "path": "query_texts/node_272.sql",
+    "text_len": 103,
+    "text_hash": "sha256:155364c5d0dbc7acd8383b0745e3474f18c567ae231395f6a0da85e323d07897",
+    "line_count": 4
+  },
+  {
+    "node_id": 273,
+    "name": "ВТ_ПериодичностьВыплат",
+    "path": "query_texts/node_273.sql",
+    "text_len": 1136,
+    "text_hash": "sha256:090b385ffd9075b65a8c1a5d15174ccb33191f38d946441bfae6e422bf865e1e",
+    "line_count": 35
+  },
+  {
+    "node_id": 274,
+    "name": "Подзапрос_53",
+    "path": "query_texts/node_274.sql",
+    "text_len": 100,
+    "text_hash": "sha256:10524bcca1c957daceeb12d3b7bdbb90385503ccdcc53b79c38d1b37dcc1ece2",
+    "line_count": 4
+  },
+  {
+    "node_id": 275,
+    "name": "ВТ_Срочники",
+    "path": "query_texts/node_275.sql",
+    "text_len": 814,
+    "text_hash": "sha256:dbfb1efd88cc8d1cbf6fde211a01761e37834bff093f8aaf5746b9eb1281311f",
+    "line_count": 15
+  },
+  {
+    "node_id": 276,
+    "name": "ВТ_ВыплатныеСчета",
+    "path": "query_texts/node_276.sql",
+    "text_len": 426,
+    "text_hash": "sha256:4b33073db52457d4bf9a281391c4b5308bae5b3c382a657a33837ef3e32b505b",
+    "line_count": 10
+  },
+  {
+    "node_id": 277,
+    "name": "ВТ_ДатыОкончанияСрочныхВыплат",
+    "path": "query_texts/node_277.sql",
+    "text_len": 386,
+    "text_hash": "sha256:432acf5dca0871434af23352b03c01e5ac93c95471300232e38d23deca747d3f",
+    "line_count": 12
+  },
+  {
+    "node_id": 278,
+    "name": "Подзапрос_54",
+    "path": "query_texts/node_278.sql",
+    "text_len": 98,
+    "text_hash": "sha256:9b30d4b990ae88aa1c766932f501e3cbb1c7991db6c96e963d9a1c1df12c4b5b",
+    "line_count": 4
+  },
+  {
+    "node_id": 279,
+    "name": "ВТ_КоличествоВыплат",
+    "path": "query_texts/node_279.sql",
+    "text_len": 452,
+    "text_hash": "sha256:eca5290656c7a676c8a175358687d410148bc8e3ec4a570e97060986763b2f55",
+    "line_count": 16
+  },
+  {
+    "node_id": 280,
+    "name": "Подзапрос_55",
+    "path": "query_texts/node_280.sql",
+    "text_len": 98,
+    "text_hash": "sha256:9b30d4b990ae88aa1c766932f501e3cbb1c7991db6c96e963d9a1c1df12c4b5b",
+    "line_count": 4
+  },
+  {
+    "node_id": 281,
+    "name": "ВТ_РасходВыплат",
+    "path": "query_texts/node_281.sql",
+    "text_len": 422,
+    "text_hash": "sha256:9fa93db1a50b0cafe7b55f85bd06a342a85111d8a259a72865cfbb28a4d0fbb5",
+    "line_count": 17
+  },
+  {
+    "node_id": 282,
+    "name": "Подзапрос_56",
+    "path": "query_texts/node_282.sql",
+    "text_len": 98,
+    "text_hash": "sha256:9b30d4b990ae88aa1c766932f501e3cbb1c7991db6c96e963d9a1c1df12c4b5b",
+    "line_count": 4
+  },
+  {
+    "node_id": 283,
+    "name": "ВТ_ОстаткиВыплат",
+    "path": "query_texts/node_283.sql",
+    "text_len": 392,
+    "text_hash": "sha256:c629f4dcc6f09402a991e7aacdc4dfb58829026f88a2ade7ee1355c158a34984",
+    "line_count": 11
+  },
+  {
+    "node_id": 284,
+    "name": "ВТ_ПоследниеВыплаты",
+    "path": "query_texts/node_284.sql",
+    "text_len": 492,
+    "text_hash": "sha256:b11bfc62f48344f9d4115724a25745630c030ee8d13f4287a0575814f88decd8",
+    "line_count": 16
+  },
+  {
+    "node_id": 285,
+    "name": "ВТ_ПоследниеВыплатыПоРегиструВыплат",
+    "path": "query_texts/node_285.sql",
+    "text_len": 2524,
+    "text_hash": "sha256:507264894bc583ff8fa9f1897f9666d763b6a65fd495f9fa780a99abaf0847d2",
+    "line_count": 61
+  },
+  {
+    "node_id": 286,
+    "name": "МаксДатаВыплаты",
+    "path": "query_texts/node_286.sql",
+    "text_len": 375,
+    "text_hash": "sha256:2a48a27e01c6193359414a25f25a2c5848a228d7117d6113817bed4468b15e90",
+    "line_count": 9
+  },
+  {
+    "node_id": 287,
+    "name": "ПоследняяВыплата",
+    "path": "query_texts/node_287.sql",
+    "text_len": 944,
+    "text_hash": "sha256:81f5da45d5b0ee68e8d79e64ed1241c773a82af815cb662b7789579cebbf717d",
+    "line_count": 23
+  },
+  {
+    "node_id": 288,
+    "name": "ВТ_РазмерПенсийФикс",
+    "path": "query_texts/node_288.sql",
+    "text_len": 403,
+    "text_hash": "sha256:07597893d02d3f3ecbca34fcf342882c6aee7a8fcde30efdb16d09c7c48fef0d",
+    "line_count": 15
+  },
+  {
+    "node_id": 289,
+    "name": "Подзапрос_57",
+    "path": "query_texts/node_289.sql",
+    "text_len": 97,
+    "text_hash": "sha256:7c1688b74ed7e58ec237547e856c7c65a486c01ebd1b67b76cdaf6c92b87b950",
+    "line_count": 4
+  },
+  {
+    "node_id": 290,
+    "name": "ВТ_РасчетныеСуммыПенсий",
+    "path": "query_texts/node_290.sql",
+    "text_len": 518,
+    "text_hash": "sha256:69b26a02930985ae1f0263c23c9cdd90b55b2ec0dcb84ebf932a09a613565d86",
+    "line_count": 15
+  },
+  {
+    "node_id": 291,
+    "name": "ВТ_РазмерПенсий",
+    "path": "query_texts/node_291.sql",
+    "text_len": 1009,
+    "text_hash": "sha256:4bde239a29e97f71c5546e5cfe23e2e62d2fcc312ecb4ffd336ab47deac2ded3",
+    "line_count": 22
+  },
+  {
+    "node_id": 292,
+    "name": "ВТ_ДополнительноВыкупнаяВкдачикуНетСПТ",
+    "path": "query_texts/node_292.sql",
+    "text_len": 1133,
+    "text_hash": "sha256:dfad1bc03f4036b75b960406ace18f58d35c1ec16c4a9ded8971d6e0f270bd13",
+    "line_count": 22
+  },
+  {
+    "node_id": 293,
+    "name": "ВТ_РезультатПредв",
+    "path": "query_texts/node_293.sql",
+    "text_len": 46264,
+    "text_hash": "sha256:76e50b794f15c5dba8eb639a853bcebbc673fb50d71915bbfc91edc265d06951",
+    "line_count": 973
+  },
+  {
+    "node_id": 294,
+    "name": "Часть_1",
+    "path": "query_texts/node_294.sql",
+    "text_len": 18315,
+    "text_hash": "sha256:197f6dff210a6558732f450023bdc2293fbba1667a1e74dba03df055c4297b0d",
+    "line_count": 368
+  },
+  {
+    "node_id": 295,
+    "name": "Часть_2",
+    "path": "query_texts/node_295.sql",
+    "text_len": 7430,
+    "text_hash": "sha256:87adb319d78437c8828b4a935e56d1ed5a87763fac5fb537db84c55e22b7a8ba",
+    "line_count": 178
+  },
+  {
+    "node_id": 296,
+    "name": "Часть_3",
+    "path": "query_texts/node_296.sql",
+    "text_len": 20482,
+    "text_hash": "sha256:5f6b94c278555a6d2ba2f8f601f5af2da9774d415f57fb3d3e7aa4e1664c0b10",
+    "line_count": 421
+  },
+  {
+    "node_id": 297,
+    "name": "ВТ_258НПО",
+    "path": "query_texts/node_297.sql",
+    "text_len": 4158,
+    "text_hash": "sha256:b447d5ad2dd743192a27e399e22db92c237e94d97b1dd29db69a5f9ecc825f59",
+    "line_count": 79
+  }
+]
