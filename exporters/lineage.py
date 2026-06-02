@@ -45,7 +45,7 @@ import csv
 import json
 import os
 import re
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any
 
 # ---------------------------------------------------------------------------
@@ -70,8 +70,9 @@ _EXPR_TYPES = {
 
 # JOIN-ключевые слова 1С/SQL (порядок важен — длинные раньше)
 _JOIN_TYPES_RE = re.compile(
-    r"(?i)(ПОЛНОЕ\s+ВНЕШНЕЕ|ЛЕВОЕ\s+ВНЕШНЕЕ|ПРАВОЕ\s+ВНЕШНЕЕ|ВНУТРЕННЕЕ|ПОЛНОЕ|ЛЕВОЕ|ПРАВОЕ|CROSS)\s+СОЕДИНЕНИЕ"
-    r"|(?i)(FULL\s+OUTER|LEFT\s+OUTER|RIGHT\s+OUTER|INNER|FULL|LEFT|RIGHT|CROSS)\s+JOIN"
+    r"(ПОЛНОЕ\s+ВНЕШНЕЕ|ЛЕВОЕ\s+ВНЕШНЕЕ|ПРАВОЕ\s+ВНЕШНЕЕ|ВНУТРЕННЕЕ|ПОЛНОЕ|ЛЕВОЕ|ПРАВОЕ|CROSS)\s+СОЕДИНЕНИЕ"
+    r"|(FULL\s+OUTER|LEFT\s+OUTER|RIGHT\s+OUTER|INNER|FULL|LEFT|RIGHT|CROSS)\s+JOIN",
+    re.IGNORECASE
 )
 
 _JOIN_TYPE_NORM = {
@@ -209,6 +210,13 @@ def _parse_one_field(ordinal: int, raw: str) -> dict:
         if alias is None:
             alias = expression.split("(")[0].strip()
 
+    # Звёздочка ТабА.* — проверяем раньше арифметики, иначе .* попадёт под * в [+\-*/]
+    elif upper_expr.endswith(".*"):
+        parts = expression.strip().split(".")
+        source_table = parts[0].strip() if len(parts) >= 2 else None
+        source_field = "*"
+        alias = alias or "*"
+
     # Арифметика
     elif re.search(r"[+\-*/]", expression):
         is_computed = True
@@ -216,13 +224,6 @@ def _parse_one_field(ordinal: int, raw: str) -> dict:
     # Литерал (число, строка, булево, параметр)
     elif re.match(r"^[0-9]", upper_expr) or upper_expr.startswith(("'", '"', "&", ":")):
         is_computed = True
-
-    # Звёздочка ТабА.*
-    elif upper_expr.endswith(".*"):
-        parts = expression.strip().split(".")
-        source_table = parts[0].strip() if len(parts) >= 2 else None
-        source_field = "*"
-        alias = alias or "*"
 
     # Простая ссылка Таблица.Поле
     elif "." in expression:
@@ -254,7 +255,7 @@ def _parse_one_field(ordinal: int, raw: str) -> dict:
 def _top_level_as(text: str):
     """Ищет КАК/AS на верхнем уровне (не внутри скобок)."""
     depth = 0
-    for m in re.finditer(r"[()]|(?i)\b(?:КАК|AS)\b", text):
+    for m in re.finditer(r"[()]|\b(?:КАК|AS)\b", text, re.IGNORECASE):
         ch = m.group(0)
         if ch == "(":
             depth += 1
@@ -789,7 +790,7 @@ def _build_key_fields(lineage_list: list[dict], output_dir: str) -> dict:
 
     source_file = os.path.basename(output_dir) or ""
     return {
-        "generated_at": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S"),
+        "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S"),
         "source_file":  source_file,
         "key_fields":   key_entries,
     }
