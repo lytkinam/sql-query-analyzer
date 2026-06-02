@@ -244,7 +244,7 @@ class TestBuildIntegration:
 
     def test_simple_fields_count(self):
         result = _parse(SIMPLE_SQL)
-        # Главная нода ВТ_Договоры должна иметь 3 поля
+        # Главная нода ВТ_Договоры: 3 SELECT-поля + 1 JOIN-таблица + 1 JOIN-ON
         fields_by_name = {
             nid: records
             for nid, records in result["fields_node"].items()
@@ -252,7 +252,7 @@ class TestBuildIntegration:
         }
         assert len(fields_by_name) >= 1
         records = next(iter(fields_by_name.values()))
-        assert len(records) == 3
+        assert len(records) == 5  # 3 SELECT + 1 join_table + 1 join_on_condition
 
     def test_field_record_structure(self):
         result = _parse(SIMPLE_SQL)
@@ -265,6 +265,7 @@ class TestBuildIntegration:
                 assert rec["expr_type"] in (
                     "field_ref", "case_when", "func_call",
                     "aggregate", "arithmetic", "literal", "star",
+                    "where_condition", "join_on_condition", "join_table",
                 )
 
     def test_alias_map_structure(self):
@@ -346,6 +347,62 @@ UNION_SQL = """
 ИЗ
     Таблица2 КАК б
 """
+
+
+WHERE_SQL = """
+ВЫБРАТЬ
+    д.Ссылка КАК Договор,
+    к.Наименование КАК КонтрагентНаим
+ПОМЕСТИТЬ ВТ_Договоры
+ИЗ
+    Справочник.Договоры КАК д
+        ВНУТРЕННЕЕ СОЕДИНЕНИЕ Справочник.Контрагенты КАК к
+        ПО д.Контрагент = к.Ссылка
+ГДЕ
+    д.Дата > &ДатаНачала
+    И к.ПометкаУдаления = ЛОЖЬ
+"""
+
+
+class TestWhereAndJoinFields:
+    def test_where_pseudo_field_exists(self):
+        result = _parse(WHERE_SQL)
+        records = next(iter(result["fields_node"].values()))
+        where_recs = [r for r in records if r["alias"] == "ГДЕ_УСЛОВИЕ"]
+        assert len(where_recs) == 1
+        assert where_recs[0]["expr_type"] == "where_condition"
+
+    def test_where_field_refs(self):
+        result = _parse(WHERE_SQL)
+        records = next(iter(result["fields_node"].values()))
+        where_rec = next(r for r in records if r["alias"] == "ГДЕ_УСЛОВИЕ")
+        tables = {ref["alias_table"] for ref in where_rec["field_refs"]}
+        assert "д" in tables
+        assert "к" in tables
+
+    def test_join_table_pseudo_field(self):
+        result = _parse(WHERE_SQL)
+        records = next(iter(result["fields_node"].values()))
+        join_recs = [r for r in records if r["expr_type"] == "join_table"]
+        assert len(join_recs) == 1
+        assert join_recs[0]["alias"] == "ВНУТРЕННЕЕ_СОЕДИНЕНИЕ_к"
+        assert join_recs[0]["expression_raw"] == "Справочник.Контрагенты"
+
+    def test_join_on_pseudo_field(self):
+        result = _parse(WHERE_SQL)
+        records = next(iter(result["fields_node"].values()))
+        on_recs = [r for r in records if r["expr_type"] == "join_on_condition"]
+        assert len(on_recs) == 1
+        assert on_recs[0]["alias"] == "ВНУТРЕННЕЕ_СОЕДИНЕНИЕ_к_УСЛОВИЕ"
+        assert on_recs[0]["expression_raw"] == "ПО д.Контрагент = к.Ссылка"
+
+    def test_join_on_field_refs(self):
+        result = _parse(WHERE_SQL)
+        records = next(iter(result["fields_node"].values()))
+        on_rec = next(r for r in records if r["expr_type"] == "join_on_condition")
+        tables = {ref["alias_table"] for ref in on_rec["field_refs"]}
+        assert "д" in tables
+        assert "к" in tables
 
 
 class TestUnion:

@@ -9,14 +9,15 @@ exporters/fields_node.py
     {
       "alias":         str,   # псевдоним таблицы (как он стоит в FROM/JOIN)
       "primary_table": str,   # первичная таблица (из AS / КАК, или == alias)
-      "is_virtual":    bool   # True  → ВТ (есть в node_names)
+      "is_virtual":    bool,  # True  → ВТ (есть в node_names)
                               # False → физическая таблица 1С (терминал)
+      "join_type":     str,  # "ИЗ", "ЛЕВОЕ_СОЕДИНЕНИЕ", "ВНУТРЕННЕЕ_СОЕДИНЕНИЕ" и т.д.
     }
 
   fields_node[node_id] — список записей
     {
-      "alias":         str,   # синоним поля (после КАК / AS)
-      "expression_raw":str,   # выражение как есть из SELECT
+      "alias":         str,   # синоним поля (после КАК / AS) или pseudo-alias
+      "expression_raw":str,   # выражение как есть из SELECT / WHERE / JOIN ON
       "expr_type":     str,   # тип: см. EXPR_TYPES ниже
       "field_refs":    list   # все пары {alias_table, field, primary_table}
     }
@@ -30,19 +31,24 @@ exporters/fields_node.py
 
 Типы expr_type
 --------------
-  field_ref   — простая ссылка: Таблица.Поле
-  case_when   — ВЫБОР КОГДА ... КОНЕЦ
-  func_call   — функция: ДОБАВИТЬКДАТЕ(...), СУММА(...) и др.
-  aggregate   — агрегат без аргумента-поля: КОЛИЧЕСТВО(*)
-  arithmetic  — арифметическое выражение: А * Б + В
-  literal     — строка, число, NULL, &Параметр, ЗНАЧЕНИЕ(...)
-  star        — * (все поля)
+  field_ref         — простая ссылка: Таблица.Поле
+  case_when         — ВЫБОР КОГДА ... КОНЕЦ
+  func_call         — функция: ДОБАВИТЬКДАТЕ(...), СУММА(...) и др.
+  aggregate         — агрегат без аргумента-поля: КОЛИЧЕСТВО(*)
+  arithmetic        — арифметическое выражение: А * Б + В
+  literal           — строка, число, NULL, &Параметр, ЗНАЧЕНИЕ(...)
+  star              — * (все поля)
+  where_condition   — условие ГДЕ/WHERE (pseudo-field alias = "ГДЕ_УСЛОВИЕ")
+  join_on_condition — условие ПО/ON в JOIN (pseudo-field alias = "ТИП_СОЕДИНЕНИЯ_<alias>_УСЛОВИЕ")
+  join_table        — таблица в JOIN (pseudo-field alias = "ТИП_СОЕДИНЕНИЯ_<alias>")
 
 Правило трассировки (используется в exporters/lineage.py):
   - field_ref с is_virtual=True → рекурсия в source_node
   - field_ref с is_virtual=False → СТОП, физическая таблица
   - literal / star → СТОП, нет данных для трассировки
   - case_when / func_call / arithmetic → рекурсия по всем field_refs
+  - where_condition / join_on_condition → рекурсия по field_refs (условия содержат ссылки)
+  - join_table → СТОП, это терминальная таблица
 """
 
 import re
@@ -55,6 +61,7 @@ from typing import Optional
 EXPR_TYPES = (
     "field_ref", "case_when", "func_call", "aggregate",
     "arithmetic", "literal", "star",
+    "where_condition", "join_on_condition", "join_table",
 )
 
 # Ключевые слова 1С/SQL, не являющиеся именами таблиц или полей
@@ -259,24 +266,42 @@ def _extract_select_block_raw(rest: str) -> Optional[str]:
         i += 1
 
     return rest[:end].strip()
-    # Убираем ВЫБРАТЬ РАЗЛИЧНЫЕ / SELECT DISTINCT
-    m = re.search(
-        r'(?:^|\s)(?:ВЫБРАТЬ|SELECT)(?:\s+(?:ПЕРВЫЕ|TOP)\s+\d+)?(?:\s+(?:РАЗЛИЧНЫЕ|DISTINCT))?\s',
-        node_text, re.IGNORECASE,
-    )
+
+
+# ──────────────────────────────────────────────
+# Парсер WHERE / JOIN ON
+# ──────────────────────────────────────────────
+
+_WHERE_STOP_RE = re.compile(
+    r'(?:^|\s)(?:СГРУППИРОВАТЬ|GROUP\s+BY|УПОРЯДОЧИТЬ|ORDER\s+BY'
+    r'|ИТОГИ|TOTALS|ИМЕЮЩИЕ|HAVING|ОБЪЕДИНИТЬ|UNION'
+    r'|ДЛЯ ИЗМЕНЕНИЯ|FOR UPDATE)(?:\s|$)',
+    re.IGNORECASE,
+)
+
+_JOIN_ON_STOP_RE = re.compile(
+    r'(?:^|\s)(?:СОЕДИНЕНИЕ|JOIN|ГДЕ|WHERE'
+    r'|СГРУППИРОВАТЬ|GROUP\s+BY|УПОРЯДОЧИТЬ|ORDER\s+BY'
+    r'|ИТОГИ|TOTALS|ИМЕЮЩИЕ|HAVING|ОБЪЕДИНИТЬ|UNION'
+    r'|ДЛЯ ИЗМЕНЕНИЯ|FOR UPDATE)(?:\s|$)',
+    re.IGNORECASE,
+)
+
+
+def _extract_where_block(node_text: str) -> Optional[str]:
+    """
+    Извлекает условие из блока ГДЕ/WHERE.
+    Возвращает текст условия (без ключевого слова ГДЕ) или None.
+    """
+    safe, ph = _hide_strings(node_text)
+
+    keyword_re = re.compile(r'(?:^|\s)(?:ГДЕ|WHERE)\s', re.IGNORECASE)
+    m = keyword_re.search(safe)
     if not m:
         return None
 
     start = m.end()
-    rest = node_text[start:]
-
-    # Ищем конец SELECT-списка: первое ИЗ/FROM/ГДЕ/WHERE/... на верхнем уровне
-    stop_pattern = re.compile(
-        r'(?:^|\s)(?:ИЗ|FROM|ГДЕ|WHERE|СГРУППИРОВАТЬ|GROUP\s+BY'
-        r'|УПОРЯДОЧИТЬ|ORDER\s+BY|ИТОГИ|TOTALS|ИМЕЮЩИЕ|HAVING'
-        r'|ДЛЯ ИЗМЕНЕНИЯ|FOR UPDATE|ПОМЕСТИТЬ|INTO)(?:\s|$)',
-        re.IGNORECASE,
-    )
+    rest = safe[start:]
 
     depth = 0
     i = 0
@@ -289,16 +314,13 @@ def _extract_select_block_raw(rest: str) -> Optional[str]:
             depth -= 1
         elif depth == 0:
             tail = rest[i:]
-            if stop_pattern.match(tail) or stop_pattern.search(' ' + tail[:10]):
-                m2 = stop_pattern.search(rest[i - 1:] if i > 0 else rest)
+            if _WHERE_STOP_RE.match(tail) or _WHERE_STOP_RE.search(' ' + tail[:10]):
+                m2 = _WHERE_STOP_RE.search(rest[i - 1:] if i > 0 else rest)
                 if m2 and depth == 0:
-                    # уточняем точную позицию
                     sm = re.search(
-                        r'(?:^|(?<=\s))(?:ИЗ|FROM|ГДЕ|WHERE'
-                        r'|СГРУППИРОВАТЬ|GROUP\s+BY'
-                        r'|УПОРЯДОЧИТЬ|ORDER\s+BY'
-                        r'|ИТОГИ|TOTALS|ИМЕЮЩИЕ|HAVING'
-                        r'|ДЛЯ ИЗМЕНЕНИЯ|FOR UPDATE|ПОМЕСТИТЬ|INTO)(?=\s|$)',
+                        r'(?:^|(?<=\s))(?:СГРУППИРОВАТЬ|GROUP\s+BY|УПОРЯДОЧИТЬ|ORDER\s+BY'
+                        r'|ИТОГИ|TOTALS|ИМЕЮЩИЕ|HAVING|ОБЪЕДИНИТЬ|UNION'
+                        r'|ДЛЯ ИЗМЕНЕНИЯ|FOR UPDATE)(?=\s|$)',
                         rest[i:], re.IGNORECASE,
                     )
                     if sm:
@@ -306,7 +328,66 @@ def _extract_select_block_raw(rest: str) -> Optional[str]:
                         break
         i += 1
 
-    return rest[:end].strip()
+    return _restore_strings(rest[:end].strip(), ph)
+
+
+def _extract_join_on_conditions(node_text: str) -> list:
+    """
+    Извлекает все условия ПО/ON для JOIN'ов в ноде.
+    Возвращает список словарей:
+        [{"condition_text": "..."}, ...]
+    Порядок условий соответствует порядку JOIN'ов в тексте.
+    """
+    safe, ph = _hide_strings(node_text)
+
+    on_pattern = re.compile(r'(?:^|\s)(?:ПО|ON)\s', re.IGNORECASE)
+    conditions = []
+
+    for m in on_pattern.finditer(safe):
+        pos = m.start()
+        # Проверяем, что мы на верхнем уровне (вне скобок подзапросов)
+        depth = 0
+        for ch in safe[:pos]:
+            if ch == '(':
+                depth += 1
+            elif ch == ')':
+                depth -= 1
+        if depth != 0:
+            continue
+
+        start = m.end()
+        rest = safe[start:]
+
+        depth2 = 0
+        i = 0
+        end = len(rest)
+        while i < len(rest):
+            ch = rest[i]
+            if ch == '(':
+                depth2 += 1
+            elif ch == ')':
+                depth2 -= 1
+            elif depth2 == 0:
+                tail = rest[i:]
+                if _JOIN_ON_STOP_RE.match(tail) or _JOIN_ON_STOP_RE.search(' ' + tail[:10]):
+                    m2 = _JOIN_ON_STOP_RE.search(rest[i - 1:] if i > 0 else rest)
+                    if m2 and depth2 == 0:
+                        sm = re.search(
+                            r'(?:^|(?<=\s))(?:СОЕДИНЕНИЕ|JOIN|ГДЕ|WHERE'
+                            r'|СГРУППИРОВАТЬ|GROUP\s+BY|УПОРЯДОЧИТЬ|ORDER\s+BY'
+                            r'|ИТОГИ|TOTALS|ИМЕЮЩИЕ|HAVING|ОБЪЕДИНИТЬ|UNION'
+                            r'|ДЛЯ ИЗМЕНЕНИЯ|FOR UPDATE)(?=\s|$)',
+                            rest[i:], re.IGNORECASE,
+                        )
+                        if sm:
+                            end = i + sm.start()
+                            break
+            i += 1
+
+        condition_text = _restore_strings(rest[:end].strip(), ph)
+        conditions.append({"condition_text": condition_text})
+
+    return conditions
 
 
 # ──────────────────────────────────────────────
@@ -342,10 +423,18 @@ def parse_table_alias_map(node_text: str, virtual_table_names: set) -> list:
     # Схлопываем скобки рекурсивно
     flat = _remove_nested_parens(text)
 
+    # Обрезаем всё до первого ИЗ/FROM — иначе запятые из SELECT-списка
+    # будут ошибочно распознаны как разделители таблиц
+    from_m = re.search(r'(?:^|\s)(?:ИЗ|FROM)\s', flat, re.IGNORECASE)
+    if from_m:
+        flat = flat[from_m.start():]
+    else:
+        return []
+
     # Паттерн: (ИЗ|FROM|JOIN|СОЕДИНЕНИЕ) <таблица> [КАК <псевдоним>]
     pattern = re.compile(
-        r'(?:(?:ИЗ|FROM'
-        r'|(?:ЛЕВОЕ|ПРАВОЕ|ПОЛНОЕ|ВНУТРЕННЕЕ|CROSS|LEFT|RIGHT|FULL|INNER|OUTER|CROSS)?'
+        r'(?:(ИЗ|FROM)'
+        r'|((?:ЛЕВОЕ|ПРАВОЕ|ПОЛНОЕ|ВНУТРЕННЕЕ|CROSS|LEFT|RIGHT|FULL|INNER|OUTER)?'
         r'\s*(?:СОЕДИНЕНИЕ|JOIN))'
         r'|,)'
         r'\s+([\w.~]+)'
@@ -357,8 +446,9 @@ def parse_table_alias_map(node_text: str, virtual_table_names: set) -> list:
     seen_aliases = set()
 
     for m in pattern.finditer(flat):
-        primary = m.group(1).strip()
-        alias = m.group(2).strip() if m.group(2) else primary
+        join_type_raw = m.group(1) or m.group(2)
+        primary = m.group(3).strip()
+        alias = m.group(4).strip() if m.group(4) else primary
 
         # Восстанавливаем строки в именах (маловероятно, но на всякий случай)
         primary = _restore_strings(primary, ph)
@@ -371,10 +461,17 @@ def parse_table_alias_map(node_text: str, virtual_table_names: set) -> list:
 
         is_virtual = primary.upper() in virtual_table_names
 
+        # Нормализуем join_type: "ИЗ" → "ИЗ", "ЛЕВОЕ СОЕДИНЕНИЕ" → "ЛЕВОЕ_СОЕДИНЕНИЕ"
+        if join_type_raw:
+            join_type = join_type_raw.strip().upper().replace(' ', '_')
+        else:
+            join_type = 'FROM'  # запятая — считаем продолжением FROM
+
         result.append({
             "alias": alias,
             "primary_table": primary,
             "is_virtual": is_virtual,
+            "join_type": join_type,
         })
 
     return result
@@ -635,6 +732,44 @@ def build_fields_and_alias_map(nodes: list) -> dict:
                 "field_refs": all_refs,
             })
 
+        # ── 3. WHERE pseudo-field ─────────────────
+        where_expr = _extract_where_block(node_text)
+        if where_expr:
+            where_refs = _extract_field_refs(where_expr, alias_map)
+            field_records.append({
+                "alias": "ГДЕ_УСЛОВИЕ",
+                "expression_raw": where_expr,
+                "expr_type": "where_condition",
+                "field_refs": where_refs,
+            })
+
+        # ── 4. JOIN pseudo-fields ─────────────────
+        # Таблицы в alias_map: [0] — FROM, [1:] — JOIN
+        on_conditions = _extract_join_on_conditions(node_text)
+        for idx, entry in enumerate(alias_map[1:], start=0):
+            join_type = entry.get("join_type", "JOIN")
+            alias = entry["alias"]
+            primary = entry["primary_table"]
+
+            # JOIN table pseudo-field
+            field_records.append({
+                "alias": f"{join_type}_{alias}",
+                "expression_raw": primary,
+                "expr_type": "join_table",
+                "field_refs": [],
+            })
+
+            # JOIN ON condition pseudo-field
+            if idx < len(on_conditions):
+                on_expr = on_conditions[idx]["condition_text"]
+                on_refs = _extract_field_refs(on_expr, alias_map)
+                field_records.append({
+                    "alias": f"{join_type}_{alias}_УСЛОВИЕ",
+                    "expression_raw": f"ПО {on_expr}",
+                    "expr_type": "join_on_condition",
+                    "field_refs": on_refs,
+                })
+
         fields_node[nid] = field_records
 
     return {
@@ -714,6 +849,7 @@ def generate_fields_node(model: dict, output_dir: str) -> None:
                 "alias": e["alias"],
                 "primary_table": e["primary_table"],
                 "is_virtual": "1" if e["is_virtual"] else "0",
+                "join_type": e.get("join_type", ""),
             })
 
     with open(os.path.join(out_dir, "table_alias_map.csv"), "w", newline="", encoding="utf-8") as f:
