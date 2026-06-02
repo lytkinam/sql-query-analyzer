@@ -1,8 +1,7 @@
 # Результат анализа example.sql
 
 **Источник:** `../example.sql`
-**Инструмент:** `exporters/normalizer.py` + `exporters/tables.py`
-**Дата:** $(date -Iseconds)
+**Инструменты:** `exporters/normalizer.py`, `exporters/tables.py`, `exporters/texts.py`
 
 ## Статистика
 
@@ -22,12 +21,21 @@ output_example/
 │   ├── nodes.jsonl         # Все узлы (JSON Lines)
 │   ├── tempqueries.json    # Только ВТ
 │   └── subqueries.json     # Только подзапросы
-└── tables/
-    ├── nodes.csv
-    ├── tempqueries_catalog.csv
-    ├── edges_parent.csv
-    ├── edges_refs.csv
-    ├── sources_map.csv
-    ├── union_parts.csv
-    └── stubs.csv
+├── tables/
+│   ├── nodes.csv
+│   ├── tempqueries_catalog.csv
+│   ├── edges_parent.csv
+│   ├── edges_refs.csv
+│   ├── sources_map.csv
+│   ├── union_parts.csv
+│   └── stubs.csv
+└── query_texts/            # ← Итерация 2
+    ├── texts_index.json    # Каталог текстовых файлов
+    ├── normalized_queries.sql
+    ├── node_0.sql
+    ├── node_0.md
+    ├── node_1.sql
+    ├── node_1.md
+    ├── node_2.sql
+    └── node_2.md
 ```

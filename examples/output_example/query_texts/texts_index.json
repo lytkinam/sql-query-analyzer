@@ -1,0 +1,26 @@
+[
+  {
+    "node_id": 0,
+    "name": "ВТ_Сотрудники",
+    "path": "query_texts/node_0.sql",
+    "text_len": 173,
+    "text_hash": "sha256:7384e825c7d22f3ad827ec00d9cbbc180fe9260866a2d379124427ed5a2eab3a",
+    "line_count": 8
+  },
+  {
+    "node_id": 1,
+    "name": "ВТ_Начисления",
+    "path": "query_texts/node_1.sql",
+    "text_len": 267,
+    "text_hash": "sha256:5880f9c8125122d5c473a583de7907bc5e19e840e2da24ccd80f71cc9060cba8",
+    "line_count": 8
+  },
+  {
+    "node_id": 2,
+    "name": "Результат_1",
+    "path": "query_texts/node_2.sql",
+    "text_len": 166,
+    "text_hash": "sha256:c684a1dd3aaf0a39add536d90102bc8e4572a244ac69c92c75a638c6ac589341",
+    "line_count": 7
+  }
+]
