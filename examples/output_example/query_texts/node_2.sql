@@ -2,7 +2,7 @@
 -- Name: Результат_1
 -- Type: temp_query
 -- Parent: null
--- OwnInTables: СУММА, ВТ_НАЧИСЛЕНИЯ
+-- OwnInTables: ВТ_НАЧИСЛЕНИЯ
 
 ВЫБРАТЬ
     ВТ_Начисления.Сотрудник,

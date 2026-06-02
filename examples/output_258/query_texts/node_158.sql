@@ -2,7 +2,7 @@
 -- Name: ВТ_ПаспортныеДанные
 -- Type: temp_query
 -- Parent: null
--- OwnInTables: ВЫБОР, ВТ_ПАСПОРТНЫЕДАННЫЕ_CLEARED
+-- OwnInTables: ВТ_ПАСПОРТНЫЕДАННЫЕ_CLEARED
 
 ВЫБРАТЬ
 	ВТ_ПаспортныеДанные_Cleared.Физлицо КАК Физлицо,

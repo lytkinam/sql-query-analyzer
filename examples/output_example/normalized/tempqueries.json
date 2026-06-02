@@ -8,7 +8,6 @@
     "max_parent_id": 0,
     "children_ids": [],
     "own_in_tables": [
-      "СОТРУДНИКИ.НАИМЕНОВАНИЕ",
       "СПРАВОЧНИК.СОТРУДНИКИ"
     ],
     "is_stub": false,
@@ -23,7 +22,6 @@
     "max_parent_id": 1,
     "children_ids": [],
     "own_in_tables": [
-      "НАЧИСЛЕНИЯДВИЖЕНИЯ.СУММА",
       "ВТ_СОТРУДНИКИ",
       "РЕГИСТРНАКОПЛЕНИЯ.НАЧИСЛЕНИЯ"
     ],
@@ -39,7 +37,6 @@
     "max_parent_id": 2,
     "children_ids": [],
     "own_in_tables": [
-      "СУММА",
       "ВТ_НАЧИСЛЕНИЯ"
     ],
     "is_stub": false,

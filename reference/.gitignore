@@ -1,0 +1,9 @@
+node_modules/
+*.json
+getOwnInTables_extracted.js
+test_getOwnInTables.js
+run_in_browser.js
+run_in_browser.py
+run_in_jsdom.js
+run_in_jsdom_fixed.js
+original_parser_fixed.html

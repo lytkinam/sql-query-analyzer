@@ -1,4 +1,4 @@
-# Результат анализа example_258.sql (Отчёт 258 НПО)
+# Результат анализа example_258.sql
 
 **Источник:** `../example_258.sql`
 **Инструменты:** `exporters/normalizer.py`, `exporters/tables.py`, `exporters/texts.py`
@@ -19,8 +19,8 @@ output_258/
 ├── normalized/
 │   ├── nodes.json          # Все узлы (нормализованный JSON)
 │   ├── nodes.jsonl         # Все узлы (JSON Lines)
-│   ├── tempqueries.json    # Только ВТ (116)
-│   └── subqueries.json     # Только подзапросы (182)
+│   ├── tempqueries.json    # Только ВТ
+│   └── subqueries.json     # Только подзапросы
 ├── tables/
 │   ├── nodes.csv
 │   ├── tempqueries_catalog.csv
@@ -29,9 +29,8 @@ output_258/
 │   ├── sources_map.csv
 │   ├── union_parts.csv
 │   └── stubs.csv
-└── query_texts/            # ← Итерация 2 (298 файлов .sql + 298 .md)
-    ├── texts_index.json
+└── query_texts/            # ← Итерация 2
+    ├── texts_index.json    # Каталог текстовых файлов
     ├── normalized_queries.sql
-    ├── node_0.sql … node_297.sql
-    └── node_0.md … node_297.md
+    └── node_{id}.sql / node_{id}.md
 ```

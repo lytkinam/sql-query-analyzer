@@ -2,7 +2,7 @@
 -- Name: Часть_3
 -- Type: sub_query
 -- Parent: ВТ_ПереводыПР
--- OwnInTables: ПОДЗАПРОС.РЕГИСТРАТОР,, ПОДЗАПРОС.СУММА
+-- OwnInTables: нет
 
 ВЫБРАТЬ
 	3,

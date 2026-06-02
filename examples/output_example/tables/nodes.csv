@@ -1,4 +1,4 @@
 id,name,type,parent_id,max_parent_id,children_count,own_in_tables_count,is_stub,is_union_part,text_len
-0,ВТ_Сотрудники,temp_query,,0,0,2,false,false,173
-1,ВТ_Начисления,temp_query,,1,0,3,false,false,267
-2,Результат_1,temp_query,,2,0,2,false,false,166
+0,ВТ_Сотрудники,temp_query,,0,0,1,false,false,173
+1,ВТ_Начисления,temp_query,,1,0,2,false,false,267
+2,Результат_1,temp_query,,2,0,1,false,false,166
