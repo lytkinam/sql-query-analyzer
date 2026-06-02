@@ -328,3 +328,55 @@ class TestBuildIntegration:
         for nid, records in result["fields_node"].items():
             # Каждая запись — валидный список (может быть пустым для union-part)
             assert isinstance(records, list)
+
+
+UNION_SQL = """
+ВЫБРАТЬ
+    а.Х КАК Поле1,
+    а.У КАК Поле2
+ПОМЕСТИТЬ ВТ_Результат
+ИЗ
+    Таблица1 КАК а
+
+ОБЪЕДИНИТЬ ВСЕ
+
+ВЫБРАТЬ
+    б.Х,
+    ВЫБОР КОГДА б.У > 0 ТОГДА б.У ИНАЧЕ 0 КОНЕЦ
+ИЗ
+    Таблица2 КАК б
+"""
+
+
+class TestUnion:
+    def test_union_field_refs_merged(self):
+        """field_refs из всех частей UNION объединяются, alias'ы из первой."""
+        result = _parse(UNION_SQL)
+        vt_records = None
+        for nid, records in result["fields_node"].items():
+            if any(r["alias"] == "Поле2" for r in records):
+                vt_records = records
+                break
+        assert vt_records, "Нода с Поле2 не найдена"
+
+        rec = next(r for r in vt_records if r["alias"] == "Поле2")
+        # expr_type из первой части (field_ref)
+        assert rec["expr_type"] == "field_ref"
+        # field_refs объединены из обеих частей
+        tables = {ref["alias_table"] for ref in rec["field_refs"]}
+        assert "а" in tables, "Первая часть UNION потерялась"
+        assert "б" in tables, "Вторая часть UNION не подтянулась"
+
+    def test_union_alias_from_first_part(self):
+        result = _parse(UNION_SQL)
+        vt_records = None
+        for nid, records in result["fields_node"].items():
+            if any(r["alias"] == "Поле1" for r in records):
+                vt_records = records
+                break
+        assert vt_records
+        rec = next(r for r in vt_records if r["alias"] == "Поле1")
+        assert rec["expr_type"] == "field_ref"
+        tables = {ref["alias_table"] for ref in rec["field_refs"]}
+        assert "а" in tables
+        assert "б" in tables

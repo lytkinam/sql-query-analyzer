@@ -160,6 +160,105 @@ def _extract_select_block(node_text: str) -> Optional[str]:
     (ИЗ/FROM/ГДЕ/WHERE/СГРУППИРОВАТЬ/GROUP/УПОРЯДОЧИТЬ/ORDER/ИТОГИ/HAVING/...)
     Возвращает строку со списком полей или None если ВЫБРАТЬ не найден.
     """
+    blocks = _extract_all_select_blocks(node_text, limit=1)
+    return blocks[0] if blocks else None
+
+
+def _extract_all_select_blocks(node_text: str, limit: int = 0) -> list:
+    """
+    Извлекает ВСЕ SELECT-блоки из текста, включая части UNION.
+
+    Параметр limit: максимальное количество блоков (0 = без ограничения).
+    Возвращает список строк — содержимое SELECT-списков.
+    """
+    # Скрываем строковые литералы, чтобы не путать ВЫБРАТЬ внутри строк
+    safe, ph = _hide_strings(node_text)
+
+    # Находим все ВЫБРАТЬ/SELECT на верхнем уровне (вне скобок)
+    select_positions = []
+    for m in re.finditer(
+        r'(?:^|\s)(?:ВЫБРАТЬ|SELECT)(?:\s+(?:ПЕРВЫЕ|TOP)\s+\d+)?(?:\s+(?:РАЗЛИЧНЫЕ|DISTINCT))?\s',
+        safe, re.IGNORECASE,
+    ):
+        pos = m.start()
+        depth = 0
+        for ch in safe[:pos]:
+            if ch == '(':
+                depth += 1
+            elif ch == ')':
+                depth -= 1
+        if depth == 0:
+            select_positions.append(pos)
+        if limit and len(select_positions) >= limit:
+            break
+
+    if not select_positions:
+        return []
+
+    # Для каждой позиции ВЫБРАТЬ извлекаем блок до следующего ВЫБРАТЬ или конца safe
+    blocks = []
+    for i, start in enumerate(select_positions):
+        end = select_positions[i + 1] if i + 1 < len(select_positions) else len(safe)
+        part = safe[start:end]
+        # Используем _extract_select_block_raw — тот же алгоритм, но без поиска ВЫБРАТЬ
+        block = _extract_select_block_raw(part)
+        if block:
+            blocks.append(_restore_strings(block, ph))
+
+    return blocks
+
+
+def _extract_select_block_raw(rest: str) -> Optional[str]:
+    """
+    Вырезает содержимое SELECT-списка из строки, которая уже начинается с ВЫБРАТЬ.
+    Аналог _extract_select_block, но без поиска самого ВЫБРАТЬ.
+    """
+    # Пропускаем ВЫБРАТЬ ... до первого пробела после ключевого слова
+    m = re.match(
+        r'(?:^|\s)(?:ВЫБРАТЬ|SELECT)(?:\s+(?:ПЕРВЫЕ|TOP)\s+\d+)?(?:\s+(?:РАЗЛИЧНЫЕ|DISTINCT))?\s',
+        rest, re.IGNORECASE,
+    )
+    if not m:
+        return None
+
+    start = m.end()
+    rest = rest[start:]
+
+    stop_pattern = re.compile(
+        r'(?:^|\s)(?:ИЗ|FROM|ГДЕ|WHERE|СГРУППИРОВАТЬ|GROUP\s+BY'
+        r'|УПОРЯДОЧИТЬ|ORDER\s+BY|ИТОГИ|TOTALS|ИМЕЮЩИЕ|HAVING'
+        r'|ДЛЯ ИЗМЕНЕНИЯ|FOR UPDATE|ПОМЕСТИТЬ|INTO)(?:\s|$)',
+        re.IGNORECASE,
+    )
+
+    depth = 0
+    i = 0
+    end = len(rest)
+    while i < len(rest):
+        ch = rest[i]
+        if ch == '(':
+            depth += 1
+        elif ch == ')':
+            depth -= 1
+        elif depth == 0:
+            tail = rest[i:]
+            if stop_pattern.match(tail) or stop_pattern.search(' ' + tail[:10]):
+                m2 = stop_pattern.search(rest[i - 1:] if i > 0 else rest)
+                if m2 and depth == 0:
+                    sm = re.search(
+                        r'(?:^|(?<=\s))(?:ИЗ|FROM|ГДЕ|WHERE'
+                        r'|СГРУППИРОВАТЬ|GROUP\s+BY'
+                        r'|УПОРЯДОЧИТЬ|ORDER\s+BY'
+                        r'|ИТОГИ|TOTALS|ИМЕЮЩИЕ|HAVING'
+                        r'|ДЛЯ ИЗМЕНЕНИЯ|FOR UPDATE|ПОМЕСТИТЬ|INTO)(?=\s|$)',
+                        rest[i:], re.IGNORECASE,
+                    )
+                    if sm:
+                        end = i + sm.start()
+                        break
+        i += 1
+
+    return rest[:end].strip()
     # Убираем ВЫБРАТЬ РАЗЛИЧНЫЕ / SELECT DISTINCT
     m = re.search(
         r'(?:^|\s)(?:ВЫБРАТЬ|SELECT)(?:\s+(?:ПЕРВЫЕ|TOP)\s+\d+)?(?:\s+(?:РАЗЛИЧНЫЕ|DISTINCT))?\s',
@@ -472,10 +571,10 @@ def build_fields_and_alias_map(nodes: list) -> dict:
     Обрабатываются ноды всех типов (temp_query, result, sub_query).
     Ноды типа sub_query без SELECT-блока пропускаются без ошибки.
 
-    ВОЗМОЖНАЯ ОШИБКА:
-      Ноды с ОБЪЕДИНИТЬ/UNION содержат несколько SELECT-блоков.
-      Сейчас берётся только первый. Для детального режима (is_union_part=True)
-      нужно обрабатывать каждую часть отдельно — это задача следующей итерации.
+    Для нод с ОБЪЕДИНИТЬ/UNION:
+      - alias'ы берутся из первой части
+      - field_refs объединяются из всех частей (дедупликация по alias_table+field)
+      - expr_type берётся из первой части
     """
     # Множество имён виртуальных таблиц (все temp_query) для is_virtual
     virtual_names = {
@@ -496,15 +595,16 @@ def build_fields_and_alias_map(nodes: list) -> dict:
         table_alias_map[nid] = alias_map
 
         # ── 2. fields_node ──────────────────────
-        select_block = _extract_select_block(node_text)
-        if select_block is None:
+        select_blocks = _extract_all_select_blocks(node_text)
+        if not select_blocks:
             fields_node[nid] = []
             continue
 
-        items = _split_select_list(select_block)
+        # Первая часть — основная (alias'ы и expr_type отсюда)
+        first_items = _split_select_list(select_blocks[0])
         field_records = []
 
-        for item in items:
+        for idx, item in enumerate(first_items):
             item = item.strip()
             if not item:
                 continue
@@ -513,11 +613,26 @@ def build_fields_and_alias_map(nodes: list) -> dict:
             expr_type = _classify_expr(expression)
             refs = _extract_field_refs(expression, alias_map)
 
+            # Объединяем field_refs из всех частей UNION
+            all_refs = list(refs)
+            seen_refs = {(r["alias_table"].upper(), r["field"].upper()) for r in refs}
+
+            for block in select_blocks[1:]:
+                items = _split_select_list(block)
+                if idx < len(items):
+                    other_expr, _ = _parse_alias_from_expr(items[idx].strip())
+                    other_refs = _extract_field_refs(other_expr, alias_map)
+                    for r in other_refs:
+                        key = (r["alias_table"].upper(), r["field"].upper())
+                        if key not in seen_refs:
+                            seen_refs.add(key)
+                            all_refs.append(r)
+
             field_records.append({
                 "alias": alias,
                 "expression_raw": expression,
                 "expr_type": expr_type,
-                "field_refs": refs,
+                "field_refs": all_refs,
             })
 
         fields_node[nid] = field_records
