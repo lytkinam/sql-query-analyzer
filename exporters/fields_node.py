@@ -1,0 +1,528 @@
+"""
+exporters/fields_node.py
+========================
+Итерация 2.1 — разбор полей каждой ноды.
+
+Для каждого узла строятся два объекта:
+
+  table_alias_map[node_id] — список записей
+    {
+      "alias":         str,   # псевдоним таблицы (как он стоит в FROM/JOIN)
+      "primary_table": str,   # первичная таблица (из AS / КАК, или == alias)
+      "is_virtual":    bool   # True  → ВТ (есть в node_names)
+                              # False → физическая таблица 1С (терминал)
+    }
+
+  fields_node[node_id] — список записей
+    {
+      "alias":         str,   # синоним поля (после КАК / AS)
+      "expression_raw":str,   # выражение как есть из SELECT
+      "expr_type":     str,   # тип: см. EXPR_TYPES ниже
+      "field_refs":    list   # все пары {alias_table, field, primary_table}
+    }
+
+  field_refs[]
+    {
+      "alias_table":   str,   # псевдоним таблицы из выражения (напр. "д")
+      "field":         str,   # имя поля (может быть "Контрагент.Наименование")
+      "primary_table": str    # первичная таблица из table_alias_map
+    }
+
+Типы expr_type
+--------------
+  field_ref   — простая ссылка: Таблица.Поле
+  case_when   — ВЫБОР КОГДА ... КОНЕЦ
+  func_call   — функция: ДОБАВИТЬКДАТЕ(...), СУММА(...) и др.
+  aggregate   — агрегат без аргумента-поля: КОЛИЧЕСТВО(*)
+  arithmetic  — арифметическое выражение: А * Б + В
+  literal     — строка, число, NULL, &Параметр, ЗНАЧЕНИЕ(...)
+  star        — * (все поля)
+
+Правило трассировки (используется в exporters/lineage.py):
+  - field_ref с is_virtual=True → рекурсия в source_node
+  - field_ref с is_virtual=False → СТОП, физическая таблица
+  - literal / star → СТОП, нет данных для трассировки
+  - case_when / func_call / arithmetic → рекурсия по всем field_refs
+"""
+
+import re
+from typing import Optional
+
+# ──────────────────────────────────────────────
+# Константы
+# ──────────────────────────────────────────────
+
+EXPR_TYPES = (
+    "field_ref", "case_when", "func_call", "aggregate",
+    "arithmetic", "literal", "star",
+)
+
+# Ключевые слова 1С/SQL, не являющиеся именами таблиц или полей
+_KW = re.compile(
+    r'^(?:NULL|ИСТИНА|ЛОЖЬ|TRUE|FALSE|ЗНАЧЕНИЕ|ДОБАВИТЬКДАТЕ|DATEADD'
+    r'|НАЧАЛОПЕРИОДА|КОНЕЦПЕРИОДА|НАЧАЛОСТАНДАРТНОГОИНТЕРВАЛА'
+    r'|ГОД|КВАРТАЛ|МЕСЯЦ|НЕДЕЛЯ|ДЕНЬ|ЧАС|МИНУТА|СЕКУНДА'
+    r'|YEAR|QUARTER|MONTH|WEEK|DAY|HOUR|MINUTE|SECOND'
+    r'|ISNULL|ЕСТЬNULL|ПРЕДСТАВЛЕНИЕ|ТИПЗНАЧЕНИЯ|ССЫЛКА'
+    r'|СУММА|МИНИМУМ|МАКСИМУМ|СРЕДНЕЕ|КОЛИЧЕСТВО'
+    r'|SUM|MIN|MAX|AVG|COUNT)$',
+    re.IGNORECASE,
+)
+
+# Агрегатные функции
+_AGGREGATE_FUNCS = re.compile(
+    r'^(?:СУММА|МИНИМУМ|МАКСИМУМ|СРЕДНЕЕ|КОЛИЧЕСТВО|SUM|MIN|MAX|AVG|COUNT)$',
+    re.IGNORECASE,
+)
+
+# Функции (не агрегаты)
+_FUNC_FUNCS = re.compile(
+    r'^(?:ДОБАВИТЬКДАТЕ|DATEADD|НАЧАЛОПЕРИОДА|КОНЕЦПЕРИОДА'
+    r'|НАЧАЛОСТАНДАРТНОГОИНТЕРВАЛА|ЕСТЬNULL|ISNULL'
+    r'|ПРЕДСТАВЛЕНИЕ|ТИПЗНАЧЕНИЯ|ПОДСТРОКА|SUBSTRING'
+    r'|ДЛИНА|LEN|СТРНАЙТИ|STRPOS|ВЫРАЗИТЬ|CAST'
+    r'|ГОД|КВАРТАЛ|МЕСЯЦ|НЕДЕЛЯ|ДЕНЬ|ЧАС|МИНУТА|СЕКУНДА'
+    r'|YEAR|QUARTER|MONTH|WEEK|DAY|HOUR|MINUTE|SECOND)$',
+    re.IGNORECASE,
+)
+
+
+# ──────────────────────────────────────────────
+# Вспомогательные функции
+# ──────────────────────────────────────────────
+
+def _hide_strings(text: str) -> tuple:
+    """
+    Скрывает строковые литералы ("...") и ЗНАЧЕНИЕ(...) чтобы не парсить их содержимое.
+    Возвращает (обработанный текст, словарь замен).
+    """
+    placeholders = {}
+    counter = [0]
+
+    def _replace(m):
+        key = f"__STR{counter[0]}__"
+        counter[0] += 1
+        placeholders[key] = m.group(0)
+        return key
+
+    # Сначала ЗНАЧЕНИЕ(...) — вложенных скобок нет
+    result = re.sub(r'ЗНАЧЕНИЕ\s*\([^)]*\)', _replace, text, flags=re.IGNORECASE)
+    # Затем строковые литералы
+    result = re.sub(r'"[^"]*"', _replace, result)
+    result = re.sub(r"'[^']*'", _replace, result)
+    return result, placeholders
+
+
+def _restore_strings(text: str, placeholders: dict) -> str:
+    for key, val in placeholders.items():
+        text = text.replace(key, val)
+    return text
+
+
+def _remove_nested_parens(text: str) -> str:
+    """Рекурсивно убирает () → пробел (нейтрализует вложенные выражения)."""
+    while True:
+        new = re.sub(r'\([^()]*\)', ' ', text)
+        if new == text:
+            break
+        text = new
+    return text
+
+
+def _split_select_list(text: str) -> list:
+    """
+    Разбивает SELECT-список на отдельные выражения по запятой верхнего уровня.
+    Вложенные скобки (подзапросы, функции) обходятся корректно.
+    """
+    items = []
+    depth = 0
+    current = []
+    for ch in text:
+        if ch == '(':
+            depth += 1
+            current.append(ch)
+        elif ch == ')':
+            depth -= 1
+            current.append(ch)
+        elif ch == ',' and depth == 0:
+            items.append(''.join(current).strip())
+            current = []
+        else:
+            current.append(ch)
+    if current:
+        items.append(''.join(current).strip())
+    return [i for i in items if i]
+
+
+def _extract_select_block(node_text: str) -> Optional[str]:
+    """
+    Вырезает содержимое между ВЫБРАТЬ/SELECT и следующим ключевым словом
+    (ИЗ/FROM/ГДЕ/WHERE/СГРУППИРОВАТЬ/GROUP/УПОРЯДОЧИТЬ/ORDER/ИТОГИ/HAVING/...)
+    Возвращает строку со списком полей или None если ВЫБРАТЬ не найден.
+    """
+    # Убираем ВЫБРАТЬ РАЗЛИЧНЫЕ / SELECT DISTINCT
+    m = re.search(
+        r'(?:^|\s)(?:ВЫБРАТЬ|SELECT)(?:\s+(?:ПЕРВЫЕ|TOP)\s+\d+)?(?:\s+(?:РАЗЛИЧНЫЕ|DISTINCT))?\s',
+        node_text, re.IGNORECASE,
+    )
+    if not m:
+        return None
+
+    start = m.end()
+    rest = node_text[start:]
+
+    # Ищем конец SELECT-списка: первое ИЗ/FROM/ГДЕ/WHERE/... на верхнем уровне
+    stop_pattern = re.compile(
+        r'(?:^|\s)(?:ИЗ|FROM|ГДЕ|WHERE|СГРУППИРОВАТЬ|GROUP\s+BY'
+        r'|УПОРЯДОЧИТЬ|ORDER\s+BY|ИТОГИ|TOTALS|ИМЕЮЩИЕ|HAVING'
+        r'|ДЛЯ ИЗМЕНЕНИЯ|FOR UPDATE)(?:\s|$)',
+        re.IGNORECASE,
+    )
+
+    depth = 0
+    i = 0
+    end = len(rest)
+    while i < len(rest):
+        ch = rest[i]
+        if ch == '(':
+            depth += 1
+        elif ch == ')':
+            depth -= 1
+        elif depth == 0:
+            tail = rest[i:]
+            if stop_pattern.match(tail) or stop_pattern.search(' ' + tail[:10]):
+                m2 = stop_pattern.search(rest[i - 1:] if i > 0 else rest)
+                if m2 and depth == 0:
+                    # уточняем точную позицию
+                    sm = re.search(
+                        r'(?:^|(?<=\s))(?:ИЗ|FROM|ГДЕ|WHERE'
+                        r'|СГРУППИРОВАТЬ|GROUP\s+BY'
+                        r'|УПОРЯДОЧИТЬ|ORDER\s+BY'
+                        r'|ИТОГИ|TOTALS|ИМЕЮЩИЕ|HAVING'
+                        r'|ДЛЯ ИЗМЕНЕНИЯ|FOR UPDATE)(?=\s|$)',
+                        rest[i:], re.IGNORECASE,
+                    )
+                    if sm:
+                        end = i + sm.start()
+                        break
+        i += 1
+
+    return rest[:end].strip()
+
+
+# ──────────────────────────────────────────────
+# Парсер alias-map (FROM / JOIN блок)
+# ──────────────────────────────────────────────
+
+def parse_table_alias_map(node_text: str, virtual_table_names: set) -> list:
+    """
+    Разбирает FROM/JOIN-блок ноды и возвращает table_alias_map:
+
+    [
+      {
+        "alias":         str,   # псевдоним как он используется в выражениях
+        "primary_table": str,   # реальное имя таблицы (из КАК/AS или == alias)
+        "is_virtual":    bool   # входит ли в множество virtual_table_names
+      },
+      ...
+    ]
+
+    Примеры:
+      ИЗ Справочник.Договоры КАК д  →  alias="д", primary="Справочник.Договоры"
+      ИЗ ВТ_Остатки                  →  alias="ВТ_Остатки", primary="ВТ_Остатки"
+      ЛЕВОЕ СОЕДИНЕНИЕ Рег.Ост КАК о →  alias="о", primary="Рег.Ост"
+
+    ВОЗМОЖНАЯ ОШИБКА:
+      Если подзапрос в FROM имеет псевдоним, его содержимое уже схлопнуто
+      в «~id~» парсером sql_query_analyzer. Такие записи помечаются
+      is_virtual=True и в primary_table ставится сам псевдоним.
+    """
+    text, ph = _hide_strings(node_text)
+
+    # Убираем содержимое подзапросов — они уже разобраны как дочерние ноды
+    # Схлопываем скобки рекурсивно
+    flat = _remove_nested_parens(text)
+
+    # Паттерн: (ИЗ|FROM|JOIN|СОЕДИНЕНИЕ) <таблица> [КАК <псевдоним>]
+    pattern = re.compile(
+        r'(?:(?:ИЗ|FROM'
+        r'|(?:ЛЕВОЕ|ПРАВОЕ|ПОЛНОЕ|ВНУТРЕННЕЕ|CROSS|LEFT|RIGHT|FULL|INNER|OUTER|CROSS)?'
+        r'\s*(?:СОЕДИНЕНИЕ|JOIN))'
+        r'|,)'
+        r'\s+([\w.~]+)'
+        r'(?:\s+(?:КАК|AS)\s+([\w]+))?',
+        re.IGNORECASE,
+    )
+
+    result = []
+    seen_aliases = set()
+
+    for m in pattern.finditer(flat):
+        primary = m.group(1).strip()
+        alias = m.group(2).strip() if m.group(2) else primary
+
+        # Восстанавливаем строки в именах (маловероятно, но на всякий случай)
+        primary = _restore_strings(primary, ph)
+        alias = _restore_strings(alias, ph)
+
+        alias_upper = alias.upper()
+        if alias_upper in seen_aliases:
+            continue
+        seen_aliases.add(alias_upper)
+
+        is_virtual = primary.upper() in virtual_table_names
+
+        result.append({
+            "alias": alias,
+            "primary_table": primary,
+            "is_virtual": is_virtual,
+        })
+
+    return result
+
+
+# ──────────────────────────────────────────────
+# Парсер полей (SELECT-список)
+# ──────────────────────────────────────────────
+
+def _classify_expr(expr: str) -> str:
+    """
+    Определяет тип выражения по его тексту (верхний уровень).
+
+    ВОЗМОЖНАЯ ОШИБКА:
+      Арифметика вида «А + Б» при наличии пробелов может быть
+      распознана как field_ref если регекс не найдёт оператор.
+      Критичных случаев пока нет, но при появлении — расширить
+      паттерн _ARITH_OPS.
+    """
+    e = expr.strip()
+    if not e:
+        return "literal"
+
+    el = e.upper()
+
+    if el == '*':
+        return "star"
+
+    # ВЫБОР / CASE
+    if re.match(r'^(?:ВЫБОР|CASE)\b', e, re.IGNORECASE):
+        return "case_when"
+
+    # Параметр &Х или строковый литерал или ЗНАЧЕНИЕ(...) или число
+    if re.match(r'^(?:&|__STR\d+__|\d)', e):
+        return "literal"
+    if re.match(r'^(?:NULL|ИСТИНА|ЛОЖЬ|TRUE|FALSE)$', e, re.IGNORECASE):
+        return "literal"
+
+    # Функция: ИМЯ(
+    func_m = re.match(r'^([\w]+)\s*\(', e, re.IGNORECASE)
+    if func_m:
+        func_name = func_m.group(1).upper()
+        if _AGGREGATE_FUNCS.match(func_name):
+            return "aggregate"
+        return "func_call"
+
+    # Арифметика: содержит +, -, *, /
+    flat = _remove_nested_parens(e)
+    if re.search(r'[+\-*/]', flat):
+        return "arithmetic"
+
+    # Простая ссылка: Таблица.Поле или просто Поле
+    return "field_ref"
+
+
+def _extract_field_refs(expr: str, alias_map: list) -> list:
+    """
+    Извлекает все ссылки вида <ПсевдонимТаблицы>.<Поле> из выражения.
+
+    Возвращает список:
+    [
+      {
+        "alias_table":   str,
+        "field":         str,
+        "primary_table": str   # из alias_map, или == alias_table если не найден
+      }
+    ]
+
+    ВОЗМОЖНАЯ ОШИБКА:
+      Если псевдоним таблицы не найден в alias_map текущей ноды,
+      primary_table = alias_table (не резолвится). Это происходит
+      когда ссылка идёт на поле из родительской ноды или когда
+      alias_map неполный из-за сложного синтаксиса СОЕДИНЕНИЯ.
+    """
+    # Строим быстрый lookup alias → primary_table
+    lookup = {}
+    for entry in alias_map:
+        lookup[entry["alias"].upper()] = entry
+
+    text, ph = _hide_strings(expr)
+
+    # Ищем все «слово.слово» (возможно цепочка: А.Б.В)
+    refs_raw = re.findall(r'([\w]+)\.([\w.]+)', text)
+
+    result = []
+    seen = set()
+
+    for alias_table, field in refs_raw:
+        # Пропускаем ЗНАЧЕНИЕ(Перечисление.Х.У) — уже скрыто в ph
+        if _KW.match(alias_table):
+            continue
+        if alias_table.startswith('__STR'):
+            continue
+
+        key = (alias_table.upper(), field.upper())
+        if key in seen:
+            continue
+        seen.add(key)
+
+        entry = lookup.get(alias_table.upper())
+        primary = entry["primary_table"] if entry else alias_table
+
+        result.append({
+            "alias_table": alias_table,
+            "field": field,
+            "primary_table": primary,
+        })
+
+    return result
+
+
+def _parse_alias_from_expr(expr: str) -> tuple:
+    """
+    Выделяет (выражение_без_алиаса, алиас) из элемента SELECT-списка.
+
+    Примеры:
+      "д.Ссылка КАК Договор"       → ("д.Ссылка", "Договор")
+      "СУММА(X.Сумма) AS Итого"    → ("СУММА(X.Сумма)", "Итого")
+      "д.Ссылка"                   → ("д.Ссылка", "Ссылка")  ← fallback
+      "*"                           → ("*", "*")
+
+    ВОЗМОЖНАЯ ОШИБКА:
+      Если алиаса нет и выражение сложное (CASE/функция),
+      fallback-алиас будет пустой строкой или некорректным.
+      В таких случаях рекомендуется явно задавать КАК.
+    """
+    # Паттерн: ... КАК <алиас> в конце (не внутри скобок)
+    # Ищем КАК/AS вне скобок
+    depth = 0
+    last_as_pos = -1
+    i = 0
+    tokens = re.split(r'(\s+)', expr)  # сохраняем пробелы
+    flat_tokens = []
+    for tok in tokens:
+        flat_tokens.append(tok)
+
+    # Более надёжный подход: ищем \bКАК\b или \bAS\b на верхнем уровне вложенности
+    depth = 0
+    pos = 0
+    as_start = -1
+    as_end = -1
+
+    i = 0
+    while i < len(expr):
+        ch = expr[i]
+        if ch == '(':
+            depth += 1
+        elif ch == ')':
+            depth -= 1
+        elif depth == 0:
+            # Проверяем КАК или AS
+            tail = expr[i:]
+            m = re.match(r'^(?:КАК|AS)\s+(\w+)\s*$', tail, re.IGNORECASE)
+            if m:
+                as_start = i
+                as_end = i + len(tail)
+                break
+        i += 1
+
+    if as_start >= 0:
+        alias = expr[as_start:].strip()
+        alias = re.sub(r'^(?:КАК|AS)\s+', '', alias, flags=re.IGNORECASE).strip()
+        expression = expr[:as_start].strip()
+    else:
+        expression = expr.strip()
+        # Fallback алиас: последний токен после последней точки
+        m = re.search(r'\.([\w]+)\s*$', expression)
+        alias = m.group(1) if m else expression.split()[-1] if expression else ""
+
+    return expression, alias
+
+
+# ──────────────────────────────────────────────
+# Главная функция
+# ──────────────────────────────────────────────
+
+def build_fields_and_alias_map(nodes: list) -> dict:
+    """
+    Принимает список нод (из analyze_sql_query → result["nodes"]).
+    Возвращает:
+    {
+      "fields_node":      { node_id(str): [ field_record, ... ] },
+      "table_alias_map":  { node_id(str): [ alias_record,  ... ] }
+    }
+
+    field_record:
+    {
+      "alias":         str,
+      "expression_raw":str,
+      "expr_type":     str,
+      "field_refs":    [ {alias_table, field, primary_table}, ... ]
+    }
+
+    Обрабатываются ноды всех типов (temp_query, result, sub_query).
+    Ноды типа sub_query без SELECT-блока пропускаются без ошибки.
+
+    ВОЗМОЖНАЯ ОШИБКА:
+      Ноды с ОБЪЕДИНИТЬ/UNION содержат несколько SELECT-блоков.
+      Сейчас берётся только первый. Для детального режима (is_union_part=True)
+      нужно обрабатывать каждую часть отдельно — это задача следующей итерации.
+    """
+    # Множество имён виртуальных таблиц (все temp_query) для is_virtual
+    virtual_names = {
+        n["name"].upper()
+        for n in nodes
+        if n["type"] == "temp_query"
+    }
+
+    fields_node = {}
+    table_alias_map = {}
+
+    for node in nodes:
+        nid = str(node["id"])
+        node_text = node.get("text", "")
+
+        # ── 1. table_alias_map ──────────────────
+        alias_map = parse_table_alias_map(node_text, virtual_names)
+        table_alias_map[nid] = alias_map
+
+        # ── 2. fields_node ──────────────────────
+        select_block = _extract_select_block(node_text)
+        if select_block is None:
+            fields_node[nid] = []
+            continue
+
+        items = _split_select_list(select_block)
+        field_records = []
+
+        for item in items:
+            item = item.strip()
+            if not item:
+                continue
+
+            expression, alias = _parse_alias_from_expr(item)
+            expr_type = _classify_expr(expression)
+            refs = _extract_field_refs(expression, alias_map)
+
+            field_records.append({
+                "alias": alias,
+                "expression_raw": expression,
+                "expr_type": expr_type,
+                "field_refs": refs,
+            })
+
+        fields_node[nid] = field_records
+
+    return {
+        "fields_node": fields_node,
+        "table_alias_map": table_alias_map,
+    }

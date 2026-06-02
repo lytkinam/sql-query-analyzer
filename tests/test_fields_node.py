@@ -1,0 +1,330 @@
+"""
+tests/test_fields_node.py
+=========================
+Тесты итерации 2.1: парсер полей нод (fields_node + table_alias_map).
+
+Запуск:
+    pytest tests/test_fields_node.py -v
+"""
+
+import pytest
+from sql_query_analyzer import analyze_sql_query
+from exporters.fields_node import (
+    build_fields_and_alias_map,
+    parse_table_alias_map,
+    _extract_select_block,
+    _split_select_list,
+    _classify_expr,
+    _extract_field_refs,
+    _parse_alias_from_expr,
+)
+
+
+# ──────────────────────────────────────────────
+# Фикстуры
+# ──────────────────────────────────────────────
+
+SIMPLE_SQL = """
+ВЫБРАТЬ
+    д.Ссылка КАК Договор,
+    д.Контрагент КАК Контрагент,
+    к.Наименование КАК КонтрагентНаим
+ПОМЕСТИТЬ ВТ_Договоры
+ИЗ
+    Справочник.Договоры КАК д
+        ЛЕВОЕ СОЕДИНЕНИЕ Справочник.Контрагенты КАК к
+        ПО д.Контрагент = к.Ссылка
+"""
+
+CASE_SQL = """
+ВЫБРАТЬ
+    о.ПенсионныйСчет КАК ПС,
+    ВЫБОР
+        КОГДА о.Остаток > 0 ТОГДА о.Остаток
+        ИНАЧЕ 0
+    КОНЕЦ КАК ОстатокПолож,
+    ДОБАВИТЬКДАТЕ(о.ДатаНачала, МЕСЯЦ, 12) КАК ДатаПлюс12
+ПОМЕСТИТЬ ВТ_Остатки
+ИЗ
+    РегистрНакопления.Остатки КАК о
+"""
+
+PACKED_SQL = SIMPLE_SQL + ";" + CASE_SQL
+
+
+@pytest.fixture
+def simple_result():
+    return build_fields_and_alias_map(
+        analyze_sql_query(SIMPLE_SQL, detailed=False)["nodes"]
+        if isinstance(analyze_sql_query(SIMPLE_SQL, detailed=False), dict)
+        else __import__('json').loads(analyze_sql_query(SIMPLE_SQL, detailed=False))["nodes"]
+    )
+
+
+def _parse(sql: str, detailed: bool = False) -> dict:
+    import json
+    raw = analyze_sql_query(sql, detailed=detailed)
+    nodes = raw["nodes"] if isinstance(raw, dict) else json.loads(raw)["nodes"]
+    return build_fields_and_alias_map(nodes)
+
+
+# ──────────────────────────────────────────────
+# 1. _extract_select_block
+# ──────────────────────────────────────────────
+
+class TestExtractSelectBlock:
+    def test_simple_returns_fields(self):
+        block = _extract_select_block(SIMPLE_SQL)
+        assert block is not None
+        assert "д.Ссылка" in block
+
+    def test_no_select_returns_none(self):
+        assert _extract_select_block("ИЗ Справочник.Д КАК д") is None
+
+    def test_stops_before_from(self):
+        block = _extract_select_block("ВЫБРАТЬ а.Поле ИЗ Таблица КАК а")
+        assert block is not None
+        assert "ИЗ" not in block.upper()
+        assert "Таблица" not in block
+
+    def test_case_expression_in_select(self):
+        block = _extract_select_block(CASE_SQL)
+        assert block is not None
+        assert "ВЫБОР" in block.upper()
+
+
+# ──────────────────────────────────────────────
+# 2. _split_select_list
+# ──────────────────────────────────────────────
+
+class TestSplitSelectList:
+    def test_three_simple_fields(self):
+        items = _split_select_list("а.Х, б.У, в.З")
+        assert len(items) == 3
+
+    def test_case_not_split_by_comma(self):
+        expr = "ВЫБОР КОГДА а.Х > 0 ТОГДА а.Х ИНАЧЕ 0 КОНЕЦ КАК Поле"
+        items = _split_select_list(expr)
+        assert len(items) == 1
+
+    def test_func_with_two_args(self):
+        expr = "ДОБАВИТЬКДАТЕ(а.Д, МЕСЯЦ, 12) КАК Дата, а.Х"
+        items = _split_select_list(expr)
+        assert len(items) == 2
+
+    def test_star(self):
+        items = _split_select_list("*")
+        assert items == ["*"]
+
+
+# ──────────────────────────────────────────────
+# 3. _parse_alias_from_expr
+# ──────────────────────────────────────────────
+
+class TestParseAliasFromExpr:
+    @pytest.mark.parametrize("expr, exp_expr, exp_alias", [
+        ("д.Ссылка КАК Договор",       "д.Ссылка",            "Договор"),
+        ("д.Ссылка AS Contract",        "д.Ссылка",            "Contract"),
+        ("д.Контрагент.Наим",           "д.Контрагент.Наим",   "Наим"),
+        ("СУММА(х.Сумма) КАК Итого",   "СУММА(х.Сумма)",      "Итого"),
+        ("*",                            "*",                   "*"),
+    ])
+    def test_alias_extraction(self, expr, exp_expr, exp_alias):
+        got_expr, got_alias = _parse_alias_from_expr(expr)
+        assert got_expr == exp_expr
+        assert got_alias == exp_alias
+
+
+# ──────────────────────────────────────────────
+# 4. _classify_expr
+# ──────────────────────────────────────────────
+
+class TestClassifyExpr:
+    @pytest.mark.parametrize("expr, expected", [
+        ("д.Ссылка",                            "field_ref"),
+        ("ВЫБОР КОГДА а > 0 ТОГДА 1 КОНЕЦ",    "case_when"),
+        ("ДОБАВИТЬКДАТЕ(а.Д, МЕСЯЦ, 12)",       "func_call"),
+        ("СУММА(х.Сумма)",                      "aggregate"),
+        ("а.Х * б.У",                           "arithmetic"),
+        ('"текст"',                             "literal"),
+        ("NULL",                                "literal"),
+        ("&Параметр",                           "literal"),
+        ("*",                                  "star"),
+    ])
+    def test_types(self, expr, expected):
+        assert _classify_expr(expr) == expected
+
+
+# ──────────────────────────────────────────────
+# 5. parse_table_alias_map
+# ──────────────────────────────────────────────
+
+class TestParseTableAliasMap:
+    def test_simple_join(self):
+        result = parse_table_alias_map(SIMPLE_SQL, {"ВТ_ДОГОВОРЫ"})
+        aliases = {r["alias"].upper() for r in result}
+        assert "Д" in aliases
+        assert "К" in aliases
+
+    def test_primary_table_resolved(self):
+        result = parse_table_alias_map(SIMPLE_SQL, set())
+        by_alias = {r["alias"].upper(): r for r in result}
+        assert by_alias["Д"]["primary_table"] == "Справочник.Договоры"
+        assert by_alias["К"]["primary_table"] == "Справочник.Контрагенты"
+
+    def test_is_virtual_flag(self):
+        sql = "ВЫБРАТЬ а.Х ИЗ ВТ_Тест КАК а"
+        result = parse_table_alias_map(sql, {"ВТ_ТЕСТ"})
+        assert result[0]["is_virtual"] is True
+
+    def test_is_not_virtual_physical_table(self):
+        result = parse_table_alias_map(SIMPLE_SQL, set())
+        for r in result:
+            assert r["is_virtual"] is False
+
+    def test_no_duplicate_aliases(self):
+        result = parse_table_alias_map(SIMPLE_SQL, set())
+        aliases = [r["alias"].upper() for r in result]
+        assert len(aliases) == len(set(aliases))
+
+
+# ──────────────────────────────────────────────
+# 6. _extract_field_refs
+# ──────────────────────────────────────────────
+
+class TestExtractFieldRefs:
+    def test_simple_ref(self):
+        alias_map = [{"alias": "д", "primary_table": "Справочник.Договоры", "is_virtual": False}]
+        refs = _extract_field_refs("д.Ссылка", alias_map)
+        assert len(refs) == 1
+        assert refs[0]["alias_table"] == "д"
+        assert refs[0]["field"] == "Ссылка"
+        assert refs[0]["primary_table"] == "Справочник.Договоры"
+
+    def test_no_duplicate_refs(self):
+        alias_map = [{"alias": "о", "primary_table": "Рег.Ост", "is_virtual": False}]
+        refs = _extract_field_refs("о.Х + о.Х", alias_map)
+        fields = [r["field"] for r in refs]
+        assert fields.count("Х") == 1
+
+    def test_unknown_alias_fallback(self):
+        refs = _extract_field_refs("неизв.Поле", [])
+        assert refs[0]["primary_table"] == "неизв"
+
+    def test_value_keyword_skipped(self):
+        expr = 'ЗНАЧЕНИЕ(Перечисление.Виды.Тип)'
+        refs = _extract_field_refs(expr, [])
+        # ЗНАЧЕНИЕ скрыто в __STRx__, dot внутри не должен парситься
+        assert refs == []
+
+    def test_multiple_tables(self):
+        alias_map = [
+            {"alias": "а", "primary_table": "Т1", "is_virtual": True},
+            {"alias": "б", "primary_table": "Т2", "is_virtual": False},
+        ]
+        refs = _extract_field_refs("а.Х + б.У", alias_map)
+        tables = {r["alias_table"] for r in refs}
+        assert tables == {"а", "б"}
+
+
+# ──────────────────────────────────────────────
+# 7. build_fields_and_alias_map — интеграционные
+# ──────────────────────────────────────────────
+
+class TestBuildIntegration:
+    def test_keys_present(self):
+        result = _parse(SIMPLE_SQL)
+        assert "fields_node" in result
+        assert "table_alias_map" in result
+
+    def test_node_ids_are_strings(self):
+        result = _parse(SIMPLE_SQL)
+        for k in result["fields_node"]:
+            assert isinstance(k, str)
+
+    def test_simple_fields_count(self):
+        result = _parse(SIMPLE_SQL)
+        # Главная нода ВТ_Договоры должна иметь 3 поля
+        fields_by_name = {
+            nid: records
+            for nid, records in result["fields_node"].items()
+            if any(r["alias"] == "Договор" for r in records)
+        }
+        assert len(fields_by_name) >= 1
+        records = next(iter(fields_by_name.values()))
+        assert len(records) == 3
+
+    def test_field_record_structure(self):
+        result = _parse(SIMPLE_SQL)
+        for nid, records in result["fields_node"].items():
+            for rec in records:
+                assert "alias" in rec
+                assert "expression_raw" in rec
+                assert "expr_type" in rec
+                assert "field_refs" in rec
+                assert rec["expr_type"] in (
+                    "field_ref", "case_when", "func_call",
+                    "aggregate", "arithmetic", "literal", "star",
+                )
+
+    def test_alias_map_structure(self):
+        result = _parse(SIMPLE_SQL)
+        for nid, entries in result["table_alias_map"].items():
+            for e in entries:
+                assert "alias" in e
+                assert "primary_table" in e
+                assert isinstance(e["is_virtual"], bool)
+
+    def test_case_field_classified(self):
+        result = _parse(CASE_SQL)
+        case_fields = [
+            rec
+            for records in result["fields_node"].values()
+            for rec in records
+            if rec["alias"] == "ОстатокПолож"
+        ]
+        assert case_fields, "Поле ОстатокПолож не найдено"
+        assert case_fields[0]["expr_type"] == "case_when"
+
+    def test_func_call_classified(self):
+        result = _parse(CASE_SQL)
+        func_fields = [
+            rec
+            for records in result["fields_node"].values()
+            for rec in records
+            if rec["alias"] == "ДатаПлюс12"
+        ]
+        assert func_fields, "Поле ДатаПлюс12 не найдено"
+        assert func_fields[0]["expr_type"] == "func_call"
+
+    def test_func_field_refs_contain_source(self):
+        result = _parse(CASE_SQL)
+        func_fields = [
+            rec
+            for records in result["fields_node"].values()
+            for rec in records
+            if rec["alias"] == "ДатаПлюс12"
+        ]
+        refs = func_fields[0]["field_refs"]
+        tables = {r["alias_table"] for r in refs}
+        assert "о" in tables
+
+    def test_virtual_table_flagged(self):
+        sql = """
+            ВЫБРАТЬ а.Х
+            ПОМЕСТИТЬ ВТ_Итог
+            ИЗ ВТ_Источник КАК а
+            ;
+            ВЫБРАТЬ б.Х ИЗ ВТ_Итог КАК б
+        """
+        result = _parse(sql)
+        for nid, entries in result["table_alias_map"].items():
+            for e in entries:
+                if e["primary_table"].upper() == "ВТ_ИТОГ":
+                    assert e["is_virtual"] is True
+
+    def test_packed_query_all_nodes_have_fields(self):
+        result = _parse(PACKED_SQL)
+        for nid, records in result["fields_node"].items():
+            # Каждая запись — валидный список (может быть пустым для union-part)
+            assert isinstance(records, list)
