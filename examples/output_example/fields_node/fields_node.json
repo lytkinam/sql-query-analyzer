@@ -1,0 +1,80 @@
+{
+  "0": [
+    {
+      "alias": "Сотрудник",
+      "expression_raw": "Сотрудники.Ссылка",
+      "expr_type": "field_ref",
+      "field_refs": [
+        {
+          "alias_table": "Сотрудники",
+          "field": "Ссылка",
+          "primary_table": "Справочник.Сотрудники"
+        }
+      ]
+    },
+    {
+      "alias": "Наименование",
+      "expression_raw": "Сотрудники.Наименование",
+      "expr_type": "field_ref",
+      "field_refs": [
+        {
+          "alias_table": "Сотрудники",
+          "field": "Наименование",
+          "primary_table": "Справочник.Сотрудники"
+        }
+      ]
+    }
+  ],
+  "1": [
+    {
+      "alias": "Сотрудник",
+      "expression_raw": "ВТ_Сотрудники.Сотрудник",
+      "expr_type": "field_ref",
+      "field_refs": [
+        {
+          "alias_table": "ВТ_Сотрудники",
+          "field": "Сотрудник",
+          "primary_table": "ВТ_Сотрудники"
+        }
+      ]
+    },
+    {
+      "alias": "Сумма",
+      "expression_raw": "НачисленияДвижения.Сумма",
+      "expr_type": "field_ref",
+      "field_refs": [
+        {
+          "alias_table": "НачисленияДвижения",
+          "field": "Сумма",
+          "primary_table": "РегистрНакопления.Начисления"
+        }
+      ]
+    }
+  ],
+  "2": [
+    {
+      "alias": "Сотрудник",
+      "expression_raw": "ВТ_Начисления.Сотрудник",
+      "expr_type": "field_ref",
+      "field_refs": [
+        {
+          "alias_table": "ВТ_Начисления",
+          "field": "Сотрудник",
+          "primary_table": "ВТ_Начисления"
+        }
+      ]
+    },
+    {
+      "alias": "ИтогоСумма",
+      "expression_raw": "СУММА(ВТ_Начисления.Сумма)",
+      "expr_type": "aggregate",
+      "field_refs": [
+        {
+          "alias_table": "ВТ_Начисления",
+          "field": "Сумма",
+          "primary_table": "ВТ_Начисления"
+        }
+      ]
+    }
+  ]
+}

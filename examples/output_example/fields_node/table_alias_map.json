@@ -1,0 +1,43 @@
+{
+  "0": [
+    {
+      "alias": "Сотрудники.Наименование",
+      "primary_table": "Сотрудники.Наименование",
+      "is_virtual": false
+    },
+    {
+      "alias": "Сотрудники",
+      "primary_table": "Справочник.Сотрудники",
+      "is_virtual": false
+    }
+  ],
+  "1": [
+    {
+      "alias": "НачисленияДвижения.Сумма",
+      "primary_table": "НачисленияДвижения.Сумма",
+      "is_virtual": false
+    },
+    {
+      "alias": "ВТ_Сотрудники",
+      "primary_table": "ВТ_Сотрудники",
+      "is_virtual": true
+    },
+    {
+      "alias": "НачисленияДвижения",
+      "primary_table": "РегистрНакопления.Начисления",
+      "is_virtual": false
+    }
+  ],
+  "2": [
+    {
+      "alias": "ИтогоСумма",
+      "primary_table": "СУММА",
+      "is_virtual": false
+    },
+    {
+      "alias": "ВТ_Начисления",
+      "primary_table": "ВТ_Начисления",
+      "is_virtual": true
+    }
+  ]
+}

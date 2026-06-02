@@ -380,3 +380,41 @@ class TestUnion:
         tables = {ref["alias_table"] for ref in rec["field_refs"]}
         assert "а" in tables
         assert "б" in tables
+
+
+class TestGenerateFieldsNode:
+    def test_files_created(self, tmp_path):
+        from exporters.fields_node import generate_fields_node
+        result = _parse(SIMPLE_SQL)
+        model = {"nodes": []}
+        # reconstruct minimal model from result
+        # we need a model with nodes that have id and text
+        import json
+        from sql_query_analyzer import analyze_sql_query
+        raw = analyze_sql_query(SIMPLE_SQL, detailed=False)
+        nodes = raw["nodes"] if isinstance(raw, dict) else json.loads(raw)["nodes"]
+        model = {"nodes": nodes}
+        generate_fields_node(model, str(tmp_path))
+
+        assert (tmp_path / "fields_node" / "fields_node.json").exists()
+        assert (tmp_path / "fields_node" / "table_alias_map.json").exists()
+        assert (tmp_path / "fields_node" / "fields_node.csv").exists()
+        assert (tmp_path / "fields_node" / "table_alias_map.csv").exists()
+
+    def test_csv_content(self, tmp_path):
+        from exporters.fields_node import generate_fields_node
+        import json
+        from sql_query_analyzer import analyze_sql_query
+        raw = analyze_sql_query(SIMPLE_SQL, detailed=False)
+        nodes = raw["nodes"] if isinstance(raw, dict) else json.loads(raw)["nodes"]
+        model = {"nodes": nodes}
+        generate_fields_node(model, str(tmp_path))
+
+        import csv
+        with open(tmp_path / "fields_node" / "fields_node.csv", newline="", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            rows = list(reader)
+        assert len(rows) > 0
+        assert "node_id" in rows[0]
+        assert "alias" in rows[0]
+        assert "expr_type" in rows[0]

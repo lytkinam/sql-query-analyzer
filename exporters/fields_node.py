@@ -641,3 +641,83 @@ def build_fields_and_alias_map(nodes: list) -> dict:
         "fields_node": fields_node,
         "table_alias_map": table_alias_map,
     }
+
+
+# ──────────────────────────────────────────────
+# Экспортёр файлов
+# ──────────────────────────────────────────────
+
+def generate_fields_node(model: dict, output_dir: str) -> None:
+    """
+    Генерирует файлы итерации 2.1 (fields_node + table_alias_map) в output_dir.
+
+    Создаёт:
+      fields_node/fields_node.json
+      fields_node/table_alias_map.json
+      fields_node/fields_node.csv
+      fields_node/table_alias_map.csv
+    """
+    import csv
+    import json
+    import os
+
+    result = build_fields_and_alias_map(model["nodes"])
+
+    out_dir = os.path.join(output_dir, "fields_node")
+    os.makedirs(out_dir, exist_ok=True)
+
+    # JSON
+    with open(os.path.join(out_dir, "fields_node.json"), "w", encoding="utf-8") as f:
+        json.dump(result["fields_node"], f, ensure_ascii=False, indent=2)
+
+    with open(os.path.join(out_dir, "table_alias_map.json"), "w", encoding="utf-8") as f:
+        json.dump(result["table_alias_map"], f, ensure_ascii=False, indent=2)
+
+    # CSV: fields_node — разворачиваем field_refs
+    fn_rows = []
+    for nid, records in result["fields_node"].items():
+        for rec in records:
+            base = {
+                "node_id": nid,
+                "alias": rec["alias"],
+                "expression_raw": rec["expression_raw"],
+                "expr_type": rec["expr_type"],
+            }
+            if rec["field_refs"]:
+                for ref in rec["field_refs"]:
+                    fn_rows.append({
+                        **base,
+                        "alias_table": ref["alias_table"],
+                        "field": ref["field"],
+                        "primary_table": ref["primary_table"],
+                    })
+            else:
+                fn_rows.append({
+                    **base,
+                    "alias_table": "",
+                    "field": "",
+                    "primary_table": "",
+                })
+
+    with open(os.path.join(out_dir, "fields_node.csv"), "w", newline="", encoding="utf-8") as f:
+        if fn_rows:
+            writer = csv.DictWriter(f, fieldnames=list(fn_rows[0].keys()))
+            writer.writeheader()
+            writer.writerows(fn_rows)
+
+    # CSV: table_alias_map
+    am_rows = []
+    for nid, entries in result["table_alias_map"].items():
+        for e in entries:
+            am_rows.append({
+                "node_id": nid,
+                "alias": e["alias"],
+                "primary_table": e["primary_table"],
+                "is_virtual": "1" if e["is_virtual"] else "0",
+            })
+
+    with open(os.path.join(out_dir, "table_alias_map.csv"), "w", newline="", encoding="utf-8") as f:
+        if am_rows:
+            writer = csv.DictWriter(f, fieldnames=list(am_rows[0].keys()))
+            writer.writeheader()
+            writer.writerows(am_rows)
