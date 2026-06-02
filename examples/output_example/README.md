@@ -1,7 +1,7 @@
 # Результат анализа example.sql
 
 **Источник:** `../example.sql`
-**Инструменты:** `exporters/normalizer.py`, `exporters/tables.py`, `exporters/texts.py`
+**Инструменты:** `exporters/normalizer.py`, `exporters/tables.py`, `exporters/texts.py`, `exporters/lineage.py`
 
 ## Статистика
 
@@ -28,9 +28,18 @@ output_example/
 │   ├── edges_refs.csv
 │   ├── sources_map.csv
 │   ├── union_parts.csv
-│   └── stubs.csv
-└── query_texts/            # ← Итерация 2
-    ├── texts_index.json    # Каталог текстовых файлов
-    ├── normalized_queries.sql
-    └── node_{id}.sql / node_{id}.md
+│   ├── stubs.csv
+│   ├── fields.csv          # ← Итерация 4
+│   ├── expressions.csv
+│   ├── conditions.csv
+│   └── joins.csv
+├── query_texts/            # ← Итерация 2
+│   ├── texts_index.json
+│   ├── normalized_queries.sql
+│   └── node_{id}.sql / node_{id}.md
+└── lineage/                # ← Итерация 4
+    ├── field_lineage.json
+    ├── lineage_key_fields.json
+    ├── field_mapping.csv
+    └── dependency_matrix.csv
 ```

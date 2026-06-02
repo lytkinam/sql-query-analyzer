@@ -1,0 +1,3 @@
+output_field,final_node_id,intermediate_node_id,input_field,rule_type,transform_desc
+Сотрудник,2,,Ссылка,direct,Прямой перенос
+ИтогоСумма,2,,Сумма,computed,СУММА(ВТ_Начисления.Сумма)

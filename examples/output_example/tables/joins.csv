@@ -1,0 +1,2 @@
+node_id,node_name,join_type,left_source,left_alias,right_source,right_alias,on_expression
+1,ВТ_Начисления,LEFT JOIN,ВТ_Сотрудники,ВТ_Сотрудники,РегистрНакопления.Начисления,НачисленияДвижения,ВТ_Сотрудники.Сотрудник = НачисленияДвижения.Сотрудник

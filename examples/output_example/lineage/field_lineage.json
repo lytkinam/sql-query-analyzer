@@ -1,0 +1,46 @@
+[
+  {
+    "output_field": "Сотрудник",
+    "final_node_id": 2,
+    "chain": [
+      {
+        "node_id": 2,
+        "node_name": "Результат_1",
+        "alias": "Сотрудник",
+        "expr": "ВТ_Начисления.Сотрудник"
+      },
+      {
+        "node_id": 0,
+        "node_name": "ВТ_Сотрудники",
+        "alias": "Сотрудник",
+        "expr": "Сотрудники.Ссылка"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "СПРАВОЧНИК.СОТРУДНИКИ",
+        "source_field": "Ссылка"
+      }
+    ],
+    "depth": 3
+  },
+  {
+    "output_field": "ИтогоСумма",
+    "final_node_id": 2,
+    "chain": [
+      {
+        "node_id": 2,
+        "node_name": "Результат_1",
+        "alias": "ИтогоСумма",
+        "expr": "ВТ_Начисления.Сумма"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_НАЧИСЛЕНИЯ",
+        "source_field": "Сумма"
+      }
+    ],
+    "depth": 2
+  }
+]

@@ -1,0 +1,1168 @@
+[
+  {
+    "output_field": "ВидДоговора_гр1",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ВидДоговора_гр1",
+        "expr": "ВТ_РезультатПредв.ВидДоговора_гр1"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ВидДоговора_гр1"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ВидОбязательств_гр1а",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ВидОбязательств_гр1а",
+        "expr": "ВТ_РезультатПредв.ВидОбязательств_гр1а"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ВидОбязательств_гр1а"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "НомерДоговора2",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "НомерДоговора2",
+        "expr": "ВТ_РезультатПредв.НомерДоговора2"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "НомерДоговора2"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ДатаЗаключения3",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ДатаЗаключения3",
+        "expr": "ВТ_РезультатПредв.ДатаЗаключения3"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ДатаЗаключения3"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "НаименованиеВкладчика4",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "НаименованиеВкладчика4",
+        "expr": "ВТ_РезультатПредв.НаименованиеВкладчика4"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "НаименованиеВкладчика4"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "НомерСчета6_5",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "НомерСчета6_5",
+        "expr": "ВТ_РезультатПредв.НомерСчета6"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "НомерСчета6"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ИдентификаторФЛ_СНИЛС_6",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ИдентификаторФЛ_СНИЛС_6",
+        "expr": "ВТ_РезультатПредв.ИдентификаторФЛ_СНИЛС_6"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ИдентификаторФЛ_СНИЛС_6"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ИдентификаторФЛ_ИНН_7",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ИдентификаторФЛ_ИНН_7",
+        "expr": "ВТ_РезультатПредв.ИдентификаторФЛ_ИНН_7"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ИдентификаторФЛ_ИНН_7"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ДатаРождения8",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ДатаРождения8",
+        "expr": "ВТ_РезультатПредв.ДатаРождения8"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ДатаРождения8"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ДатаСмерти9",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ДатаСмерти9",
+        "expr": "ВТ_РезультатПредв.ДатаСмерти9"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ДатаСмерти9"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "Пол10",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "Пол10",
+        "expr": "ВТ_РезультатПредв.Пол10"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "Пол10"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "НомерСхемы11",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "НомерСхемы11",
+        "expr": "ВТ_РезультатПредв.НомерСхемы11"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "НомерСхемы11"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "СтатусУчастника12",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "СтатусУчастника12",
+        "expr": "ВТ_РезультатПредв.СтатусУчастника12"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "СтатусУчастника12"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "Фондирование13",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "Фондирование13",
+        "expr": "ВТ_РезультатПредв.Фондирование13"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "Фондирование13"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ОтветственностьЗаДополнительноеФондирование14",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ОтветственностьЗаДополнительноеФондирование14",
+        "expr": "ВТ_РезультатПредв.ОтветственностьЗаДополнительноеФондирование14"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ОтветственностьЗаДополнительноеФондирование14"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "МинимальнаяГарантированнаяДоходность15",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "МинимальнаяГарантированнаяДоходность15",
+        "expr": "ВТ_РезультатПредв.МинимальнаяГарантированнаяДоходность15"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "МинимальнаяГарантированнаяДоходность15"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "СрокГарантированногоДохода16",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "СрокГарантированногоДохода16",
+        "expr": "ВТ_РезультатПредв.СрокГарантированногоДохода16"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "СрокГарантированногоДохода16"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ВеличинаИндексации17",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ВеличинаИндексации17",
+        "expr": "ВТ_РезультатПредв.ВеличинаИндексации17"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ВеличинаИндексации17"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ЗависимостьУровняИндексации18",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ЗависимостьУровняИндексации18",
+        "expr": "ВТ_РезультатПредв.ЗависимостьУровняИндексации18"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ЗависимостьУровняИндексации18"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "Наследование19",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "Наследование19",
+        "expr": "ВТ_РезультатПредв.Наследование19"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "Наследование19"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "НачальныйОстаток20",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "НачальныйОстаток20",
+        "expr": "ВТ_РезультатПредв.НачальныйОстаток20"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "НачальныйОстаток20"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ДатаНачалаВыплатногоПериода21",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ДатаНачалаВыплатногоПериода21",
+        "expr": "ВТ_РезультатПредв.ДатаНачалаВыплатногоПериода21"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ДатаНачалаВыплатногоПериода21"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ПериодВыплаты22",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ПериодВыплаты22",
+        "expr": "ВТ_РезультатПредв.ПериодВыплаты22"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ПериодВыплаты22"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ПериодичностьВыплат23",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ПериодичностьВыплат23",
+        "expr": "ВТ_РезультатПредв.ПериодичностьВыплат23"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ПериодичностьВыплат23"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ДатаОкончанияВыплат24",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ДатаОкончанияВыплат24",
+        "expr": "ВТ_РезультатПредв.ДатаОкончанияВыплат24"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ДатаОкончанияВыплат24"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ДатаВыходаУчастника25",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ДатаВыходаУчастника25",
+        "expr": "ВТ_РезультатПредв.ДатаВыходаУчастника25"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ДатаВыходаУчастника25"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "Взносы26",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "Взносы26",
+        "expr": "ВТ_РезультатПредв.Взносы26"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "Взносы26"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ИнвестиционныйДоход27",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ИнвестиционныйДоход27",
+        "expr": "ВТ_РезультатПредв.ИнвестиционныйДоход27"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ИнвестиционныйДоход27"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "Перевод28",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "Перевод28",
+        "expr": "ВТ_РезультатПредв.Перевод28"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "Перевод28"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ПереводВрезервы28а",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ПереводВрезервы28а",
+        "expr": "ВТ_РезультатПредв.ПереводВРезервы28а"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ПереводВРезервы28а"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ИныеПереводы29",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ИныеПереводы29",
+        "expr": "ВТ_РезультатПредв.ИныеПереводы29"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ИныеПереводы29"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "Пенсия30",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "Пенсия30",
+        "expr": "ВТ_РезультатПредв.Пенсия30"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "Пенсия30"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ВыкупнаяСумма31",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ВыкупнаяСумма31",
+        "expr": "ВТ_РезультатПредв.ВыкупнаяСумма31"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ВыкупнаяСумма31"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ВыплатаПравопреемникам32",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ВыплатаПравопреемникам32",
+        "expr": "ВТ_РезультатПредв.ВыплатаПравопреемникам32"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ВыплатаПравопреемникам32"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ЕдиновременнаяВыплата32а",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ЕдиновременнаяВыплата32а",
+        "expr": "ЕдиновременнаяВыплата32а"
+      }
+    ],
+    "depth": 1
+  },
+  {
+    "output_field": "ВыплатаОЖС32б",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ВыплатаОЖС32б",
+        "expr": "ВыплатаОЖС32б"
+      }
+    ],
+    "depth": 1
+  },
+  {
+    "output_field": "КонечныйОстаток33",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "КонечныйОстаток33",
+        "expr": "ВТ_РезультатПредв.КонечныйОстаток33"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "КонечныйОстаток33"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "СуммаОбязательствПоВСНаКонец34",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "СуммаОбязательствПоВСНаКонец34",
+        "expr": "ВТ_РезультатПредв.СуммаОбязательствПоВСНаКонец34"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "СуммаОбязательствПоВСНаКонец34"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "СуммаОбязательствПередППНаКонец35",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "СуммаОбязательствПередППНаКонец35",
+        "expr": "ВТ_РезультатПредв.РасчетнаяСуммаПП43"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "РасчетнаяСуммаПП43"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ТипДоговора36",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ТипДоговора36",
+        "expr": "ВТ_РезультатПредв.ТипДоговора36"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ТипДоговора36"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "Графа37",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "Графа37",
+        "expr": "ВТ_РезультатПредв.РазмерПенсии37"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "РазмерПенсии37"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ДатаНазначенияПенсии38",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ДатаНазначенияПенсии38",
+        "expr": "ВТ_РезультатПредв.ДатаНазначенияПенсии38"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ДатаНазначенияПенсии38"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ДатаПриостановкиВыплат38_1",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ДатаПриостановкиВыплат38_1",
+        "expr": "ВТ_РезультатПредв.ДатаПриостановкиВыплат38_1"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ДатаПриостановкиВыплат38_1"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ЗадолженностьПенсии38_2",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ЗадолженностьПенсии38_2",
+        "expr": "ВТ_РезультатПредв.ЗадолженностьПенсии38_2"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ЗадолженностьПенсии38_2"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "Графа39",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "Графа39",
+        "expr": "ВТ_РезультатПредв.Графа39"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "Графа39"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ПериодГарантийногоВосполнения39_1",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ПериодГарантийногоВосполнения39_1",
+        "expr": "ВТ_РезультатПредв.ПериодГарантийногоВосполнения39_1"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ПериодГарантийногоВосполнения39_1"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ДатаНачалаПериодаФиксации39_2",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ДатаНачалаПериодаФиксации39_2",
+        "expr": "ВТ_РезультатПредв.ДатаНачалаПериодаФиксации39_2"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ДатаНачалаПериодаФиксации39_2"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ИнвестДоходКФиксации39_3",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ИнвестДоходКФиксации39_3",
+        "expr": "ВТ_РезультатПредв.ИнвестДоходКФиксации39_3"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ИнвестДоходКФиксации39_3"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ГруппаРаздельногоУчета40",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ГруппаРаздельногоУчета40",
+        "expr": "ВТ_РезультатПредв.ГруппаРаздельногоУчета40"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ГруппаРаздельногоУчета40"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ВидПенсионнойПрограммы41",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ВидПенсионнойПрограммы41",
+        "expr": "ВТ_РезультатПредв.ВидПенсионнойПрограммы"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ВидПенсионнойПрограммы"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ДатаОснованийИзъятия42",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ДатаОснованийИзъятия42",
+        "expr": "ВТ_РезультатПредв.ДатаОснованийИзъятия42"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ДатаОснованийИзъятия42"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "УсловиеПрямогоУчастия43",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "УсловиеПрямогоУчастия43",
+        "expr": "ВТ_РезультатПредв.УсловиеПрямогоУчастия_МодельОценки43"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "УсловиеПрямогоУчастия_МодельОценки43"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ИдентификаторДоговора",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ИдентификаторДоговора",
+        "expr": "ВТ_РезультатПредв.НомерДоговора2"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "НомерДоговора2"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ИдентификаторВкладчика",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ИдентификаторВкладчика",
+        "expr": "ВТ_РезультатПредв.ИдентификаторВкладчика"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ИдентификаторВкладчика"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ИдентификаторУчастника",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ИдентификаторУчастника",
+        "expr": "ВТ_РезультатПредв.ИдентификаторУчастника"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ИдентификаторУчастника"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "СрокГарантированногоДохода16_Расшифровка",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "СрокГарантированногоДохода16_Расшифровка",
+        "expr": "ВТ_РезультатПредв.СрокГарантированногоДохода16_Расшифровка"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "СрокГарантированногоДохода16_Расшифровка"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ЗависимостьУровняИндексации18_Расшифровка",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ЗависимостьУровняИндексации18_Расшифровка",
+        "expr": "ВТ_РезультатПредв.ЗависимостьУровняИндексации18_Расшифровка"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ЗависимостьУровняИндексации18_Расшифровка"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "НомерСчета",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "НомерСчета",
+        "expr": "ВТ_РезультатПредв.НомерСчета"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "НомерСчета"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ТипВкладчика",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ТипВкладчика",
+        "expr": "ВТ_РезультатПредв.ТипВкладчика"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ТипВкладчика"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ТипПенсионногоСчета",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ТипПенсионногоСчета",
+        "expr": "ВТ_РезультатПредв.ТипПенсионногоСчета"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ТипПенсионногоСчета"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ДатаОпределенияОбязательств",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ДатаОпределенияОбязательств",
+        "expr": "ВТ_РезультатПредв.ДатаОпределенияОбязательств"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ДатаОпределенияОбязательств"
+      }
+    ],
+    "depth": 2
+  },
+  {
+    "output_field": "ИзмененияОбязательств",
+    "final_node_id": 297,
+    "chain": [
+      {
+        "node_id": 297,
+        "node_name": "ВТ_258НПО",
+        "alias": "ИзмененияОбязательств",
+        "expr": "ВТ_РезультатПредв.ИзмененияОбязательств"
+      },
+      {
+        "node_id": null,
+        "node_name": null,
+        "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+        "source_field": "ИзмененияОбязательств"
+      }
+    ],
+    "depth": 2
+  }
+]

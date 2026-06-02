@@ -1,0 +1,1234 @@
+{
+  "generated_at": "2026-06-02T09:55:08",
+  "source_file": "output_258",
+  "key_fields": [
+    {
+      "field": "ВидДоговора_гр1",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ВидДоговора_гр1",
+          "expr": "ВТ_РезультатПредв.ВидДоговора_гр1"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ВидДоговора_гр1"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ВидОбязательств_гр1а",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ВидОбязательств_гр1а",
+          "expr": "ВТ_РезультатПредв.ВидОбязательств_гр1а"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ВидОбязательств_гр1а"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "НомерДоговора2",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "НомерДоговора2",
+          "expr": "ВТ_РезультатПредв.НомерДоговора2"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "НомерДоговора2"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ДатаЗаключения3",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ДатаЗаключения3",
+          "expr": "ВТ_РезультатПредв.ДатаЗаключения3"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ДатаЗаключения3"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "НаименованиеВкладчика4",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "НаименованиеВкладчика4",
+          "expr": "ВТ_РезультатПредв.НаименованиеВкладчика4"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "НаименованиеВкладчика4"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "НомерСчета6_5",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "НомерСчета6_5",
+          "expr": "ВТ_РезультатПредв.НомерСчета6"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "НомерСчета6"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ИдентификаторФЛ_СНИЛС_6",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ИдентификаторФЛ_СНИЛС_6",
+          "expr": "ВТ_РезультатПредв.ИдентификаторФЛ_СНИЛС_6"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ИдентификаторФЛ_СНИЛС_6"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ИдентификаторФЛ_ИНН_7",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ИдентификаторФЛ_ИНН_7",
+          "expr": "ВТ_РезультатПредв.ИдентификаторФЛ_ИНН_7"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ИдентификаторФЛ_ИНН_7"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ДатаРождения8",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ДатаРождения8",
+          "expr": "ВТ_РезультатПредв.ДатаРождения8"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ДатаРождения8"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ДатаСмерти9",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ДатаСмерти9",
+          "expr": "ВТ_РезультатПредв.ДатаСмерти9"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ДатаСмерти9"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "Пол10",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "Пол10",
+          "expr": "ВТ_РезультатПредв.Пол10"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "Пол10"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "НомерСхемы11",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "НомерСхемы11",
+          "expr": "ВТ_РезультатПредв.НомерСхемы11"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "НомерСхемы11"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "СтатусУчастника12",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "СтатусУчастника12",
+          "expr": "ВТ_РезультатПредв.СтатусУчастника12"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "СтатусУчастника12"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "Фондирование13",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "Фондирование13",
+          "expr": "ВТ_РезультатПредв.Фондирование13"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "Фондирование13"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ОтветственностьЗаДополнительноеФондирование14",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ОтветственностьЗаДополнительноеФондирование14",
+          "expr": "ВТ_РезультатПредв.ОтветственностьЗаДополнительноеФондирование14"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ОтветственностьЗаДополнительноеФондирование14"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "МинимальнаяГарантированнаяДоходность15",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "МинимальнаяГарантированнаяДоходность15",
+          "expr": "ВТ_РезультатПредв.МинимальнаяГарантированнаяДоходность15"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "МинимальнаяГарантированнаяДоходность15"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "СрокГарантированногоДохода16",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "СрокГарантированногоДохода16",
+          "expr": "ВТ_РезультатПредв.СрокГарантированногоДохода16"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "СрокГарантированногоДохода16"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ВеличинаИндексации17",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ВеличинаИндексации17",
+          "expr": "ВТ_РезультатПредв.ВеличинаИндексации17"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ВеличинаИндексации17"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ЗависимостьУровняИндексации18",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ЗависимостьУровняИндексации18",
+          "expr": "ВТ_РезультатПредв.ЗависимостьУровняИндексации18"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ЗависимостьУровняИндексации18"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "Наследование19",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "Наследование19",
+          "expr": "ВТ_РезультатПредв.Наследование19"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "Наследование19"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "НачальныйОстаток20",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "НачальныйОстаток20",
+          "expr": "ВТ_РезультатПредв.НачальныйОстаток20"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "НачальныйОстаток20"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ДатаНачалаВыплатногоПериода21",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ДатаНачалаВыплатногоПериода21",
+          "expr": "ВТ_РезультатПредв.ДатаНачалаВыплатногоПериода21"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ДатаНачалаВыплатногоПериода21"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ПериодВыплаты22",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ПериодВыплаты22",
+          "expr": "ВТ_РезультатПредв.ПериодВыплаты22"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ПериодВыплаты22"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ПериодичностьВыплат23",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ПериодичностьВыплат23",
+          "expr": "ВТ_РезультатПредв.ПериодичностьВыплат23"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ПериодичностьВыплат23"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ДатаОкончанияВыплат24",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ДатаОкончанияВыплат24",
+          "expr": "ВТ_РезультатПредв.ДатаОкончанияВыплат24"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ДатаОкончанияВыплат24"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ДатаВыходаУчастника25",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ДатаВыходаУчастника25",
+          "expr": "ВТ_РезультатПредв.ДатаВыходаУчастника25"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ДатаВыходаУчастника25"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "Взносы26",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "Взносы26",
+          "expr": "ВТ_РезультатПредв.Взносы26"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "Взносы26"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ИнвестиционныйДоход27",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ИнвестиционныйДоход27",
+          "expr": "ВТ_РезультатПредв.ИнвестиционныйДоход27"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ИнвестиционныйДоход27"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "Перевод28",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "Перевод28",
+          "expr": "ВТ_РезультатПредв.Перевод28"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "Перевод28"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ПереводВрезервы28а",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ПереводВрезервы28а",
+          "expr": "ВТ_РезультатПредв.ПереводВРезервы28а"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ПереводВРезервы28а"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ИныеПереводы29",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ИныеПереводы29",
+          "expr": "ВТ_РезультатПредв.ИныеПереводы29"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ИныеПереводы29"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "Пенсия30",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "Пенсия30",
+          "expr": "ВТ_РезультатПредв.Пенсия30"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "Пенсия30"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ВыкупнаяСумма31",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ВыкупнаяСумма31",
+          "expr": "ВТ_РезультатПредв.ВыкупнаяСумма31"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ВыкупнаяСумма31"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ВыплатаПравопреемникам32",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ВыплатаПравопреемникам32",
+          "expr": "ВТ_РезультатПредв.ВыплатаПравопреемникам32"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ВыплатаПравопреемникам32"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ЕдиновременнаяВыплата32а",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ЕдиновременнаяВыплата32а",
+          "expr": "ЕдиновременнаяВыплата32а"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ВыплатаОЖС32б",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ВыплатаОЖС32б",
+          "expr": "ВыплатаОЖС32б"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "КонечныйОстаток33",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "КонечныйОстаток33",
+          "expr": "ВТ_РезультатПредв.КонечныйОстаток33"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "КонечныйОстаток33"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "СуммаОбязательствПоВСНаКонец34",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "СуммаОбязательствПоВСНаКонец34",
+          "expr": "ВТ_РезультатПредв.СуммаОбязательствПоВСНаКонец34"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "СуммаОбязательствПоВСНаКонец34"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "СуммаОбязательствПередППНаКонец35",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "СуммаОбязательствПередППНаКонец35",
+          "expr": "ВТ_РезультатПредв.РасчетнаяСуммаПП43"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "РасчетнаяСуммаПП43"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ТипДоговора36",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ТипДоговора36",
+          "expr": "ВТ_РезультатПредв.ТипДоговора36"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ТипДоговора36"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "Графа37",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "Графа37",
+          "expr": "ВТ_РезультатПредв.РазмерПенсии37"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "РазмерПенсии37"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ДатаНазначенияПенсии38",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ДатаНазначенияПенсии38",
+          "expr": "ВТ_РезультатПредв.ДатаНазначенияПенсии38"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ДатаНазначенияПенсии38"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ДатаПриостановкиВыплат38_1",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ДатаПриостановкиВыплат38_1",
+          "expr": "ВТ_РезультатПредв.ДатаПриостановкиВыплат38_1"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ДатаПриостановкиВыплат38_1"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ЗадолженностьПенсии38_2",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ЗадолженностьПенсии38_2",
+          "expr": "ВТ_РезультатПредв.ЗадолженностьПенсии38_2"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ЗадолженностьПенсии38_2"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "Графа39",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "Графа39",
+          "expr": "ВТ_РезультатПредв.Графа39"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "Графа39"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ПериодГарантийногоВосполнения39_1",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ПериодГарантийногоВосполнения39_1",
+          "expr": "ВТ_РезультатПредв.ПериодГарантийногоВосполнения39_1"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ПериодГарантийногоВосполнения39_1"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ДатаНачалаПериодаФиксации39_2",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ДатаНачалаПериодаФиксации39_2",
+          "expr": "ВТ_РезультатПредв.ДатаНачалаПериодаФиксации39_2"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ДатаНачалаПериодаФиксации39_2"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ИнвестДоходКФиксации39_3",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ИнвестДоходКФиксации39_3",
+          "expr": "ВТ_РезультатПредв.ИнвестДоходКФиксации39_3"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ИнвестДоходКФиксации39_3"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ГруппаРаздельногоУчета40",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ГруппаРаздельногоУчета40",
+          "expr": "ВТ_РезультатПредв.ГруппаРаздельногоУчета40"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ГруппаРаздельногоУчета40"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ВидПенсионнойПрограммы41",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ВидПенсионнойПрограммы41",
+          "expr": "ВТ_РезультатПредв.ВидПенсионнойПрограммы"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ВидПенсионнойПрограммы"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ДатаОснованийИзъятия42",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ДатаОснованийИзъятия42",
+          "expr": "ВТ_РезультатПредв.ДатаОснованийИзъятия42"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ДатаОснованийИзъятия42"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "УсловиеПрямогоУчастия43",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "УсловиеПрямогоУчастия43",
+          "expr": "ВТ_РезультатПредв.УсловиеПрямогоУчастия_МодельОценки43"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "УсловиеПрямогоУчастия_МодельОценки43"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ИдентификаторДоговора",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ИдентификаторДоговора",
+          "expr": "ВТ_РезультатПредв.НомерДоговора2"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "НомерДоговора2"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ИдентификаторВкладчика",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ИдентификаторВкладчика",
+          "expr": "ВТ_РезультатПредв.ИдентификаторВкладчика"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ИдентификаторВкладчика"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ИдентификаторУчастника",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ИдентификаторУчастника",
+          "expr": "ВТ_РезультатПредв.ИдентификаторУчастника"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ИдентификаторУчастника"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "СрокГарантированногоДохода16_Расшифровка",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "СрокГарантированногоДохода16_Расшифровка",
+          "expr": "ВТ_РезультатПредв.СрокГарантированногоДохода16_Расшифровка"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "СрокГарантированногоДохода16_Расшифровка"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ЗависимостьУровняИндексации18_Расшифровка",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ЗависимостьУровняИндексации18_Расшифровка",
+          "expr": "ВТ_РезультатПредв.ЗависимостьУровняИндексации18_Расшифровка"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ЗависимостьУровняИндексации18_Расшифровка"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "НомерСчета",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "НомерСчета",
+          "expr": "ВТ_РезультатПредв.НомерСчета"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "НомерСчета"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ТипВкладчика",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ТипВкладчика",
+          "expr": "ВТ_РезультатПредв.ТипВкладчика"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ТипВкладчика"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ТипПенсионногоСчета",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ТипПенсионногоСчета",
+          "expr": "ВТ_РезультатПредв.ТипПенсионногоСчета"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ТипПенсионногоСчета"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ДатаОпределенияОбязательств",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ДатаОпределенияОбязательств",
+          "expr": "ВТ_РезультатПредв.ДатаОпределенияОбязательств"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ДатаОпределенияОбязательств"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    },
+    {
+      "field": "ИзмененияОбязательств",
+      "description": "",
+      "chain": [
+        {
+          "node_id": 297,
+          "node_name": "ВТ_258НПО",
+          "alias": "ИзмененияОбязательств",
+          "expr": "ВТ_РезультатПредв.ИзмененияОбязательств"
+        },
+        {
+          "node_id": null,
+          "node_name": null,
+          "source_table": "ВТ_РЕЗУЛЬТАТПРЕДВ",
+          "source_field": "ИзмененияОбязательств"
+        }
+      ],
+      "branching": false,
+      "notes": ""
+    }
+  ]
+}

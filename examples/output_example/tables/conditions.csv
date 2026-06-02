@@ -1,0 +1,3 @@
+node_id,node_name,condition_type,expression,involved_tables,involves_parameter
+1,ВТ_Начисления,JOIN_ON,ВТ_Сотрудники.Сотрудник = НачисленияДвижения.Сотрудник,ВТ_Сотрудники;НачисленияДвижения,false
+2,Результат_1,JOIN_ON,ВТ_Начисления.Сотрудник,ВТ_Начисления,false

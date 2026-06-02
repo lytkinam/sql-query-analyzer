@@ -1,0 +1,2 @@
+node_id,node_name,expr_type,expr_text,output_alias,line
+2,Результат_1,AGGREGATE,СУММА(ВТ_Начисления.Сумма),ИтогоСумма,2
