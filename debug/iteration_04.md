@@ -1,240 +1,263 @@
 # Итерация 4 — отладочный чеклист
 
-> **Файл итерации:** `sql_query_analyzer.py` — функция `get_own_in_tables`  
-> **Что изменилось:** приведено к логике JS-оригинала (`СхемаЗапросаSQL_e5c678.html`)
+> **Файл итерации:** `exporters/lineage.py`  
+> **Тесты:** `tests/test_lineage.py`  
+> **Сложность:** 🔴 высокая — требует разбора SELECT-списка
 
 ---
 
-## 1. Что изменилось (diff JS ↔ Python)
+## 1. Целевые файлы
 
-| Шаг | Было | Стало |
-|---|---|---|
-| 1 (удаление `()`) | `() → [...]` | `() → " ~ "` (как в JS) |
-| 5 (ВЫБРАТЬ…ИЗ) | lookahead-regex на `(?=\bИЗ\b)` | JS-паттерн: `\s[^!]*?(?=\s(ИЗ\|FROM)\s)` |
-| 6 (СГРУППИРОВАТЬ) | только до конца строки | два прохода: до `!` И до конца строки |
-| 8 (матч) | `\b(?:ИЗ\|FROM\|(?:\S+\s+)?(?:СОЕДИНЕНИЕ\|JOIN))` | `(?:ИЗ\|FROM\|СОЕДИНЕНИЕ\|JOIN)\s+\S+` + `,\s*\S+` |
-| HAVING | присутствовал как отдельный шаг | удалён (в JS-оригинале отсутствует) |
-| ГДЕ/WHERE | удалялся явно | НЕ удаляется (скобки шага 1 нейтрализуют `ИЗ` внутри) |
+По завершении итерации должны генерироваться:
+
+| Файл | Описание |
+|---|---|
+| `tables/fields.csv` | Реестр полей: `node_id, node_name, field_ordinal, field_alias, expression, source_table, source_field, is_computed` |
+| `tables/expressions.csv` | ISNULL, ВЫБОР КОГДА, агрегаты |
+| `tables/conditions.csv` | WHERE, JOIN ON |
+| `tables/joins.csv` | Карта соединений |
+| `lineage/field_lineage.json` | Цепочки по каждому полю финального узла |
+| `lineage/lineage_key_fields.json` | Только ключевые поля из `extractor.yaml` |
+| `lineage/dependency_matrix.csv` | Матрица: узел X зависит от узла Y |
 
 ---
 
 ## 2. Запуск тестов
 
 ```bash
-# только get_own_in_tables
-pytest tests/ -v -k "own_in_tables or OwnIn"
+# только итерация 4
+pytest tests/test_lineage.py -v
 
-# полный прогон всех четырёх итераций
-pytest tests/ -v
+# отдельные классы
+pytest tests/test_lineage.py::TestLineageFilesExist -v
+pytest tests/test_lineage.py::TestFields -v
+pytest tests/test_lineage.py::TestExpressions -v
+pytest tests/test_lineage.py::TestJoins -v
+pytest tests/test_lineage.py::TestFieldLineage -v
+pytest tests/test_lineage.py::TestDependencyMatrix -v
 
-# проверить регрессии с покрытием
+# все четыре итерации
 pytest tests/ -v --tb=short
 ```
 
 ---
 
-## 3. Ручная проверка по каждому шагу
-
-Проверяем пошагово, что происходит с текстом на каждом шаге:
+## 3. Ручная проверка generate_lineage
 
 ```python
-import re
-from sql_query_analyzer import get_own_in_tables
+import json, tempfile, os
+from sql_query_analyzer import analyze_sql_query
+from exporters.normalizer import normalize
+from exporters.lineage import generate_lineage
 
-def trace_own_in_tables(text: str):
-    print(f"  Исходный: {text!r}")
+with open("examples/example.sql", encoding="utf-8") as f:
+    sql = f.read()
 
-    # Шаг 1
-    t = text
-    while True:
-        n = re.sub(r'\(([^()]*)\)', ' ~ ', t)
-        if n == t: break
-        t = n
-    print(f"  После шага 1 ()→~: {t!r}")
+model = normalize(json.loads(analyze_sql_query(sql, detailed=True)))
+out = tempfile.mkdtemp()
+generate_lineage(model, out)
 
-    # Шаг 2
-    while True:
-        n = re.sub(r'\[([^\[\]]*)\]', ' ', t)
-        if n == t: break
-        t = n
-    print(f"  После шага 2 []→ : {t!r}")
-
-    # Шаг 3
-    p = re.compile(r'\{(?!\s*\S+\s+(?:СОЕДИНЕНИЕ|JOIN)\s)([^{}]*)\}', re.I)
-    while True:
-        n = p.sub(' ', t)
-        if n == t: break
-        t = n
-    print(f"  После шага 3 {{}}→ : {t!r}")
-
-    # Шаг 4
-    t = re.sub(r'(?:^|\s)(?:ОБЪЕДИНИТЬ|UNION)(?:\s+(?:ВСЕ|ALL))?(?:$|\s)', ' ! ', t, flags=re.I)
-    print(f"  После шага 4 UNION→!: {t!r}")
-
-    # Шаг 5
-    t = re.sub(r'(?:^|\s)(?:ВЫБРАТЬ|SELECT)\s[^!]*?(?:\s|^)(?=(?:ИЗ|FROM)\s)', ' ', t, flags=re.I)
-    print(f"  После шага 5 SELECT→: {t!r}")
-
-    # Шаги 6-7
-    t = re.sub(r'(?:^|\s)(?:СГРУППИРОВАТЬ|GROUP)\s[^!]*!', ' ', t, flags=re.I)
-    t = re.sub(r'(?:^|\s)(?:СГРУППИРОВАТЬ|GROUP)\s[\s\S]*$', ' ', t, flags=re.I)
-    t = re.sub(r'(?:^|\s)(?:ДЛЯ ИЗМЕНЕНИЯ|FOR UPDATE)\s[^!]*!', ' ', t, flags=re.I)
-    t = re.sub(r'(?:^|\s)(?:ДЛЯ ИЗМЕНЕНИЯ|FOR UPDATE)\s[\s\S]*$', ' ', t, flags=re.I)
-    t = re.sub(r'(?:^|\s)(?:ИНДЕКСИРОВАТЬ|INDEX)\s[\s\S]*$', ' ', t, flags=re.I)
-    t = re.sub(r'(?:^|\s)(?:УПОРЯДОЧИТЬ|ORDER)\s[\s\S]*$', ' ', t, flags=re.I)
-    t = re.sub(r'(?:^|\s)(?:ИТОГИ|TOTALS)\s[\s\S]*$', ' ', t, flags=re.I)
-    print(f"  После шагов 6-7 (фин. клаузы): {t!r}")
-
-    # Шаг 8
-    result = get_own_in_tables(text)
-    print(f"  Результат: {result}")
-    return result
-
-
-cases = [
-    "ВЫБРАТЬ Поле ИЗ ТабА",
-    "ВЫБРАТЬ * ИЗ ТабА ГДЕ Поле В (ВЫБРАТЬ Ссылка ИЗ ТабБ)",
-    "ВЫБРАТЬ а.П ИЗ ТабА КАК а ЛЕВОЕ СОЕДИНЕНИЕ ТабБ КАК б ПО а.Ссылка = б.Ссылка",
-    "ВЫБРАТЬ П ИЗ ТабА UNION ALL ВЫБРАТЬ П ИЗ ТабБ",
-    "ВЫБРАТЬ П, СУММА(Кол) ИЗ ТабА СГРУППИроваТь ПО П",
-    "ВЫБРАТЬ * ИЗ ТабА, ТабБ",
-    "ВЫБРАТЬ * ИЗ РегистрНакопления.Продажи{(Дата, &Нач, &Кон)} КАК Продажи",
+expected = [
+    "tables/fields.csv",
+    "tables/expressions.csv",
+    "tables/conditions.csv",
+    "tables/joins.csv",
+    "lineage/field_lineage.json",
+    "lineage/lineage_key_fields.json",
+    "lineage/dependency_matrix.csv",
 ]
 
-for sql in cases:
-    print(f"\n{'='*60}")
-    trace_own_in_tables(sql)
+for fn in expected:
+    path = os.path.join(out, fn)
+    size = os.path.getsize(path) if os.path.exists(path) else 0
+    print(f"  [{'OK' if size > 0 else 'MISSING/EMPTY'}] {fn}  ({size} bytes)")
 ```
 
 ---
 
-## 4. Ключевые ассерты парсера
+## 4. Проверка парсера SELECT-списка
+
+Проверяем что парсер правильно разбирает разные формы SELECT-списка:
 
 ```python
-import json
-from sql_query_analyzer import analyze_sql_query
+from exporters.lineage import parse_select_list
 
-# 1. Простой один запрос
-_sql = "ВЫБРАТЬ Поле ИЗ Справочник.Номенклатура"
-result = json.loads(analyze_sql_query(_sql))
-assert len(result["nodes"]) == 1, "должен быть 1 узел"
-assert result["nodes"][0]["own_in_tables"] == ["СПРАВОЧНИК.НОМЕНКЛАТУРА"]
-print("Тест 1 прошёл")
+cases = [
+    # (вход, ожидаемый alias, source_table, source_field, is_computed)
+    ("ТабА.Поле",     "ПОЛЕ",   "ТАБА",   "ПОЛЕ",   False),
+    ("ТабА.П КАК МойАлиас", "МОЙАЛИАС", "ТАБА", "П",     False),
+    ("СУММА(ТабА.Кол) КАК Сумма", "СУММА",  "ТАБА",   "КОЛ",   True),
+    ("1 КАК Признак",           "ПРИЗНАК", None,    None,    True),
+    ("ТабА.*",               "*",      "ТАБА",   "*",     False),
+]
 
-# 2. ГДЕ с подзапросом: внутренний ИЗ не должен попасть в корневой узел
-_sql = "ВЫБРАТЬ * ИЗ ТабА ГДЕ П В (ВЫБРАТЬ Ссылка ИЗ ТаБ Б"
-result = json.loads(analyze_sql_query(_sql))
-root = result["nodes"][0]
-assert "ТАБА" in root["own_in_tables"], "корень должен читать ТабА"
-assert "ТАБ Б" not in " ".join(root["own_in_tables"]), "ТабБ не должна просочиться в корнь — она в подзапросе"
-print("Тест 2 прошёл")
-
-# 3. Временная таблица → результат: ребро должно быть
-_sql = """
-ВЫБРАТЬ Поле ПОМЕСТИТЬ ВремТаблица ИЗ Справочник.Номенклатура;
-ВЫБРАТЬ * ИЗ ВремТаблица
-"""
-result = json.loads(analyze_sql_query(_sql))
-edges = result["edges"]
-assert len(edges) == 1, f"должно быть 1 ребро, получено: {len(edges)}"
-assert edges[0]["from_name"] == "ВремТаблица"
-print("Тест 3 прошёл")
-
-# 4. UNION: оба ИЗ должны быть в own_in_tables
-_sql = "ВЫБРАТЬ П ИЗ ТабА ОБЪЕДИНИТЬ ВСЕ ВЫБРАТЬ П ИЗ ТабБ"
-result = json.loads(analyze_sql_query(_sql))
-own = result["nodes"][0]["own_in_tables"]
-assert "ТАБА" in own and "ТАББ" in own, f"own_in_tables: {own}"
-print("Тест 4 прошёл")
-
-# 5. СГРУППИРОВАТЬ не впадает в own_in_tables
-_sql = "ВЫБРАТЬ П, СУММА(Кол) ИЗ ТабА СГРУППИРОВАТЬ ПО П"
-result = json.loads(analyze_sql_query(_sql))
-own = result["nodes"][0]["own_in_tables"]
-assert own == ["ТАБА"], f"own_in_tables: {own}"
-print("Тест 5 прошёл")
-
-print("\nВсе ассерты OK")
+for expr, exp_alias, exp_src_t, exp_src_f, exp_computed in cases:
+    fields = parse_select_list(f"ВЫБРАТЬ {expr} ИЗ ТабА")
+    f0 = fields[0]
+    ok = (
+        f0["field_alias"].upper() == exp_alias and
+        (f0["source_table"] or "").upper() == (exp_src_t or "") and
+        (f0["source_field"] or "").upper() == (exp_src_f or "") and
+        f0["is_computed"] == exp_computed
+    )
+    print(f"  [{'OK' if ok else 'FAIL'}] {expr!r} → alias={f0['field_alias']} src={f0['source_table']}.{f0['source_field']} computed={f0['is_computed']}")
 ```
 
 ---
 
-## 5. Таблица контрольных примеров `get_own_in_tables`
+## 5. Проверка fields.csv
 
-| SQL-вход | Ожидаемый результат | Причина |
-|---|---|---|
-| `ВЫБРАТЬ П ИЗ ТабА` | `["ТАБА"]` | базовый FROM |
-| `ГДЕ П В (ВЫБРАТЬ С ИЗ ТБ)` | ТБ не попадает в корень | скобки заменяются на ` ~ ` на шаге 1 |
-| `ЛЕВОЕ СОЕДИНЕНИЕ ТабБ` | `["ТАБА", "ТАББ"]` | JOIN паттерн |
-| `ИЗ ТабА, ТабБ` | `["ТАБА", "ТАББ"]` | запятая через `,\s*` паттерн |
-| `UNION ALL ВЫБРАТЬ П ИЗ ТаББ` | `["ТАБА", "ТАББ"]` | UNION-маркер `!` |
-| `СГРУППИРОВАТЬ ПО П` | не попадает в ответ | удаляется на шаге 6-7 |
-| `ПОМЕСТИТЬ ВТаб ИЗ ...` | `ВТАБ` не в own | ПОМЕСТИТЬ — цель, а не источник |
-| `ИНДЕКСИРОВАТЬ ПО П` | не попадает | удаляется на шаге 7 |
-| `{(Дата, &Н, &К)}` в имени таблицы | `["РЕГИСТР...ПРОДАЖИ"]` | `{}` убираются на шаге 3 |
+```python
+import csv, os
+
+with open(os.path.join(out, "tables", "fields.csv"), encoding="utf-8") as f:
+    rows = list(csv.DictReader(f))
+
+print(f"  Итого полей: {len(rows)}")
+
+# проверяем колонки
+required_cols = {"node_id", "node_name", "field_ordinal", "field_alias",
+                 "expression", "source_table", "source_field", "is_computed"}
+assert required_cols <= set(rows[0].keys()), f"Нет колонок: {required_cols - set(rows[0].keys())}"
+print("  Колонки: OK")
+
+# field_ordinal должен быть монотонным в рамках узла
+from itertools import groupby
+for node_id, grp in groupby(rows, key=lambda r: r["node_id"]):
+    ords = [int(r["field_ordinal"]) for r in grp]
+    assert ords == list(range(len(ords))), f"node {node_id}: ординалы {ords}"
+print("  field_ordinal: OK")
+```
 
 ---
 
-## 6. ГДЕ/WHERE — почему НЕ удаляется
+## 6. Проверка field_lineage.json
 
-В JS-оригинале `ГДЕ/WHERE` не удаляется явно. Почему это безопасно:
+```python
+import json, os
 
+with open(os.path.join(out, "lineage", "field_lineage.json"), encoding="utf-8") as f:
+    lineage = json.load(f)
+
+# общая структура
+assert "fields" in lineage, "нет ключа 'fields'"
+print(f"  Всего полей с lineage: {len(lineage['fields'])}")
+
+# проверяем структуру каждой записи
+dangling = []
+for entry in lineage["fields"]:
+    if "chain" not in entry:
+        dangling.append(entry.get("field_alias", "?"))
+    if entry.get("chain"):
+        # последнее звено цепочки должно быть физическим источником
+        last = entry["chain"][-1]
+        assert last.get("source_kind") != "TempTable", \
+            f"Цепочка заканчивается на ВТ: {entry['field_alias']}"
+
+if dangling:
+    print(f"  WARN: {len(dangling)} полей без chain: {dangling[:3]}")
+else:
+    print("  chain: OK — все поля имеют цепочку")
+print("  Физические источники: OK")
 ```
-Исходный текст:
-  ВЫБРАТЬ * ИЗ ТабА ГДЕ П В (ВЫБРАТЬ Сс ИЗ ТаББ)
-
-Шаг 1: () → " ~ "
-  ВЫБРАТЬ * ИЗ ТабА ГДЕ П В  ~
-  ^--- ИЗ внутри ГДЕ исчез вместе со скобками
-
-Шаг 5: ВЫБРАТЬ … ИЗ → ""
-  " ИЗ ТабА ГДЕ П В  ~ "
-
-Шаг 8: матч по ИЗ:
-  → ["ТАБА"]  (ТаББ не попала — она была в скобках)
-```
-
-Из этого следует: удалять `ГДЕ/WHERE` вручную было бы ошибкой: если в `ГДЕ`  
-есть `ИЗ Таблица` **без скобок** (нестандартно для 1С), JS считает эту таблицу входной.
 
 ---
 
-## 7. Проверка регрессий на итерациях 1-3
+## 7. Проверка dependency_matrix.csv
+
+```python
+import csv, os
+
+with open(os.path.join(out, "lineage", "dependency_matrix.csv"), encoding="utf-8") as f:
+    rows = list(csv.DictReader(f))
+
+print(f"  Строк в матрице: {len(rows)}")
+
+# проверяем колонки
+required = {"from_node_id", "from_node_name", "to_node_id", "to_node_name", "depends_on"}
+assert required <= set(rows[0].keys()), f"Нет колонок: {required - set(rows[0].keys())}"
+
+# нет самозависимостей
+self_deps = [r for r in rows if r["from_node_id"] == r["to_node_id"]]
+if self_deps:
+    print(f"  WARN: {len(self_deps)} самозависимостей: {[r['from_node_name'] for r in self_deps[:3]]}")
+else:
+    print("  Самозависимостей: нет (OK)")
+```
+
+---
+
+## 8. Что проверяем по каждому файлу
+
+| Файл | Ключевые проверки |
+|---|---|
+| `tables/fields.csv` | Колонки, `field_ordinal` монотонен, `node_id` существует в `nodes.csv` |
+| `tables/expressions.csv` | `expr_type` ∈ {CASE, ISNULL, AGGREGATE, ARITHMETIC}; `node_id` есть |
+| `tables/conditions.csv` | `cond_type` ∈ {WHERE, JOIN_ON}; не пустой `expression` |
+| `tables/joins.csv` | `join_type` ∈ {ЛЕВОЕ, ПОЛНОЕ, ВНУТРЕННЕЕ, LEFT, FULL, INNER}; `on_condition` не пуст |
+| `lineage/field_lineage.json` | Каждое поле имеет `chain[]`; последний узел — физическая таблица |
+| `lineage/lineage_key_fields.json` | Только поля из `extractor.yaml::key_fields`; структура = `field_lineage.json` |
+| `lineage/dependency_matrix.csv` | Нет самозависимостей; матрица = подмножество `edges_refs` |
+
+---
+
+## 9. Алгоритм построения lineage (по PLAN.md)
+
+```
+1. Взять финальный узел (type=result / последняя ВТ)
+2. Для каждого поля: найти выражение в SELECT-списке узла
+3. Если expr = алиас.field → найти узел-источник через edges_refs
+4. Рекурсивно трассировать вглубь до физической таблицы
+5. Записать цепочку как chain[]
+```
+
+Проверка алгоритма вручную:
+
+```python
+import json, os
+
+with open(os.path.join(out, "lineage", "field_lineage.json"), encoding="utf-8") as f:
+    lineage = json.load(f)
+
+# вывести первые 3 цепочки
+for entry in lineage["fields"][:3]:
+    print(f"  [{entry['field_alias']}]")
+    for step in entry.get("chain", []):
+        print(f"    → {step.get('node_name', '?')}.{step.get('field', '?')} ({step.get('source_kind', '?')})")
+```
+
+---
+
+## 10. Проверка регрессий на итерациях 1-3
 
 ```bash
-# Итерация 1: нормализатор
 pytest tests/test_normalizer.py -v
-
-# Итерация 2: generate_tables
 pytest tests/test_tables.py -v
-
-# Итерация 3: generate_graph
 pytest tests/test_graph.py -v
 
-# Все сразу
+# все сразу
 pytest tests/ -v --tb=short 2>&1 | tail -30
 ```
 
-Ожидаемый результат: все тесты предыдущих итераций остаются зелёными, т.к. публичный API  
-(`analyze_sql_query`, `normalize`, `generate_tables`, `generate_graph`) не изменился.
+---
+
+## 11. Известные ограничения итерации 4
+
+- **Regex-парсер SELECT** работает на простых случаях. Сложные выражения  
+  (`ВЫБОР КОГДА`, вложенные функции) получают `is_computed=True` без распарски.
+- **`extractor.yaml`** опционален. Если отсутствует — `lineage_key_fields.json` = `field_lineage.json`.
+- **Циклические зависимости** (ВТА читает саму себя) — ограничение рекурсии по `max_depth=20`.
+- **`*` в SELECT** (`ТабА.*`) — `source_field="*"`, `is_computed=False`, lineage не строится.
+- **Большой пример** (`example_258.sql`) — итоговый `fields.csv` может содержать несколько тысяч строк.
 
 ---
 
-## 8. Известные ограничения итерации 4
+## 12. Чеклист перед коммитом
 
-- `ГДЕ ... ИЗ ...` без скобок: в 1С такой синтаксис невозможен, но если встретится  
-  — таблица будет считаться входной (JS-поведение).
-- Запятая в `FROM`: JS регекс `,\s*\S+` находит таблицы через запятую —  
-  при наличии запятой в любом месте текста (не только в FROM) тоже сработает.
-- `HAVING/ИМЕЮЩИЕ`: не удаляется (JS-поведение) — если внутри нет `ИЗ`, безопасно.
-
----
-
-## 9. Чеклист перед коммитом
-
-- [ ] `pytest tests/ -v` — все четыре итерации без падений
-- [ ] Раздел 3: trace пройден для всех 7 примеров
-- [ ] Раздел 4: все 5 ассертов прошли
-- [ ] Раздел 7: проверка регрессий на итерациях 1-3 — все зелёные
-- [ ] Сравнить вывод `analyze_sql_query(examples/example.sql)` до и после правки — ребра те же
-- [ ] `git diff` до коммита: ожидаем изменения только в `get_own_in_tables`
+- [ ] `pytest tests/test_lineage.py -v` — все зелёные
+- [ ] `pytest tests/ -v` — итерации  1-3 без регрессий
+- [ ] Раздел 3: все 7 файлов сгенерированы с ненулевым размером
+- [ ] Раздел 4: парсер SELECT прошёл все 5 случаев
+- [ ] Раздел 9: первые 3 цепочки выведены и выглядят осмысленно
+- [ ] Раздел 7: в `dependency_matrix.csv` нет самозависимостей
+- [ ] Большой пример: `generate_lineage(model_258, out)` завершается без исключений
